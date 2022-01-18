@@ -1,0 +1,41 @@
+/* Tailwind (need to be @imports) */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Load all Component CSS */
+@import "../../components/**/*.css";
+
+@import "flickity/flickity.min.css";
+@import "flickity/epicslider.css";
+
+/* Add a new BASE layer to set default typography */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        max-width: 1920px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    h1 {
+        @apply text-6xl;
+        @apply pb-2;
+    }
+    h2 {
+        @apply text-4xl;
+    }
+    p {
+        @apply text-base;
+    }
+    button:focus {
+        outline: 0px;
+    }
+}
+
+@layer utilities {
+    .iso-1 { transform: rotateX(60deg) rotateY(0deg) rotate(-45deg) scale(1.2) translate3d(28rem, -20rem, 0rem); }
+    .iso-2 { transform: perspective(400px) rotateY(-26.6deg); }
+    .svg-inherit path { fill: inherit; stroke: inherit; }
+}
