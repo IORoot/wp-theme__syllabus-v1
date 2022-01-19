@@ -24,7 +24,7 @@
 
 		<header>
 
-			<nav class="h-16 flex">
+			<nav class="h-16 flex absolute w-full">
 
 				<?php include( __DIR__.'/src/components/main-menu-logo/main-menu-logo.php' );  ?>
 				<?php include( __DIR__.'/src/components/main-menu/main-menu.php' );  ?>

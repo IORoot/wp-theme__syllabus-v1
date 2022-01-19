@@ -17,6 +17,11 @@
             }
 
             include( __DIR__.'/h-logo-text.svg' );
+            include( __DIR__.'/home.svg' );
+            include( __DIR__.'/shape.svg' );
+            include( __DIR__.'/trophy-award.svg' );
+            include( __DIR__.'/text-box-outline.svg' );
+            include( __DIR__.'/credit-card.svg' );
         echo '</div>';
     }
 

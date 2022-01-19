@@ -8,3 +8,7 @@ define( 'ANDYP_THEME_FILE',  __FILE__ );
  * Run all hooks
  */
 require get_template_directory() . '/src/hooks/init.php';
+/*
+ * Run all Components
+ */
+require get_template_directory() . '/src/components/init.php';
