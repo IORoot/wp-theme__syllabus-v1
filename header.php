@@ -20,16 +20,4 @@
 	</head>
 
 
-	<body <?php body_class('londonparkour ' . $body_classes ); ?>>
-
-		<header>
-
-			<nav class="h-16 flex absolute w-full">
-
-				<?php include( __DIR__.'/src/components/main-menu-logo/main-menu-logo.php' );  ?>
-				<?php include( __DIR__.'/src/components/main-menu/main-menu.php' );  ?>
-				<?php include( __DIR__.'/src/components/main-menu-right/main-menu-right.php' );  ?>
-
-			</nav>
-
-		</header>
+	<body <?php body_class('syllabus bg-zinc-800 ' . $body_classes ); ?>>

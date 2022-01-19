@@ -4,6 +4,8 @@ $page_classes = get_field('page_classes');
 
 get_header();
 
+get_template_part('src/views/menus/mainmenu', $pagename);
+
 ?>
 
 	<main class="<?php echo $page_classes; ?>">
