@@ -1,5 +1,5 @@
 <?php
-	$body_classes = get_field('body_classes'); 
+	$variables = (new andyp\theme\syllabus\app\all_page_variables)->get_variables();
 ?>
 
 <!doctype html>
@@ -20,4 +20,4 @@
 	</head>
 
 
-	<body <?php body_class('syllabus bg-zinc-800 ' . $body_classes ); ?>>
+	<body <?php body_class('syllabus bg-zinc-800 ' . $variables["page_builder"]["body_classes"] ); ?>>

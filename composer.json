@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+            "andyp\\theme\\syllabus\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andy Pearson",
+            "email": "andy@londonparkour.com"
+        }
+    ]
+}

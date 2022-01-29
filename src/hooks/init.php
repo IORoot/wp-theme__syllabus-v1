@@ -110,3 +110,9 @@ require get_template_directory() . '/src/hooks/disable_curl_ssl_verify.php';
  * Disable XML-RPC
  */
 require get_template_directory() . '/src/hooks/disable_xmlrpc.php';
+
+/**
+ * Define the SVG action to include into footer.
+ * See /src/assets/svgs/
+ */
+require get_template_directory() .'/src/hooks/footer_svgs.php';
