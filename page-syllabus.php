@@ -1,5 +1,13 @@
 <?php
 
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                                                         │
+// │                         Syllabus Single Page 	                         │
+// │                                                                         │
+// │            			Page Location:  /syllabus/               		 │
+// │                                                                         │
+// └─────────────────────────────────────────────────────────────────────────┘
+
 get_header();
 
 get_template_part('src/views/menus/mainmenu', $pagename);
