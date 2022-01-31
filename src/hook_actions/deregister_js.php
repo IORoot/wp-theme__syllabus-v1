@@ -7,27 +7,17 @@
 //  └──────────────────────────────────────┘░
 //   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-add_action( 'wp_enqueue_scripts', 'ldnpk_deregister_js_scripts', 100 );
 
+function remove_all_scripts() {
 
-function ldnpk_deregister_js_scripts() {
+    $wp_scripts = wp_scripts();
 
-    global $wp_scripts;
+    foreach ($wp_scripts->registered as $key => $script)
+    {
+        wp_dequeue_script( $script->handle );
+        wp_deregister_script( $script->handle );
+    }
 
-    // Deregister JS Scripts
-    // wp_deregister_script( "es6-shim" );
-    // wp_deregister_script( "es7-shim" );
-    // wp_deregister_script( "devowl-wp-utils" );
-    wp_deregister_script( 'wp-embed' );
-    // wp_deregister_script( 'thickbox' );
-    // wp_deregister_script( 'wpb_composer_front_js' );
-    // wp_deregister_script( "react" );
-    // wp_deregister_script( "react-dom" );
-    // wp_deregister_script( "mobx" );
-    // wp_deregister_script( "jquery-ui-core" );
-    // wp_deregister_script( "jquery-touch-punch" );
-    // wp_deregister_script( "vendor-devowl-wp-utils" );
-    // wp_deregister_script( "underscore" );
-    // wp_deregister_script( "utils" );
-    // wp_deregister_script( "hoverintent-js" );
-}
+    return;
+} 
+add_action('wp_enqueue_scripts', 'remove_all_scripts', 10);
