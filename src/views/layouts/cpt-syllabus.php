@@ -2,12 +2,12 @@
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                                                         │
-// │                         Syllabus_category Pages                         │
+// │               Syllabus_category Generic Term Page Layout                │
 // │                                                                         │
-// │            Page Location:  /syllabus_category/balancing/                │
+// │            Page Location:  /syllabus_category/balancing                 │
 // │                                                                         │
 // └─────────────────────────────────────────────────────────────────────────┘
 
-echo 'Filename: '. basename(__FILE__, '.php') . '.php';
+echo 'Filename: '. __FILE__;
 ?>
 

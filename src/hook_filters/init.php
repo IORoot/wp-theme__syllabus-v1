@@ -60,3 +60,11 @@ require get_template_directory() . '/src/hook_filters/svg_webp_enable.php';
  * Turn off notifications for ACF and Forms Pro
  */
 require get_template_directory() . '/src/hook_filters/turn_off_plugin_updates.php';
+
+/**
+ * Register the template files to use with the custom taxonomies.
+ */
+new andyp\theme\syllabus\hook_filters\taxonomy_templates([
+    'taxonomy' => 'syllabus_category',
+    'post_type' => 'syllabus'
+]);
