@@ -20,4 +20,4 @@
 	</head>
 
 
-	<body <?php body_class('syllabus bg-zinc-800 ' . $variables["page_builder"]["body_classes"] ); ?>>
+	<body <?php body_class('syllabus bg-zinc-800 subpixel-antialiased' . $variables["page_builder"]["body_classes"] ); ?>>

@@ -5,6 +5,23 @@ in the filter:
 
     /src/hook_filters/taxonomy_templates.php
 
+# All Templates (in order)
+
+    -- Single --
+    /src/views/layouts/single-$post_name.php
+    /src/views/layouts/cpt-$post_type.php
+    /src/views/layouts/cpt.php
+    /src/views/layouts/page-$page_type.php
+
+    -- Taxonomies --
+    /src/views/layouts/taxonomy-$taxonomy.php
+    /src/views/layouts/page-$post_type.php
+
+    -- Terms --
+    /src/views/layouts/term-$term.php
+    /src/views/layouts/taxonomy-$taxonomy-term.php
+    /src/views/layouts/page-$post_type.php
+
 
 ## Layouts
 
@@ -43,6 +60,13 @@ The catch-all for all custom post types.
     /src/views/layouts/cpt.php
 
 
+### 4. page-$page_type.php (GLOBAL)
+
+The catch-all global page-type for all pages/taxonomies/etc..
+
+    /src/views/layouts/page-syllabus.php   
+
+
 ## Taxonomies
 
 Each taxonomy has the following templates defined:
@@ -56,6 +80,14 @@ This is the template for the custom taxonomy defined.
     e.g.
     /src/views/layouts/taxonomy-syllabus_category.php
 
+### 2. page-$page_type.php (GLOBAL)
+
+The catch-all global page-type for all pages/taxonomies/etc..
+
+    /src/views/layouts/page-$page_type.php
+
+    e.g.
+    /src/views/layouts/page-syllabus.php   
 
 
 ## Taxonomy Terms
@@ -82,6 +114,15 @@ following template:
 
     e.g.
     /src/views/layouts/taxonomy-syllabus_category-term.php
+
+### 3. page-$page_type.php (GLOBAL)
+
+The catch-all global page-type for all pages/taxonomies/etc..
+
+    /src/views/layouts/page-$page_type.php
+
+    e.g.
+    /src/views/layouts/page-syllabus.php   
 
 
 # Registering

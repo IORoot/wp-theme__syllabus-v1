@@ -86,6 +86,16 @@ class taxonomy_templates
          */
         if ( file_exists( $folder . 'cpt.php'  ) ) {
             return $folder . 'cpt.php';
+        }        
+        
+        /**
+         * GLOBAL
+         * 
+         * page-syllabus.php
+         * /src/views/layouts/cpt.php
+         */
+        if ( file_exists( $folder . 'page-'.$post->post_type.'.php'  ) ) {
+            return $folder . 'page-'.$post->post_type.'.php';
         }
 
         /**
@@ -117,6 +127,11 @@ class taxonomy_templates
             return $template;
         }
 
+        // GLOBAL
+        // page-syllabus.php
+        $global_template = get_template_directory() . '/src/views/layouts/page-'.$this->settings["post_type"].'.php';
+        if (file_exists($global_template)) { $template = $global_template; }
+        
         // Check is page is equal to the name of the taxonomy.
         if ($wp_query->query["name"] == $this->settings["taxonomy"])
         {
@@ -143,8 +158,10 @@ class taxonomy_templates
      * src/
      *  views/
      *      layouts/
+     *          page-$page_type.php
      *          taxonomy-$taxonomy-term.php
      *          term-$term.php
+     * 
      */
     public function taxonomy_term_template($template) {
 
@@ -158,6 +175,11 @@ class taxonomy_templates
         // Check is page is a taxonomy page
         if (is_tax())
         {
+            // GLOBAL
+            // page-syllabus.php
+            $global_template = get_template_directory() . '/src/views/layouts/page-'.$this->settings["post_type"].'.php';
+            if (file_exists($global_template)) { $template = $global_template; }
+
             // GENERIC
             // syllabus_category-term-template.php
             $new_template = get_template_directory() . '/src/views/layouts/taxonomy-'.$this->settings["taxonomy"].'-term.php';

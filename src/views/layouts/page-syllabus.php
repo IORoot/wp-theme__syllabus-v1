@@ -2,15 +2,17 @@
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                                                         │
-// │                         Syllabus Single Page 	                         │
+// │                Syllabus Generic Generic Page Layout                     │
 // │                                                                         │
-// │            			Page Location:  /syllabus/               		 │
+// │                Page Locations:                                          │
+// │                    /syllabus/balancing                                  │
+// │                    /syllabus/balancing/mounting                         │
+// │                    /syllabus/balancing/mounting/slide-pull              │
 // │                                                                         │
 // └─────────────────────────────────────────────────────────────────────────┘
 
 get_header();
-
-get_template_part('src/views/menus/mainmenu', $pagename);
+$variables = (new andyp\theme\syllabus\app\all_page_variables)->get_variables();
 
 ?>
 
@@ -27,18 +29,8 @@ get_template_part('src/views/menus/mainmenu', $pagename);
 			<?php
 				if (have_posts()) {
 
-					while (have_posts()) {
+                    get_template_part('src/views/partials/isotope', 'post');
 
-						the_post();
-
-						$post_type = get_post_type();
-
-						get_template_part('src/views/partials/content', $post_type);
-
-					}
-
-					the_posts_navigation();
-					
 				} else {
 
 					get_template_part( 'src/views/partials/content', '404' );
