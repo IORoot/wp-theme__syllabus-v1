@@ -27,14 +27,18 @@ $variables = (new andyp\theme\syllabus\app\all_page_variables)->get_variables();
 			<div class="content w-full h-full bg-zinc-600">
 
 			<?php
-				if (have_posts()) {
+				// parent term
+				if(is_tax() && $variables["current_object"]->parent == 0){
+					include(get_template_directory() . '/src/views/isotope/isotope-taxonomy-parent.php');
+				}
 
-                    get_template_part('src/views/partials/isotope', 'post');
+				// child term
+				if (is_tax() && $variables["current_object"]->parent != 0) {
+					include(get_template_directory() . '/src/views/isotope/isotope-taxonomy-child.php');
+				} 
 
-				} else {
-
-					get_template_part( 'src/views/partials/content', '404' );
-
+				if (is_404()){
+					get_template_part( 'src/views/content/content', '404' );
 				}
 			?>
 			</div>

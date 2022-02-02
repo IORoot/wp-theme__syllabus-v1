@@ -17,7 +17,7 @@ get_template_part('src/views/menus/mainmenu', $pagename);
 
 				$post_type = get_post_type();
 
-				get_template_part('src/views/partials/content', $post_type);
+				get_template_part('src/views/content/content', $post_type);
 
 			}
 
@@ -25,7 +25,7 @@ get_template_part('src/views/menus/mainmenu', $pagename);
 			
         } else {
 
-			get_template_part( 'src/views/partials/content', '404' );
+			get_template_part( 'src/views/content/content', '404' );
 
 		}
 		?>
