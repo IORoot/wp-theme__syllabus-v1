@@ -12,7 +12,8 @@
 // └─────────────────────────────────────────────────────────────────────────┘
 
 get_header();
-$variables = (new andyp\theme\syllabus\app\all_page_variables)->get_variables();
+$help = new andyp\theme\syllabus\lib\helpers;
+$variables = $help->get_variables();
 
 ?>
 
@@ -35,7 +36,7 @@ $variables = (new andyp\theme\syllabus\app\all_page_variables)->get_variables();
 				// child term
 				if (is_tax() && $variables["current_object"]->parent != 0) {
 					include(get_template_directory() . '/src/views/isotope/isotope-taxonomy-child.php');
-				} 
+				}
 
 				if (is_404()){
 					get_template_part( 'src/views/content/content', '404' );

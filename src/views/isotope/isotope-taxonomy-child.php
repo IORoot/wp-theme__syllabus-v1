@@ -31,7 +31,7 @@
             <div class="grid-item overflow-hidden pb-10 md:pr-10 inline-block w-1/5 float-left  vaulting" data-unixdate="">
                 <a class="flex flex-col bg-zinc-900 text-white hover:bg-amber-500 rounded-lg overflow-hidden relative fill-zinc-50 hover:fill-zinc-900 p-4" href="<?php echo $post_permalink; ?>">
                 
-                    <div class="{{title:sanitize}} text-zinc-500 text-xs uppercase"><?php echo $index . '. ' . $post->post_title; ?></div>
+                    <div class="text-zinc-500 text-xs uppercase"><span class="text-zinc-300 mr-1"><?php echo $help->numberToRoman($index) . '. '?></span><?php echo $post->post_title; ?></div>
 
                     <?php echo $post_image; ?>
                 </a>

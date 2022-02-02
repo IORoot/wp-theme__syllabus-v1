@@ -1,5 +1,6 @@
 <?php
-	$variables = (new andyp\theme\syllabus\app\all_page_variables)->get_variables();
+	$help = new andyp\theme\syllabus\lib\helpers;
+	$variables = $help->get_variables();
 ?>
 
 <!doctype html>
@@ -20,4 +21,4 @@
 	</head>
 
 
-	<body <?php body_class('syllabus bg-zinc-800 subpixel-antialiased' . $variables["page_builder"]["body_classes"] ); ?>>
+	<body <?php body_class('syllabus bg-zinc-800 subpixel-antialiased' . $variables["acf"]["body_classes"] ); ?>>

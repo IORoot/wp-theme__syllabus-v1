@@ -37,7 +37,7 @@
             <div class="grid-item overflow-hidden pb-10 md:pr-10 inline-block w-1/5 float-left  vaulting">
                 <a class="flex flex-col bg-zinc-900 text-white hover:bg-amber-500 rounded-lg overflow-hidden relative fill-amber-500 hover:fill-zinc-900 p-4" href="<?php echo $term_permalink; ?>">
                 
-                    <div class="{{title:sanitize}} text-zinc-500 text-xs uppercase"><?php echo $index+1 . '. ' . $term_child->name; ?></div>
+                    <div class="text-zinc-500 text-xs uppercase"><?php echo $term_child->name; ?></div>
 
                     <?php
                         if (array_key_exists('svg_glyph', $term_acf)){
