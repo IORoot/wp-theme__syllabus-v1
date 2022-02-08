@@ -28,10 +28,10 @@
 
             ?>
 
-            <div class="grid-item overflow-hidden pb-10 md:pr-10 inline-block w-1/5 float-left  vaulting" >
-                <a class="flex flex-col bg-zinc-50 text-zinc-900 hover:bg-amber-500 rounded-lg overflow-hidden relative fill-zinc-900 hover:fill-zinc-50 p-4" href="<?php echo $post_permalink; ?>">
+            <div class="grid-item overflow-hidden pb-10 md:pr-10 inline-block w-1/5 float-left" >
+                <a class="flex flex-col bg-zinc-800 hover:bg-amber-500 text-zinc-400 hover:text-zinc-800 rounded-lg overflow-hidden relative fill-zinc-900 hover:fill-zinc-50 p-4" href="<?php echo $post_permalink; ?>">
                 
-                    <div class="text-zinc-700 text-xs uppercase"><span class="text-cyan-500 mr-1"><?php echo $help->numberToRoman($index) . '. '?></span><?php echo $post->post_title; ?></div>
+                    <div class="text-xs uppercase"><span class="text-emerald-500 mr-1"><?php echo $help->numberToRoman($index) . '. '?></span><?php echo $post->post_title; ?></div>
 
                     <?php echo $post_image; ?>
                 </a>

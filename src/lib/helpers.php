@@ -10,6 +10,9 @@ class helpers {
     {
         $this->get_current_object();
         $this->get_acf_fields();
+        $this->get_taxonomies();
+        $this->get_terms();
+        $this->get_terms_acf();
     }
 
     /**
@@ -35,9 +38,67 @@ class helpers {
     {
         $this->variables['acf'] = get_fields( get_queried_object() );
     }
+
+    /**
+     * Get Taxonomies.
+     */
+    private function get_taxonomies()
+    {
+        /**
+         * WP_Post
+         */
+        if (is_a($this->variables['current_object'],'WP_Post')){
+            $this->variables['taxonomies'] = get_post_taxonomies($this->variables['current_object']->ID);
+        }
+    }    
+    
+    /**
+     * Get Terms.
+     */
+    private function get_terms()
+    {
+        $this->variables['terms'] = [];
+        /**
+         * Check there are taxonomies.
+         */
+        if (empty($this->variables["taxonomies"])){
+            return;
+        }
+        
+        /**
+         * WP_Post
+         */
+        if (is_a($this->variables['current_object'],'WP_Post')){
+            
+            foreach ($this->variables["taxonomies"] as $taxonomy){
+                $terms = get_the_terms($this->variables['current_object'], $taxonomy);
+                $this->variables['terms'] = array_merge($this->variables['terms'], $terms); 
+            }
+        }
+    }
+
+
+    private function get_terms_acf()
+    {
+        /**
+         * Check there are terms.
+         */
+        if (empty($this->variables["terms"])){
+            return;
+        }
+
+        /**
+         * Get ACF for each term.
+         */
+        foreach ($this->variables["terms"] as $term_key => $term){
+            $this->variables['terms'][$term_key]->acf = get_fields('term_'.$term->term_id,'options');   
+        }
+    }
     
 
     /**
+     * Convert integer to roman numerals.
+     * 
     * @param int $number
     * @return string
     */

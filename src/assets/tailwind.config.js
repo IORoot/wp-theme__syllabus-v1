@@ -10,7 +10,7 @@ module.exports = {
     safelist: [
       {
         pattern: /./,
-        variants: ['hover','focus','sm','md','lg'],
+        variants: ['hover','focus','target','sm','md','lg'],
       },
     ]
   },

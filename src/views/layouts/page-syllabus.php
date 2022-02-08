@@ -9,6 +9,9 @@
 // │                    /syllabus/balancing/mounting                         │
 // │                    /syllabus/balancing/mounting/slide-pull              │
 // │                                                                         │
+// │               $variable is a special variable containing many           │
+// │               custom data structures. (Acf, Taxonomies, terms, etc.)    │
+// │                                                                         │
 // └─────────────────────────────────────────────────────────────────────────┘
 
 get_header();
@@ -38,8 +41,13 @@ $variables = $help->get_variables();
 					include(get_template_directory() . '/src/views/isotope/isotope-taxonomy-child.php');
 				}
 
+				// single page
+				if (is_single()) {
+					include(get_template_directory() . '/src/views/content/content-syllabus.php');
+				}
+				
 				if (is_404()){
-					get_template_part( 'src/views/content/content', '404' );
+					include(get_template_directory() . '/src/views/content/content-404.php');
 				}
 			?>
 			</div>

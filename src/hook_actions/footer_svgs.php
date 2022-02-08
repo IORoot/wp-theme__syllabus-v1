@@ -25,6 +25,7 @@
             include( get_template_directory() . '/src/assets/svgs/chevron-up.svg' );
             include( get_template_directory() . '/src/assets/svgs/chevron-down.svg' );
             include( get_template_directory() . '/src/assets/svgs/map-marker-path.svg' );
+            include( get_template_directory() . '/src/assets/svgs/close.svg' );
         echo '</div>';
     }
 

@@ -1,8 +1,3 @@
-<?php
-	$help = new andyp\theme\syllabus\lib\helpers;
-	$variables = $help->get_variables();
-?>
-
 <!doctype html>
 <html <?php language_attributes(); ?>>
 
