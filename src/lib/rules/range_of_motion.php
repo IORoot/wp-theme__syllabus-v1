@@ -50,7 +50,7 @@ class range_of_motion implements rulesInterface {
     }
 
     private function svg(){
-        return __FUNCTION__ . ' : ' . $this->config[__FUNCTION__];
+        return '<div class="w-10 h-10 fill-amber-500">' . $this->config[__FUNCTION__] . '</div>';
     }
 
 }
