@@ -11,13 +11,19 @@
 	<div class="w-4/5 h-full flex flex-col gap-8">
 
 		<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                			  VIDEO                                      │
+			// └─────────────────────────────────────────────────────────────────────────┘
 			include(get_template_directory() . '/src/views/partials/post-video.php'); 
 		?>
 		
-		<div class="content max-w-screen-sm mx-auto">
+
+		<div class="content max-w-screen-sm mx-auto w-full">
 		<?php
-			include(get_template_directory() . '/src/views/partials/post-title.php'); 
-			include(get_template_directory() . '/src/views/partials/post-content.php'); 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                			  TABS                                       │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/post-tabs.php');
 		?>
 		</div>
 		
@@ -32,9 +38,23 @@
 	// └─────────────────────────────────────────────────────────────────────────┘
 	?>
 	<div class="w-1/5 h-full flex flex-col gap-4">
-		<?php include(get_template_directory() . '/src/views/partials/post-taxonomy-glyph.php'); ?>
-		<?php include(get_template_directory() . '/src/views/partials/post-thumbnail.php'); ?>
-		<?php include(get_template_directory() . '/src/views/partials/post-side-rules.php'); ?>
+		<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                			  GLYPH                                      │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/post-taxonomy-glyph.php'); ?>
+
+		<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                			  IMAGE                                      │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/post-thumbnail.php'); ?>
+
+		<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                			  RULES                                      │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/post-side-rules.php'); ?>
 	</div>
 
 </article>
