@@ -27,30 +27,61 @@ class range_of_motion implements rulesInterface {
 
     private function build(){
         $this->output .= $this->svg();
+        $this->output .= '<div class="flex flex-col gap-4 font-thin w-full">';
         $this->output .= $this->range();
         $this->output .= $this->more_or_less();
         $this->output .= $this->multiplier();
         $this->output .= $this->description();
+        $this->output .= '</div>';
     }
 
     private function range(){
-        return __FUNCTION__ . ' : ' . $this->config[__FUNCTION__];
+        $out = '<h5 class="capitalize text-2xl">'.__FUNCTION__.' Rule.</h5>';
+            $out .= '<div class ="w-full font-light">';
+                $out .= 'Your range of motion must be <span class="text-emerald-500 font-medium">'. $this->config[__FUNCTION__] . '</span>';
+            $out .= '</div>';
+        return $out;
     }
 
     private function more_or_less(){
-        return __FUNCTION__ . ' : ' . $this->config[__FUNCTION__];
+        $out = '<div class="flex flex-row gap-4">';
+            $out .= '<div class="w-1/4 text-amber-100">';
+                $out .= '+ / -';
+            $out .= '</div>';
+
+            $out .= '<div class ="w-3/4">';
+                $out .= 'Your range of motion can be '.$this->config[__FUNCTION__].' than specified.';
+            $out .= '</div>';
+        $out .= '</div>';
+        return $out;
     }
 
     private function multiplier(){
-        return __FUNCTION__ . ' : ' . $this->config[__FUNCTION__];
-    }
+        $out = '<div class="flex flex-row gap-4">';
+            $out .= '<div class="w-1/4 text-amber-100">';
+                $out .= 'Multiplier';
+            $out .= '</div>';
+
+            $out .= '<div class ="w-3/4">';
+                $out .= 'x'.$this->config[__FUNCTION__].' times the specified amount.';
+            $out .= '</div>';
+        $out .= '</div>';
+        return $out;    }
 
     private function description(){
-        return __FUNCTION__ . ' : ' . $this->config[__FUNCTION__];
-    }
+        $out = '<div class="flex flex-row gap-4">';
+            $out .= '<div class="w-1/4 text-amber-100">';
+                $out .= 'Details';
+            $out .= '</div>';
+
+            $out .= '<div class ="w-3/4">';
+                $out .= $this->config[__FUNCTION__];
+            $out .= '</div>';
+        $out .= '</div>';
+        return $out;    }
 
     private function svg(){
-        return '<div class="w-10 h-10 fill-amber-500">' . $this->config[__FUNCTION__] . '</div>';
+        return '<div class="w-12 h-12 fill-amber-500">' . $this->config[__FUNCTION__] . '</div>';
     }
 
 }

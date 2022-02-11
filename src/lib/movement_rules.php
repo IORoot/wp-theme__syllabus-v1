@@ -24,7 +24,9 @@ class movement_rules {
     private function loop_rules()
     {
         foreach ($this->rules as $this->rule){
+            $this->rule_wrapper_open();
             $this->process_rule();
+            $this->rule_wrapper_close();
         }
     }
 
@@ -36,6 +38,14 @@ class movement_rules {
 
         $rule->set_config($this->rule);
         $this->output .= $rule->get_output();
+    }
+
+    private function rule_wrapper_open(){
+        $this->output .= '<div class="bg-zinc-800 p-4 rounded-xl flex flex-row gap-4 w-full">';
+    }
+
+    private function rule_wrapper_close(){
+        $this->output .= '</div>';
     }
 
 }
