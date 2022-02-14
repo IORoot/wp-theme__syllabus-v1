@@ -15,9 +15,10 @@
 // └─────────────────────────────────────────────────────────────────────────┘
 
 get_header();
+if (is_admin()){ acf_form_head(); } // https://www.advancedcustomfields.com/resources/create-a-front-end-form/
+
 $help = new andyp\theme\syllabus\lib\helpers;
 $variables = $help->get_variables();
-
 $access = new andyp\theme\syllabus\lib\access();
 ?>
 

@@ -12,11 +12,11 @@
     <input type="radio" id="tab3" name="css-tabs" class="hidden">
 
     <ul class="tabs flex list-none p-0 mb-10 gap-4">
-        <li class="tab"><label for="tab1" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">DETAILS</label></li>
-        <li class="tab"><label for="tab2" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">RULES</label></li>
+        <li class="tab w-full"><label for="tab1" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">DETAILS</label></li>
+        <li class="tab w-full"><label for="tab2" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">RULES</label></li>
 
         <?php if ($access->can('view_tabs')){ ?>
-            <li class="tab"><label for="tab3" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">ADMIN</label></li>
+            <li class="tab w-full"><label for="tab3" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">ADMIN</label></li>
         <?php } ?>
     </ul>
 
@@ -56,7 +56,13 @@
     // └─────────────────────────────────────────────────────────────────────────┘
     ?>
     <div class="tab-content hidden">
-        <h1>ADMIN</h1>
+        <?php
+            // ┌─────────────────────────────────────────────────────────────────────────┐
+            // │                			  ADMIN                                      │
+            // └─────────────────────────────────────────────────────────────────────────┘
+
+            include(get_template_directory() . '/src/views/partials/post-admin.php'); 
+        ?>
     </div>
     
 </div>
