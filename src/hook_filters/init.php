@@ -68,3 +68,8 @@ new andyp\theme\syllabus\hook_filters\taxonomy_templates([
     'taxonomy' => 'syllabus_category',
     'post_type' => 'syllabus'
 ]);
+
+/**
+ * Add filmed status to post title in sidebar.
+ */
+require get_template_directory() . '/src/hook_filters/sidebar_post_title.php';
