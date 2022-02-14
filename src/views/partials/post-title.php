@@ -1,6 +1,6 @@
-<h1 class="post_title mb-8">
+<h1 class="post_title p-0">
     <?php 
-        echo $variables["acf"]["award_level"]. '. '; 
+        echo 'Level '. $variables["acf"]["award_level"]. '. '; 
         the_title(); 
     ?>
 </h1>

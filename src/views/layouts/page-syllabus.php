@@ -18,6 +18,7 @@ get_header();
 $help = new andyp\theme\syllabus\lib\helpers;
 $variables = $help->get_variables();
 
+$access = new andyp\theme\syllabus\lib\access();
 ?>
 
 	<main class="flex flex-row min-h-screen <?php echo $page_classes; ?>">

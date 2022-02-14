@@ -2,8 +2,6 @@
 
 namespace andyp\theme\syllabus\lib;
 
-use andyp\theme\syllabus\lib\rules\distance;
-
 class movement_rules {
 
     public $rules;
