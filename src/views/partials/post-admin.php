@@ -3,14 +3,23 @@
     // │                		        THE ACF FORM                             │
     // └─────────────────────────────────────────────────────────────────────────┘
     ?>
+<div class="flex flex-wrap gap-4 bg-zinc-700 rounded-xl p-4 mb-4">
+<?php edit_post_link('Edit page', '', '', null, 'bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded'); ?>
+</div>
+
 <div class="flex flex-wrap gap-4 bg-zinc-700 rounded-xl p-4">
 <?php
     acf_form([
         'fields' => [
+            'filmed',
+            'award_level',
             'filming_location',
             'specific_location',
             'filming_notes',
-            'filmed',
+            'media',
+        ],
+        'field_groups' => [
+            ''
         ],
         'post_title' => true,
         'post_content' => true,

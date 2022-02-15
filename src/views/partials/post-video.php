@@ -1,3 +1,4 @@
+<div class="p-2 bg-zinc-900 rounded-xl mb-8">
 <?php
 
     /**
@@ -9,7 +10,7 @@
 
     foreach ($variables["acf"]["media"] as $video){
         ?>
-            <lite-youtube class="w-full h-96 bg-cover bg-center bg-no-repeat fill-amber-500 flex cursor-pointer rounded-xl overflow-hidden" id="ytplayer" videoid="<?php echo $video['videoId']; ?>" >
+            <lite-youtube class="w-full h-96 bg-zinc-800 bg-cover bg-center bg-no-repeat fill-amber-500 flex cursor-pointer rounded-xl overflow-hidden" id="ytplayer" videoid="<?php echo $video['videoId']; ?>" >
                 
                 <svg class="h-24 w-24 m-auto" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
 
@@ -18,4 +19,4 @@
     }
 
 ?>
-
+</div>

@@ -1,4 +1,4 @@
-<div class="side-rules flex flex-wrap gap-4 bg-zinc-700 rounded-xl p-4">
+<div class="side-rules flex flex-wrap gap-4 bg-zinc-800 rounded-xl p-4">
     <div class="text-center font-thin text-lg w-full">Rules</div>
 
     <?php
@@ -7,7 +7,7 @@
 
         foreach ($rules as $rule_index => $rule){ ?>
 
-            <div class="w-1/3 flex-auto bg-zinc-800 rounded-xl text-zinc-100 fill-zinc-400 p-4">
+            <div class="w-1/3 flex-auto bg-zinc-900 rounded-xl text-zinc-100 fill-zinc-400 p-4">
 
                 <div class="text-center font-thin capitalize text-xs mb-2"><?php echo $rule['acf_fc_layout']; ?></div>
 
