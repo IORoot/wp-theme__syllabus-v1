@@ -12,6 +12,7 @@ class helpers {
         $this->get_acf_fields();
         $this->get_taxonomies();
         $this->get_terms();
+        $this->get_parent_term();
         $this->get_terms_acf();
     }
 
@@ -74,6 +75,27 @@ class helpers {
                 $terms = get_the_terms($this->variables['current_object'], $taxonomy);
                 $this->variables['terms'] = array_merge($this->variables['terms'], $terms); 
             }
+        } 
+        
+    }
+
+    /**
+     * Get a parent term.
+     */
+    private function get_parent_term()
+    {
+        /**
+         * WP_Term
+         */
+        if (!is_a($this->variables['current_object'],'WP_Term')){
+            return;
+        }
+
+        /**
+         * Has a parent.
+         */
+        if ($this->variables['current_object']->parent != 0){
+            $this->variables['terms']['parent'] = get_term($this->variables['current_object']->parent, $variables["current_object"]->taxonomy);
         }
     }
 
