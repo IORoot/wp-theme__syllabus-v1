@@ -35,12 +35,12 @@ $access = new andyp\theme\syllabus\lib\access();
 			<?php
 				// parent term
 				if(is_tax() && $variables["current_object"]->parent == 0){
-					include(get_template_directory() . '/src/views/isotope/isotope-taxonomy-parent.php');
+					include(get_template_directory() . '/src/views/content/content-taxonomy-parent.php');
 				}
 
 				// child term
 				if (is_tax() && $variables["current_object"]->parent != 0) {
-					include(get_template_directory() . '/src/views/isotope/isotope-taxonomy-child.php');
+					include(get_template_directory() . '/src/views/content/content-taxonomy-child.php');
 				}
 
 				// single page
