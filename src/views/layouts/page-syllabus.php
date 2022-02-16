@@ -30,7 +30,7 @@ $access = new andyp\theme\syllabus\lib\access();
 			
 
 			<div class="searchbar w-full h-16 bg-zinc-700"></div>
-			<div class="content w-full h-full bg-zinc-600">
+			<div class="content w-full h-full bg-zinc-600 p-4 flex flex-col gap-4">
 
 			<?php
 				// parent term

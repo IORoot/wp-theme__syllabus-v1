@@ -18,14 +18,14 @@
 ?>
 <div class="flex flex-wrap bg-zinc-800 rounded-xl p-2 text-2xl font-thin gap-2">
 
-    <a href="<?php echo $parent_link; ?>" class="rounded-xl bg-zinc-900 fill-zinc-700 text-zinc-700 flex flex-row px-4 py-1 hover:bg-emerald-700 hover:fill-white hover:text-white">
+    <a href="<?php echo $parent_link; ?>" class="rounded-xl bg-zinc-900 fill-zinc-700 text-zinc-700 flex flex-row px-4 py-1 hover:bg-emerald-600 hover:fill-white hover:text-white">
         <div class="h-8 w-8  inline-block"><?php echo $parent_glyph ?></div>
         <div class="">
             <?php echo $parent_name ?>
         </div>
     </a>
 
-    <a href="<?php echo $child_link; ?>" class="rounded-xl bg-zinc-900 text-zinc-500 fill-zinc-500 flex flex-row px-4 py-1 hover:bg-emerald-700 hover:fill-white hover:text-white">
+    <a href="<?php echo $child_link; ?>" class="rounded-xl bg-zinc-900 text-zinc-500 fill-zinc-500 flex flex-row px-4 py-1 hover:bg-emerald-600 hover:fill-white hover:text-white">
         <div class="h-8 w-8  inline-block"><?php echo $child_glyph ?></div>
         <div class="">
             <?php echo $child_name?>

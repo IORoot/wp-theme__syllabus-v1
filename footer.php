@@ -9,6 +9,5 @@
 			</div>
 
 		</footer>
-
 	</body>
 </html>
