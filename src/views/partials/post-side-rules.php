@@ -15,9 +15,9 @@
             // │                                                                         │
             // └─────────────────────────────────────────────────────────────────────────┘
             ?>
-            <div class="w-1/3 flex-auto bg-zinc-900 rounded-xl text-zinc-100 fill-zinc-400 p-4 flex flex-col">
+            <a href="#open-rule-modal-<?php echo $rule_index?>" class="w-1/3 flex-auto bg-zinc-900 hover:bg-amber-500 hover:fill-zinc-900 hover:text-zinc-900 rounded-xl text-zinc-100 fill-zinc-400 p-4 flex flex-col">
 
-                <a href="#open-rule-modal-<?php echo $rule_index?>" class="fill-amber-500 block w-2/3 mb-8 mx-auto" title="<?php echo $rule['description']; ?>"><?php echo $rule['svg']; ?></a>
+                <div class="block w-2/3 mb-8 mx-auto" title="<?php echo $rule['description']; ?>"><?php echo $rule['svg']; ?></div>
 
                 <div class="capitalize text-xs">
                     <?php 
@@ -31,7 +31,7 @@
                     ?>
                 </div>
 
-            </div>
+            </a>
 
 
             <?php
