@@ -11,12 +11,22 @@
         <?php echo str_replace('width="170px" height="170px"' ,'', $variables["acf"]["svg_glyph"]); ?>
     </div>
 
-    <div class="text-7xl text-zinc-50 my-11 uppercase">
-        <?php echo $variables["current_object"]->name; ?>
-    </div>
 
-    <div class="text-2xl text-zinc-50 text-right">
-    <?php echo $variables["current_object"]->count; ?>
+    <div class="flex flex-col justify-center">
+        <?php if (array_key_exists('parent', $variables["terms"])) { ?>
+            <a href="<?php echo get_term_link($variables["terms"]["parent"]); ?>" class="flex flex-row fill-zinc-500 text-zinc-500 hover:fill-emerald-500 hover:text-emerald-500">
+                <div class="h-6 w-6 "><?php echo str_replace('width="170px" height="170px"' ,'', $variables["terms"]["parent"]->acf["svg_glyph"]); ?></div>
+                <div class="text-xl uppercase"><?php  echo $variables["terms"]["parent"]->name; ?></div>
+            </a>
+        <?php } ?>
+
+
+        <div class="text-7xl text-zinc-50 uppercase">
+            <?php echo $variables["current_object"]->name; ?>
+        </div>
+
     </div>
+    
+    <?php include(get_template_directory() . '/src/views/partials/taxonomy-child-stats.php'); ?>
 
 </div>

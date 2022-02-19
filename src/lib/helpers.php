@@ -95,7 +95,7 @@ class helpers {
          * Has a parent.
          */
         if ($this->variables['current_object']->parent != 0){
-            $this->variables['terms']['parent'] = get_term($this->variables['current_object']->parent, $variables["current_object"]->taxonomy);
+            $this->variables['terms']['parent'] = get_term($this->variables['current_object']->parent, $this->variables["current_object"]->taxonomy);
         }
     }
 

@@ -1,4 +1,4 @@
-<a href="#open-thumbnail-modal" class="w-full h-full bg-zinc-800 rounded-xl hover:bg-zinc-700">
+<a href="#open-thumbnail-modal" class="w-full h-auto bg-zinc-800 rounded-xl hover:bg-zinc-700">
     <?php echo get_the_post_thumbnail(); ?>
 </a>
 

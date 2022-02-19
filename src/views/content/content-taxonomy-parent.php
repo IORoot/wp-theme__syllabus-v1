@@ -34,14 +34,8 @@ include(get_template_directory() . '/src/views/partials/taxonomy-parent-title.ph
 
     <?php
 
-        $terms = get_terms([
-            'taxonomy' => $variables["current_object"]->taxonomy,
-            'parent' => $variables["current_object"]->term_id
-        ]);
-
         foreach ($terms as $index => $term_child){
 
-            
             $term_acf = get_fields('term_'.$term_child->term_id, 'options');
             if (!$term_acf){ $term_acf = []; }
             $term_permalink = get_term_link($term_child->term_id);
@@ -49,7 +43,7 @@ include(get_template_directory() . '/src/views/partials/taxonomy-parent-title.ph
             ?>
 
             <div class="grid-item overflow-hidden inline-block w-full">
-                <a class="flex flex-col bg-zinc-900 text-white hover:bg-amber-500 rounded-lg overflow-hidden relative fill-amber-500 hover:fill-zinc-900 p-4" href="<?php echo $term_permalink; ?>">
+                <a class="flex flex-col bg-zinc-800 text-white hover:bg-amber-500 rounded-lg overflow-hidden relative fill-amber-500 hover:fill-zinc-900 p-4" href="<?php echo $term_permalink; ?>">
                 
                     <div class="text-zinc-500 text-xs uppercase"><?php echo $term_child->name; ?></div>
 

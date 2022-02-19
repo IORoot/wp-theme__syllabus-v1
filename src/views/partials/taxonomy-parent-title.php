@@ -15,8 +15,6 @@
         <?php echo $variables["current_object"]->name; ?>
     </div>
 
-    <div class="text-2xl text-zinc-50 text-right">
-    <?php echo $variables["current_object"]->count; ?>
-    </div>
+    <?php include(get_template_directory() . '/src/views/partials/taxonomy-parent-stats.php'); ?>
 
 </div>

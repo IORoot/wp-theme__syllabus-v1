@@ -8,7 +8,7 @@ foreach ($variables["terms"] as $term){
 
 ?>
 
-<div class="w-full h-full bg-zinc-800 fill-zinc-100 rounded-xl">
+<div class="w-full h-auto bg-zinc-800 fill-zinc-100 rounded-xl">
     <?php echo $svg_glyph; ?>
     <p class="text-center mb-4 font-thin text-lg"> <?php echo $term_name ?></p>
 </div>
