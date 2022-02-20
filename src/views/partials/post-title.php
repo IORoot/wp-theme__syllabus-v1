@@ -4,12 +4,12 @@
         if ($term->parent == 0){
             $parent_link  = get_term_link($term);
             $parent_name  = $term->name;
-            $parent_glyph = str_replace('width="170px" height="170px"', '', $term->acf["svg_glyph"]);
+            $parent_glyph = $term->acf["svg_glyph"];
             continue; 
         } else {
             $child_link  = get_term_link($term);
             $child_name = $term->name;
-            $child_glyph = str_replace('width="170px" height="170px"', '', $term->acf["svg_glyph"]);
+            $child_glyph = $term->acf["svg_glyph"];
 
         }
 

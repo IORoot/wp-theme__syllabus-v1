@@ -73,3 +73,7 @@ new andyp\theme\syllabus\hook_filters\taxonomy_templates([
  * Add filmed status to post title in sidebar.
  */
 require get_template_directory() . '/src/hook_filters/sidebar_post_title.php';
+/**
+ * Add Add SVG Glyph to category name.
+ */
+require get_template_directory() . '/src/hook_filters/sidebar_cat_name.php';
