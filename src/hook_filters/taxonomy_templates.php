@@ -127,6 +127,11 @@ class taxonomy_templates
             return $template;
         }
 
+        // Check the post_typee is the same.
+        if ($wp_query->query["post_type"] != $this->settings["post_type"]){
+            return $template;
+        }
+
         // GLOBAL
         // page-syllabus.php
         $global_template = get_template_directory() . '/src/views/layouts/page-'.$this->settings["post_type"].'.php';

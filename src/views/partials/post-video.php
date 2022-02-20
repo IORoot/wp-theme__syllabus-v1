@@ -31,21 +31,7 @@
     }
     ?>
 </div>
-<?php
-// ┌─────────────────────────────────────────────────────────────────────────┐
-// │                                                                         │
-// │                			NAVIGATION CELLS                             │
-// │                                                                         │
-// └─────────────────────────────────────────────────────────────────────────┘
-?>
 
-<?php if ( count($variables["acf"]["media"]) > 1 ){ ?>
-    <div class="nav-carousel p-2 bg-zinc-900 rounded-xl">
-        <?php foreach ($variables["acf"]["media"] as $video){ ?>
-            <div class="carousel-cell w-32 h-20"><img src="https://img.youtube.com/vi/<?php echo $video['videoId']; ?>/default.jpg"></div>
-        <?php } ?>
-    </div>
-<?php } ?>
 
 <?php
 // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -70,14 +56,33 @@
         contain: true,
         pageDots: false
     });    
-    
-    var nav_element = document.querySelector('.nav-carousel');
-    var flickity = new Flickity( nav_element, {
-        asNavFor: '.main-carousel',
-        contain: true,
-        pageDots: false
-    });
 </script>
+
+<?php
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                                                                         │
+// │                	NAVIGATION CELLS & SCRIPT                            │
+// │                                                                         │
+// └─────────────────────────────────────────────────────────────────────────┘
+?>
+
+<?php if ( count($variables["acf"]["media"]) > 1 ){ ?>
+    <div class="nav-carousel p-2 bg-zinc-900 rounded-xl">
+        <?php foreach ($variables["acf"]["media"] as $video){ ?>
+            <div class="carousel-cell w-32 h-20"><img src="https://img.youtube.com/vi/<?php echo $video['videoId']; ?>/default.jpg"></div>
+        <?php } ?>
+    </div>
+
+    <script>
+        var nav_element = document.querySelector('.nav-carousel');
+        var flickity = new Flickity( nav_element, {
+            asNavFor: '.main-carousel',
+            contain: true,
+            pageDots: false
+        });
+    </script>
+    
+<?php } ?>
 
 
 <?php
