@@ -1,5 +1,5 @@
 
-<article <?php post_class(); ?>>
+<article <?php post_class('pt-32'); ?>>
 
 	<?php 
 		the_content(); 

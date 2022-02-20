@@ -2,14 +2,13 @@
 
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                                                         │
-// │                	 Template for ultimate fallback                      │
+// │                	 Template for the HOMEPAGE /                         │
 // │                                                                         │
 // └─────────────────────────────────────────────────────────────────────────┘
 
-
 get_header();
 
-get_template_part('src/views/menus/mainmenu', $pagename);
+include(get_template_directory() . '/src/views/menus/mainmenu.php');
 
 ?>
 
@@ -21,13 +20,8 @@ get_template_part('src/views/menus/mainmenu', $pagename);
             while (have_posts()) {
 
 				the_post();
-				// ┌─────────────────────────────────────────────────────────────────────────┐
-				// │                                                                         │
-				// │                	    Template POST_TYPE                               │
-				// │                                                                         │
-				// └─────────────────────────────────────────────────────────────────────────┘
 				$post_type = get_post_type();
-				include(get_template_directory() . '/src/views/content/content-'.$post_type.'.php');
+				include(get_template_directory() . '/src/views/content/content-front-page.php');
 			}
 
 			the_posts_navigation();
