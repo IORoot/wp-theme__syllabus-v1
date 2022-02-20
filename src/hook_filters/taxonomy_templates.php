@@ -127,6 +127,11 @@ class taxonomy_templates
             return $template;
         }
 
+        // check if the post_Type is set.
+        if (!array_key_exists('post_type', $wp_query->query)){
+            return $template;
+        }
+
         // Check the post_typee is the same.
         if ($wp_query->query["post_type"] != $this->settings["post_type"]){
             return $template;
