@@ -29,5 +29,5 @@
         echo '</div>';
     }
 
-    add_action( 'wp_footer', 'footer_svgs' );
+    add_action( 'wp_footer', 'footer_svgs', 30 );
 ?>

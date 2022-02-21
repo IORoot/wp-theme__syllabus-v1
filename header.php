@@ -16,4 +16,4 @@
 	</head>
 
 
-	<body <?php body_class('syllabus bg-zinc-800 subpixel-antialiased' . $variables["acf"]["body_classes"] ); ?>>
+	<body <?php body_class('syllabus bg-zinc-800 subpixel-antialiased' ); ?>>
