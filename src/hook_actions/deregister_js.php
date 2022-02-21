@@ -43,8 +43,9 @@ function remove_registered_scripts(){
         if ($queue_value == 'real-media-library-rml'){ dequeue_deregister($queue_value); }
         if ($queue_value == 'wp-media-picker'){ dequeue_deregister($queue_value); }
         if ($queue_value == 'underscore'){ dequeue_deregister($queue_value); }
+        if ($queue_value == 'wp-embed'){ dequeue_deregister($queue_value); }
     } 
 
 }
 
-// add_action('wp_print_scripts', 'remove_registered_scripts',100);
+add_action('wp_print_scripts', 'remove_registered_scripts',100);
