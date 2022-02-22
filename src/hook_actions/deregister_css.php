@@ -9,8 +9,11 @@
 
 
 function remove_all_theme_styles() {
+
+    if (is_admin()){ return; }
+
     global $wp_styles;
-    
+
     $wp_styles->queue = [
         // 'mp-theme',
         // 'mp-account-css',
