@@ -55,3 +55,28 @@ require get_template_directory() . '/src/hook_actions/remove_emojis.php';
  * Remove Frontend RSD Link
  */
 require get_template_directory() . '/src/hook_actions/remove_rsd_link.php';
+
+/**
+ * Customise the Advanced Forms Pro Submit buttons
+ */
+require get_template_directory() . '/src/hook_actions/AFP_submit_buttons.php';
+
+/**
+ * Customise the Advanced Forms Pro Before Fields
+ */
+require get_template_directory() . '/src/hook_actions/AFP_before_fields.php';
+
+/**
+ * Customise the Advanced Forms Pro After Fields
+ */
+require get_template_directory() . '/src/hook_actions/AFP_after_fields.php';
+
+/**
+ * Customise the Advanced Forms Pro Field Atrributes
+ */
+require get_template_directory() . '/src/hook_actions/AFP_field_attributes.php';
+
+/**
+ * Customise the Advanced Forms Pro Before render
+ */
+require get_template_directory() . '/src/hook_actions/AFP_before_render.php';
