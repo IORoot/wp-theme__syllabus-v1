@@ -19,7 +19,7 @@ include(get_template_directory() . '/src/views/menus/mainmenu.php');
         while (have_posts()) {
             the_post();
             $post_type = get_post_type();
-            include(get_template_directory() . '/src/views/content/content-signup.php');
+            include(get_template_directory() . '/src/views/content/content-memberpress-account.php');
         }
 
         the_posts_navigation();
