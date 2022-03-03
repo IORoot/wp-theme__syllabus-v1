@@ -100,6 +100,9 @@ class helpers {
     }
 
 
+    /**
+     * Get any Term ACF fields
+     */
     private function get_terms_acf()
     {
         /**
@@ -140,5 +143,8 @@ class helpers {
     }
 
 
+    public function get_random_iso_image() {
+        
+    }
 
 }
