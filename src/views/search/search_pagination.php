@@ -1,4 +1,3 @@
-
 <div class="flex justify-center pb-10">
 <?php
 echo paginate_links([
