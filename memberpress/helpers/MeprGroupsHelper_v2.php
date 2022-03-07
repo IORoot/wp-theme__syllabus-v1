@@ -212,12 +212,25 @@ class MeprGroupsHelper_v2 {
       ?>
       <div class="mepr-price-box-benefits"><?php echo $benefits; ?></div>
 
+      <?php
+      // ┌─────────────────────────────────────────────────────────────────────────┐
+      //                               SIGN UP BUTTON 2                  
+      // └─────────────────────────────────────────────────────────────────────────┘ 
+      ?>
+      <div class="mepr-price-box-foot ">
+        <div class="mepr-price-box-footer"><?php echo $product->pricing_footer_txt; ?></div>
+        <?php
+          if(in_array($product->pricing_button_position, array('footer','both'))) {
+            echo self::price_box_button($user, $group, $product, $active);
+          }
+        ?>
+      </div>
+
     </div>
     <?php
     $output = ob_get_clean();
     echo MeprHooks::apply_filters('mepr-group-page-item-output', $output, $product, $group, $preview);
   }
-
 
 
 
