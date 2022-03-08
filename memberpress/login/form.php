@@ -5,7 +5,7 @@
   <?php if(MeprUtils::is_user_logged_in()): ?>
 
 
-  <?php
+  <?php  
   // ┌─────────────────────────────────────────────────────────────────────────┐
   //
   //                 	              Logged in                              
@@ -110,7 +110,7 @@
               // └─────────────────────────────────────────────────────────────────────────┘
               ?>
               <h2 class="mb-4">Log into your Account</h2>
-              <p class="text-zinc-500">Need to sign up? 
+              <p class="text-zinc-500 mb-8">Need to sign up? 
                 <a href="/plans/signup/" class="text-blue-400 hover:underline cursor-pointer">Register here.</a>
               </p>
 
@@ -119,7 +119,7 @@
               //                 	         Username                              
               // └─────────────────────────────────────────────────────────────────────────┘
               ?>
-                <div class="mp-form-row mepr_username mt-8">
+                <div class="mp-form-row mepr_username">
 
                   <div class="mp-form-label">
                     <?php $uname_or_email_str = MeprHooks::apply_filters('mepr-login-uname-or-email-str', _x('Username or E-mail', 'ui', 'memberpress')); ?>

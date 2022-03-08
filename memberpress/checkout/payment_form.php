@@ -6,7 +6,7 @@
       <label><?php _ex('Credit Card Number', 'ui', 'memberpress'); ?></label>
       <span class="cc-error"><?php _ex('Invalid Credit Card Number', 'ui', 'memberpress'); ?></span>
     </div>
-    <input type="tel" class="mepr-form-input card-number cc-number validation" pattern="\d*" autocomplete="cc-number" required>
+    <input type="tel" class="mepr-form-input card-number cc-number validation " pattern="\d*" autocomplete="cc-number" required>
     <input type="hidden" class="mepr-cc-num" name="mepr_cc_num"/>
   </div>
   <input type="hidden" name="mepr-cc-type" class="cc-type" value="" />

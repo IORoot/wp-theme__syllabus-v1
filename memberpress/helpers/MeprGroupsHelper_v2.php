@@ -121,7 +121,13 @@ class MeprGroupsHelper_v2 {
         //                                  GLYPH                   
         // └─────────────────────────────────────────────────────────────────────────┘ 
         ?>  
-        <?php echo get_field('svg', $product->rec->ID); ?>
+        <?php 
+          $colour = get_field('colour', $product->rec->ID);
+
+          echo '<div class="fill-'.$colour.'">';
+          echo get_field('svg', $product->rec->ID); 
+          echo '</div>';
+        ?>
 
         <?php
         // ┌─────────────────────────────────────────────────────────────────────────┐
@@ -261,19 +267,21 @@ class MeprGroupsHelper_v2 {
     ?>
     <div class="mepr-price-box-button ">
       <?php
+        $colour = get_field('colour', $product->rec->ID);
+
         //All this logic is for showing a "VIEW" button instead of "Buy Now" if the member has already purchased it
         //and the membership access URL is set for that membership - and you can't buy the same membership more than once
         if( $user && !$product->simultaneous_subscriptions &&
             $user->is_already_subscribed_to($product->ID) &&
             !empty($product->access_url) ):
         ?>
-          <a <?php echo 'href="'.$product->access_url.'"'; ?> class="text-center bg-green-500 py-4 rounded-lg block text-white text-2xl hover:bg-cyan-500 hover:text-zinc-50 <?php echo self::price_box_button_classes($group, $product, true); ?>">
-          <svg class="w-6 h-8 pb-1 fill-white inline" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17,3H14V6H10V3H7A2,2 0 0,0 5,5V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V5A2,2 0 0,0 17,3M12,8A2,2 0 0,1 14,10A2,2 0 0,1 12,12A2,2 0 0,1 10,10A2,2 0 0,1 12,8M16,16H8V15C8,13.67 10.67,13 12,13C13.33,13 16,13.67 16,15V16M13,5H11V1H13V5M16,19H8V18H16V19M12,21H8V20H12V21Z"/></svg>
+          <a <?php echo 'href="'.$product->access_url.'"'; ?> class="text-center <?php echo 'bg-'.$colour; ?> py-4 rounded-lg block text-white fill-white text-2xl hover:bg-zinc-50 hover:text-zinc-900 hover:fill-<?php echo $colour; ?> <?php echo self::price_box_button_classes($group, $product, true); ?>">
+          <svg class="w-6 h-8 pb-1 inline" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17,3H14V6H10V3H7A2,2 0 0,0 5,5V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V5A2,2 0 0,0 17,3M12,8A2,2 0 0,1 14,10A2,2 0 0,1 12,12A2,2 0 0,1 10,10A2,2 0 0,1 12,8M16,16H8V15C8,13.67 10.67,13 12,13C13.33,13 16,13.67 16,15V16M13,5H11V1H13V5M16,19H8V18H16V19M12,21H8V20H12V21Z"/></svg>
             <?php _e('View', 'memberpress'); ?>
           </a>
       <?php else: ?>
-          <a <?php echo $active ? 'href="'.$product->url().'"' : ''; ?> class="text-center bg-green-500 py-4 rounded-lg block text-white text-2xl hover:bg-cyan-500 hover:text-zinc-50 <?php echo self::price_box_button_classes($group, $product, $active); ?>">
-          <svg class="w-6 h-8 pb-1 fill-white inline" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17,3H14V6H10V3H7A2,2 0 0,0 5,5V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V5A2,2 0 0,0 17,3M12,8A2,2 0 0,1 14,10A2,2 0 0,1 12,12A2,2 0 0,1 10,10A2,2 0 0,1 12,8M16,16H8V15C8,13.67 10.67,13 12,13C13.33,13 16,13.67 16,15V16M13,5H11V1H13V5M16,19H8V18H16V19M12,21H8V20H12V21Z"/></svg>
+          <a <?php echo $active ? 'href="'.$product->url().'"' : ''; ?> class="text-center <?php echo 'bg-'.$colour; ?> py-4 rounded-lg block text-white fill-white text-2xl hover:bg-zinc-50 hover:text-zinc-900 hover:fill-<?php echo $colour; ?> <?php echo self::price_box_button_classes($group, $product, $active); ?>">
+          <svg class="w-6 h-8 pb-1 inline" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17,3H14V6H10V3H7A2,2 0 0,0 5,5V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V5A2,2 0 0,0 17,3M12,8A2,2 0 0,1 14,10A2,2 0 0,1 12,12A2,2 0 0,1 10,10A2,2 0 0,1 12,8M16,16H8V15C8,13.67 10.67,13 12,13C13.33,13 16,13.67 16,15V16M13,5H11V1H13V5M16,19H8V18H16V19M12,21H8V20H12V21Z"/></svg>
             <?php echo $product->pricing_button_txt; ?>
           </a>
       <?php endif; ?>
