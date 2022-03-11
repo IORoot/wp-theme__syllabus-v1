@@ -55,3 +55,8 @@ require get_template_directory() . '/src/hook_actions/remove_emojis.php';
  * Remove Frontend RSD Link
  */
 require get_template_directory() . '/src/hook_actions/remove_rsd_link.php';
+
+/**
+ * Memberpress sidebar
+ */
+require get_template_directory() . '/src/hook_actions/memberpress_user_sidebar.php';

@@ -21,7 +21,8 @@ function ldnpk_deregister_jquery() {
     //   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
     // Skip these PAGES (NOT A CPT) - ACF Form on these pages and ACF needs it.
     if (is_page([
-        'signup',   // signup
+        'signup',   // /signup
+        'account',  // /account/
     ])){ return; }
 
 

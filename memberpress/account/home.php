@@ -1,9 +1,17 @@
 <?php if(!defined('ABSPATH')) {die('You are not allowed to call this page directly.');} ?>
 
 <?php 
-  acf_form_head();
 
-  // Get all User Meta data -- also includes ACF fields.
+  /*
+  * ┌─────────────────────────────────────────────────────────────────────────┐
+  * │                                                                         │
+  * │                          ACCOUNT HOME PAGE                              │
+  * │                          /account/?action=home                          │
+  * │                                                                         │
+  * └─────────────────────────────────────────────────────────────────────────┘
+  */
+
+  // Get all User Meta data
   $user_meta = get_user_meta($mepr_current_user->rec->ID);
 ?>
 
@@ -16,7 +24,7 @@
   // │                	          Main Form                                    │
   // └─────────────────────────────────────────────────────────────────────────┘
   ?>
-    <form class="mepr-account-form mepr-form p-4 flex flex-col gap-8" id="mepr_account_form" action="" method="post" enctype="multipart/form-data" novalidate>
+    <form class="mepr-account-form mepr-form p-4 flex flex-col gap-8 w-1/2 mx-auto" id="mepr_account_form" action="" method="post" enctype="multipart/form-data" novalidate>
 
 
       <?php
@@ -33,19 +41,6 @@
 
         <?php
         // ┌─────────────────────────────────────────────────────────────────────────┐
-        // │                	            Avatar                                     │
-        // └─────────────────────────────────────────────────────────────────────────┘
-        ?>
-        <?php
-            if (!$user_meta["avatar_image"][0]){ $avatar = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/></svg>'; }
-        ?>
-        <div class="w-48 h-48 rounded-full fill-zinc-50 bg-amber-500 p-2">
-            <?php echo $avatar; ?>
-        </div>
-
-
-        <?php
-        // ┌─────────────────────────────────────────────────────────────────────────┐
         // │                	         FIRST Name Field                              │
         // └─────────────────────────────────────────────────────────────────────────┘
         ?>    
@@ -54,7 +49,7 @@
             <label for="user_first_name"><?php _ex('First Name:', 'ui', 'memberpress'); echo ($mepr_options->require_fname_lname)?'*':''; ?></label>
             <span class="cc-error mr-auto text-rose-500  text-xs inline-block" ><?php _ex('First Name Required', 'ui', 'memberpress'); ?></span>
           </div>
-          <input type="text" name="user_first_name" id="user_first_name" class="mepr-form-input h-12 rounded p-2 text-zinc-800" value="<?php echo $mepr_current_user->first_name; ?>" <?php echo ($mepr_options->require_fname_lname)?'required':''; ?> />
+          <input type="text" name="user_first_name" id="user_first_name" class="mepr-form-input h-12 rounded p-2 text-zinc-800 w-full" value="<?php echo $mepr_current_user->first_name; ?>" <?php echo ($mepr_options->require_fname_lname)?'required':''; ?> />
         </div>
 
         <?php
@@ -67,7 +62,7 @@
             <label for="user_last_name"><?php _ex('Last Name:', 'ui', 'memberpress'); echo ($mepr_options->require_fname_lname)?'*':''; ?></label>
             <span class="cc-error mr-auto text-rose-500  text-xs inline-block" ><?php _ex('Last Name Required', 'ui', 'memberpress'); ?></span>
           </div>
-          <input type="text" id="user_last_name" name="user_last_name" class="mepr-form-input h-12 rounded p-2 text-zinc-800" value="<?php echo $mepr_current_user->last_name; ?>" <?php echo ($mepr_options->require_fname_lname)?'required':''; ?> />
+          <input type="text" id="user_last_name" name="user_last_name" class="mepr-form-input h-12 rounded p-2 text-zinc-800 w-full" value="<?php echo $mepr_current_user->last_name; ?>" <?php echo ($mepr_options->require_fname_lname)?'required':''; ?> />
         </div>
 
         <?php
@@ -91,7 +86,7 @@
           <label for="user_email"><?php _ex('Email:*', 'ui', 'memberpress');  ?></label>
           <span class="cc-error mr-auto text-rose-500  text-xs inline-block" ><?php _ex('Invalid Email', 'ui', 'memberpress'); ?></span>
         </div>
-        <input type="email" id="user_email" name="user_email" class="mepr-form-input h-12 rounded p-2 text-zinc-800" value="<?php echo $mepr_current_user->user_email; ?>" required />
+        <input type="email" id="user_email" name="user_email" class="mepr-form-input h-12 rounded p-2 text-zinc-800 w-full" value="<?php echo $mepr_current_user->user_email; ?>" required />
       </div>
 
       <?php

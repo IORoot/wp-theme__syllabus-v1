@@ -20,7 +20,15 @@ function remove_all_theme_styles() {
         // 'mp-signup',
         // 'mp-login-css',
         // 'mp-account',
-        'default'
+        'default',
+
+        // MEMBERPRESS
+        // 'mp-theme',
+        'mp-account',
+        // 'mp-account-css',
+        // 'mp-login-css',
+        // 'mp-signup',
+        // 'mepr-zxcvbn-css',
     ];
 
 }
