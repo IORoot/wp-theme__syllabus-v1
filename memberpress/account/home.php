@@ -24,7 +24,7 @@
   // │                	          Main Form                                    │
   // └─────────────────────────────────────────────────────────────────────────┘
   ?>
-    <form class="mepr-account-form mepr-form p-4 flex flex-col gap-8 w-1/2 mx-auto" id="mepr_account_form" action="" method="post" enctype="multipart/form-data" novalidate>
+    <form class="mepr-account-form mepr-form p-4 flex flex-col gap-8 w-1/2 mr-auto" id="mepr_account_form" action="" method="post" enctype="multipart/form-data" novalidate>
 
 
       <?php

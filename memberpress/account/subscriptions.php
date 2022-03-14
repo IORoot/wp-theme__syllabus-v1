@@ -11,6 +11,14 @@ if(!defined('ABSPATH')) {die('You are not allowed to call this page directly.');
   * └─────────────────────────────────────────────────────────────────────────┘
   */
 
+  // This is a replacement function for the original memberpress one.
+  // The reason is because the membership 'action' buttons are embedded into
+  // a class called 'MeprBaseGateway' and cannot be extracted easily.
+  // Therefore, this class replaces the function (which is very similar)
+  // but allows us to customise it with our own classes.
+  include(get_template_directory() . '/memberpress/lib/MeprBaseGateway.php'); 
+
+
 MeprHooks::do_action('mepr_before_account_subscriptions', $mepr_current_user);
 
 if(!empty($subscriptions)) {
@@ -106,22 +114,25 @@ if(!empty($subscriptions)) {
             // │                                ROWS                                     │
             // └─────────────────────────────────────────────────────────────────────────┘
             ?>
-            <tr id="mepr-subscription-row-<?php echo $s->id; ?>" class="mepr-subscription-row text-xl <?php echo (isset($alt) && !$alt)?'mepr-alt-row':''; ?>">
+            <tr id="mepr-subscription-row-<?php echo $s->id; ?>" class="mepr-subscription-row text-xl border-t border-zinc-700 <?php echo (isset($alt) && !$alt)?'mepr-alt-row':''; ?>">
 
               <?php
               // ┌─────────────────────────────────────────────────────────────────────────┐
               // │                      DATA : Membership Type                             │
               // └─────────────────────────────────────────────────────────────────────────┘
               ?>
-              <td data-label="<?php _ex('Membership', 'ui', 'memberpress'); ?>" class="flex flex-row gap-4 p-4" >
+              <td data-label="<?php _ex('Membership', 'ui', 'memberpress'); ?>" class="p-4" >
 
-                <div class="w-7 h-7 bg-<?php echo $colour; ?> fill-black"> <?php echo $svg; ?> </div>
+                <div class="flex flex-row gap-4">
+                  <div class="w-7 h-7 bg-<?php echo $colour; ?> fill-black"> <?php echo $svg; ?> </div>
 
-                <?php if(isset($prd->access_url) && !empty($prd->access_url)): ?>
-                  <div class="mepr-account-product"><a href="<?php echo stripslashes($prd->access_url); ?>"><?php echo MeprHooks::apply_filters('mepr-account-subscr-product-name', $prd->post_title, $txn); ?></a></div>
-                <?php else: ?>
-                  <div class="mepr-account-product text-<?php echo $colour; ?>"><?php echo MeprHooks::apply_filters('mepr-account-subscr-product-name', $prd->post_title, $txn); ?></div>
-                <?php endif; ?>
+                  <?php if(isset($prd->access_url) && !empty($prd->access_url)): ?>
+                    <div class="mepr-account-product"><a href="<?php echo stripslashes($prd->access_url); ?>"><?php echo MeprHooks::apply_filters('mepr-account-subscr-product-name', $prd->post_title, $txn); ?></a></div>
+                  <?php else: ?>
+                    <div class="mepr-account-product text-<?php echo $colour; ?>"><?php echo MeprHooks::apply_filters('mepr-account-subscr-product-name', $prd->post_title, $txn); ?></div>
+                  <?php endif; ?>
+
+                </div>
               </td>
 
               <?php
@@ -141,7 +152,7 @@ if(!empty($subscriptions)) {
               // │                      DATA : Membership Subscription                     │
               // └─────────────────────────────────────────────────────────────────────────┘
               ?>
-              <td data-label="<?php _ex('Terms', 'ui', 'memberpress'); ?>" class="flex flex-row gap-4 p-4" >
+              <td data-label="<?php _ex('Terms', 'ui', 'memberpress'); ?>" class="p-4" >
                 <div class="mepr-account-auto-rebill">
                   <?php
                     if($txn != false && $txn instanceof MeprTransaction && $txn->is_sub_account()) {
@@ -244,59 +255,96 @@ if(!empty($subscriptions)) {
               // └─────────────────────────────────────────────────────────────────────────┘
               ?>
               <td data-label="<?php _ex('Actions', 'ui', 'memberpress'); ?>" class="p-4" >
-                  <div class="mepr-account-actions">
+                  <div class="mepr-account-actions flex flex-col gap-1 text-base">
+
+                    
                     <?php
+                    // ┌─────────────────────────────────────────────────────────────────────────┐
+                    // │                             IF SUB-ACCOUNT?                             │
+                    // └─────────────────────────────────────────────────────────────────────────┘
                     if($txn != false && $txn instanceof MeprTransaction && $txn->is_sub_account()) {
                       echo '--';
                     }
+
+                    // ┌─────────────────────────────────────────────────────────────────────────┐
+                    // │                              NORMAL ACCOUNT                             │
+                    // └─────────────────────────────────────────────────────────────────────────┘
                     else {
-                      if( $is_sub && $pm instanceof MeprBaseRealGateway &&
-                          ( $s->status == MeprSubscription::$active_str ||
-                            $s->status == MeprSubscription::$suspended_str ||
-                            strpos($s->active, 'mepr-active') !== false ) ) {
-                        $subscription = new MeprSubscription($s->id);
+                        
+                        // ┌─────────────────────────────────────────────────────────────────────────┐
+                        // │                     TRANSACTION + PAYMENT METHOD (PM)                   │
+                        // └─────────────────────────────────────────────────────────────────────────┘
+                        if( $is_sub && $pm instanceof MeprBaseRealGateway &&  ( $s->status == MeprSubscription::$active_str || $s->status == MeprSubscription::$suspended_str || strpos($s->active, 'mepr-active') !== false ) ) 
+                        {
+                          $subscription = new MeprSubscription($s->id);
 
-                        if(!$subscription->in_grace_period()) { //Don't let people change shiz until a payment has come through yo
-                          $pm->print_user_account_subscription_row_actions($subscription);
-                        }
-                      }
-                      elseif(!$is_sub && !empty($prd->ID)) {
-                        if($prd->is_renewable() && $prd->is_renewal()) {
-                          ?>
-                            <a href="<?php echo $prd->url(); ?>" class="mepr-account-row-action mepr-account-renew"><?php _ex('Renew', 'ui', 'memberpress'); ?></a>
-                          <?php
-                        }
+                          if(!$subscription->in_grace_period()) { //Don't let people change shiz until a payment has come through yo
 
-                        if($txn != false && $txn instanceof MeprTransaction && $group !== false && strpos($s->active, 'mepr-inactive') === false) {
-                          MeprAccountHelper::group_link($txn);
-                        }
-                        elseif(/*$group !== false &&*/ strpos($s->active, 'mepr-inactive') !== false /*&& !$prd->is_renewable()*/) {
-                          if($prd->can_you_buy_me()) {
-                            MeprAccountHelper::purchase_link($prd);
+                            // ┌─────────────────────────────────────────────────────────────────────────┐
+                            // │                          ALL ACTION BUTTONS                             │
+                            // └─────────────────────────────────────────────────────────────────────────┘
+                            $base_gateway = new MeprBaseGateway_v2;
+                            $base_gateway->add_original_pm($pm); // Include the original $pm to use the functions in it.
+                            $base_gateway->print_user_account_subscription_row_actions($subscription);
+                            // $pm->print_user_account_subscription_row_actions($subscription);
                           }
                         }
-                      }
-                      else {
-                        if($prd->can_you_buy_me()) {
-                          if($group !== false && $txn !== false && $txn instanceof MeprTransaction) {
-                            $sub_in_group   = $mepr_current_user->subscription_in_group($group);
-                            $life_in_group  = $mepr_current_user->lifetime_subscription_in_group($group);
+                        
 
-                            if(!$sub_in_group && !$life_in_group) { //$prd is in group, but user has no other active subs in this group, so let's show the change plan option
-                              MeprAccountHelper::purchase_link($prd, _x('Re-Subscribe', 'ui', 'memberpress'));
-                              MeprAccountHelper::group_link($txn);
+                        // ┌─────────────────────────────────────────────────────────────────────────┐
+                        // │                            RENEWABLE PRODUCT                            │
+                        // └─────────────────────────────────────────────────────────────────────────┘
+                        elseif(!$is_sub && !empty($prd->ID)) {
+                          if($prd->is_renewable() && $prd->is_renewal()) {
+                            ?>
+                              <a href="<?php echo $prd->url(); ?>" class="mepr-account-row-action mepr-account-renew"><?php _ex('Renew', 'ui', 'memberpress'); ?></a>
+                            <?php
+                          }
+
+                          if($txn != false && $txn instanceof MeprTransaction && $group !== false && strpos($s->active, 'mepr-inactive') === false) {
+                            MeprAccountHelper::group_link($txn);
+                          }
+                          elseif(/*$group !== false &&*/ strpos($s->active, 'mepr-inactive') !== false /*&& !$prd->is_renewable()*/) {
+                            if($prd->can_you_buy_me()) {
+                              MeprAccountHelper::purchase_link($prd);
                             }
                           }
-                          else {
-                            MeprAccountHelper::purchase_link($prd);
+                        }
+
+                        // ┌─────────────────────────────────────────────────────────────────────────┐
+                        // │                            PURCHASE PRODUCT                             │
+                        // └─────────────────────────────────────────────────────────────────────────┘
+                        else {
+                          if($prd->can_you_buy_me()) {
+                            if($group !== false && $txn !== false && $txn instanceof MeprTransaction) {
+                              $sub_in_group   = $mepr_current_user->subscription_in_group($group);
+                              $life_in_group  = $mepr_current_user->lifetime_subscription_in_group($group);
+
+                              if(!$sub_in_group && !$life_in_group) { //$prd is in group, but user has no other active subs in this group, so let's show the change plan option
+                                MeprAccountHelper::purchase_link($prd, _x('Re-Subscribe', 'ui', 'memberpress'));
+                                MeprAccountHelper::group_link($txn);
+                              }
+                            }
+                            else {
+                              MeprAccountHelper::purchase_link($prd);
+                            }
                           }
                         }
-                      }
 
-                      MeprHooks::do_action('mepr-account-subscriptions-actions', $mepr_current_user, $s, $txn, $is_sub);
+                        // ┌─────────────────────────────────────────────────────────────────────────┐
+                        // │                                  ACTION                                 │
+                        // └─────────────────────────────────────────────────────────────────────────┘
+                        MeprHooks::do_action('mepr-account-subscriptions-actions', $mepr_current_user, $s, $txn, $is_sub);
+                    }
+
+                    if ($is_sub == false){
+                      ?>
+                        &zwnj; <!-- Responsiveness when no actions present -->
+                      <?php
                     }
                     ?>
-                    &zwnj; <!-- Responsiveness when no actions present -->
+                    
+                    
                   </div>
               </td>
               <?php MeprHooks::do_action('mepr-account-subscriptions-td', $mepr_current_user, $s, $txn, $is_sub); ?>

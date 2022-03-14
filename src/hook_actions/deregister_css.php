@@ -14,21 +14,31 @@ function remove_all_theme_styles() {
 
     global $wp_styles;
 
-    $wp_styles->queue = [
-        // 'mp-theme',
-        // 'mp-account-css',
-        // 'mp-signup',
-        // 'mp-login-css',
-        // 'mp-account',
-        'default',
+    /*
+    * ┌─────────────────────────────────────────────────────────────────────────┐
+    * │                                                                         │
+    * │                                Memberpress                              │
+    * │                                /account                                 │
+    * │                                                                         │
+    * └─────────────────────────────────────────────────────────────────────────┘
+    */
+    if (is_page([ 'account' ])){ 
+        $wp_styles->queue = [
+            'default',
+            'mp-account',
+        ];
+        return;
+    }
 
-        // MEMBERPRESS
-        // 'mp-theme',
-        'mp-account',
-        // 'mp-account-css',
-        // 'mp-login-css',
-        // 'mp-signup',
-        // 'mepr-zxcvbn-css',
+    /*
+    * ┌─────────────────────────────────────────────────────────────────────────┐
+    * │                                                                         │
+    * │                                DEFAULT                                  │
+    * │                                                                         │
+    * └─────────────────────────────────────────────────────────────────────────┘
+    */
+    $wp_styles->queue = [
+        'default',
     ];
 
 }
