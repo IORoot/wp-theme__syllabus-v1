@@ -21,7 +21,7 @@ get_template_part('src/views/menus/mainmenu', $pagename);
             while (have_posts()) {
 
 				the_post();
-				include(get_template_directory() . '/src/views/content/content-by-location.php');
+				include(get_template_directory() . '/src/views/content/content-search.php');
 			}
 
 			the_posts_navigation();

@@ -31,7 +31,7 @@ function remove_registered_scripts(){
         if ($queue_value == 'wp-api'){ dequeue_deregister($queue_value); }
         if ($queue_value == 'devowl-wp-utils'){ dequeue_deregister($queue_value); }
         if ($queue_value == 'vendor-devowl-wp-utils'){ dequeue_deregister($queue_value); }
-        if ($queue_value == 'media-editor'){ dequeue_deregister($queue_value); }  // NEEDED FOR ONE AVATAR PLUGIN.
+        if ($queue_value == 'media-editor'){ dequeue_deregister($queue_value); }
         if ($queue_value == 'media-audiovideo'){ dequeue_deregister($queue_value); }
         if ($queue_value == 'es6-shim'){ dequeue_deregister($queue_value); }
         if ($queue_value == 'es7-shim'){ dequeue_deregister($queue_value); }
