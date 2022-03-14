@@ -26,6 +26,9 @@ function remove_all_theme_styles() {
         $wp_styles->queue = [
             'default',
             'mp-account',
+            'mp-signup',
+            'mp-zxcvbn-css',
+            'mp-login-css',
         ];
         return;
     }

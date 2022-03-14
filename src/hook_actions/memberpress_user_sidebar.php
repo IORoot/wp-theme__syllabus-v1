@@ -9,9 +9,11 @@
     */
     function mepr_add_image_tab($user) {
         ?>
-        <span class="mepr-nav-item custom-image">
-            <a href="/index.php/account/?action=profile-image">Hello There</a>
-        </span>
+        <div class="mepr-nav-item py-2">
+            <span class="mepr-nav-item hover:text-emerald-400 font-thin">
+                <a href="/index.php/account/?action=profile-image">Hello There</a>
+            </span>
+        </div>
         <?php
     }
     add_action('mepr_account_nav', 'mepr_add_image_tab');

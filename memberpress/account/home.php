@@ -47,7 +47,7 @@
         <div class="mp-form-row text-zinc-500 flex flex-row gap-8 mepr_first_name">
           <div class="mp-form-label w-40 flex flex-col gap-1">
             <label for="user_first_name"><?php _ex('First Name:', 'ui', 'memberpress'); echo ($mepr_options->require_fname_lname)?'*':''; ?></label>
-            <span class="cc-error mr-auto text-rose-500  text-xs inline-block" ><?php _ex('First Name Required', 'ui', 'memberpress'); ?></span>
+            <span class="cc-error mr-auto text-rose-500 text-xs inline-block" ><?php _ex('First Name Required', 'ui', 'memberpress'); ?></span>
           </div>
           <input type="text" name="user_first_name" id="user_first_name" class="mepr-form-input h-12 rounded p-2 text-zinc-800 w-full" value="<?php echo $mepr_current_user->first_name; ?>" <?php echo ($mepr_options->require_fname_lname)?'required':''; ?> />
         </div>
@@ -106,7 +106,7 @@
       // │                	          Submit button                                │
       // └─────────────────────────────────────────────────────────────────────────┘
       ?>
-      <input type="submit" name="mepr-account-form" value="<?php _ex('Save Profile', 'ui', 'memberpress'); ?>" class="mepr-submit mepr-share-button mr-auto px-8 py-2 bg-emerald-500 hover:bg-amber-500 rounded-xl" />
+      <input type="submit" name="mepr-account-form" value="<?php _ex('Save Profile', 'ui', 'memberpress'); ?>" class="mepr-submit mepr-share-button mr-auto px-8 py-2 bg-emerald-500 hover:bg-amber-500 rounded cursor-pointer" />
 
       <?php
       // ┌─────────────────────────────────────────────────────────────────────────┐

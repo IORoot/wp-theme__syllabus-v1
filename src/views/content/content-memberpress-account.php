@@ -2,7 +2,5 @@
 
     <div class="flex flex-row">
         <?php the_content(); ?>
-
     </div>
-
 </article>
