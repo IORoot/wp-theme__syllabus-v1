@@ -14,3 +14,8 @@ require get_template_directory() . '/src/shortcodes/isometric_random/isometric_r
  * Shortcode for counts
  */
 require get_template_directory() . '/src/shortcodes/counts/counts.php';
+
+/**
+ * Shortcode for searchbox
+ */
+require get_template_directory() . '/src/shortcodes/searchbox/searchbox.php';

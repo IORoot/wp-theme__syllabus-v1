@@ -10,7 +10,7 @@ module.exports = {
     safelist: [
       {
         pattern: /./,
-        variants: ['hover','focus','target','sm','md','lg'],
+        variants: ['hover','focus','target','sm','md','lg','group-target'],
       },
     ]
   },
@@ -20,19 +20,6 @@ module.exports = {
 
 
   theme: {
-    // colors: {
-    //   transparent: 'transparent',
-    //   current: 'currentColor',
-    //   black: '#000000',
-    //   night: '#242424',
-    //   fog: '#424242',
-    //   smoke: '#757575',
-    //   mist: '#e0e0e0',
-    //   ghost: '#f5f5f5',
-    //   halo: '#fafafa',
-    //   white: '#ffffff',
-    // },
-
     fontFamily: {
       sans: ['Gill Sans', 'Gill Sans MT', 'sans-serif'],
       mono: ['Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', 'monospace' ],
@@ -50,6 +37,7 @@ module.exports = {
         "128": "32rem;",
         "192": "47rem;",
       },
+      
     },
   },
 

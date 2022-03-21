@@ -6,8 +6,8 @@
 /* Load all Component CSS */
 @import "../../components/**/*.css";
 
-@import "flickity/flickity.min.css";
-@import "flickity/epicslider.css";
+/* @import "flickity/flickity.min.css"; */
+/* @import "flickity/epicslider.css"; */
 
 /* Add a new BASE layer to set default typography */
 @layer base {
