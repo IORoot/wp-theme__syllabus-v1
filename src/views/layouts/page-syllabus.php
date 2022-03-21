@@ -20,48 +20,88 @@ if (is_admin()){ acf_form_head(); } // https://www.advancedcustomfields.com/reso
 $help = new andyp\theme\syllabus\lib\helpers;
 $variables = $help->get_variables();
 $access = new andyp\theme\syllabus\lib\access();
+$sidebar_header = new andyp\theme\syllabus\lib\sidebar_header($variables);
 ?>
 
-	<main class="flex flex-row min-h-screen <?php echo $page_classes; ?>">
+	<main class="flex flex-row min-h-screen <?php echo get_field('page_classes', $post); ?>">
 
-		<?php echo do_shortcode('[sidebar_menu slug="sidebar_main"]'); ?>
+		<?php 
+		// ┌─────────────────────────────────────────────────────────────────────────┐
+		// │                		  SIDEBAR                                        │
+		// └─────────────────────────────────────────────────────────────────────────┘
+		?>
+		<div class="flex flex-col w-1/5 p-2">
+			<?php 
+			
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                		       HEADER                                    │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/sidebar-header.php'); 
+			?>
 
+
+			<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                		       MENU                                      │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/sidebar-menu.php');
+			?>
+		</div>
+
+		<?php
+		// ┌─────────────────────────────────────────────────────────────────────────┐
+		// │                                                                         │
+		// │                			Main Content                                 │
+		// │                                                                         │
+		// └─────────────────────────────────────────────────────────────────────────┘
+		?>
 		<div class="flex flex-1 flex-col">
 			
-
-			<div class="searchbar w-full h-16 bg-zinc-700">
+			<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                		  SEARCHBAR                                      │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			?>
+			<div class="searchbar w-full h-16 bg-zinc-700 flex flex-row p-3 gap-3 text-xl font-thin text-zinc-100">
+				<?php include(get_template_directory() . '/src/views/partials/post-title.php'); ?>
 				<?php include(get_template_directory() . '/src/views/search/searchbar_profile_button.php'); ?>
 			</div>
 
 
+
+			<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                		  PAGE CONTENT                                   │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			?>
 			<div class="content w-full h-full bg-zinc-600 p-4 flex flex-col gap-4">
 
-			<?php
-				// parent term
-				if(is_tax() && $variables["current_object"]->parent == 0){
+				<?php
+					// parent term
+					if(is_tax() && $variables["current_object"]->parent == 0){
 
-					$terms = get_terms([
-						'taxonomy' => $variables["current_object"]->taxonomy,
-						'parent' => $variables["current_object"]->term_id
-					]);
+						$terms = get_terms([
+							'taxonomy' => $variables["current_object"]->taxonomy,
+							'parent' => $variables["current_object"]->term_id
+						]);
 
-					include(get_template_directory() . '/src/views/content/content-taxonomy-parent.php');
-				}
+						include(get_template_directory() . '/src/views/content/content-taxonomy-parent.php');
+					}
 
-				// child term
-				if (is_tax() && $variables["current_object"]->parent != 0) {
-					include(get_template_directory() . '/src/views/content/content-taxonomy-child.php');
-				}
+					// child term
+					if (is_tax() && $variables["current_object"]->parent != 0) {
+						include(get_template_directory() . '/src/views/content/content-taxonomy-child.php');
+					}
 
-				// single page
-				if (is_single()) {
-					include(get_template_directory() . '/src/views/content/content-syllabus.php');
-				}
-				
-				if (is_404()){
-					include(get_template_directory() . '/src/views/content/content-404.php');
-				}
-			?>
+					// single page
+					if (is_single()) {
+						include(get_template_directory() . '/src/views/content/content-syllabus.php');
+					}
+					
+					if (is_404()){
+						include(get_template_directory() . '/src/views/content/content-404.php');
+					}
+				?>
 			</div>
 		</div>
 

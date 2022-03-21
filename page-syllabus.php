@@ -22,7 +22,6 @@ include(get_template_directory() . '/src/views/menus/mainmenu-'.$pagename.'.php'
 			
 
 			<div class="searchbar w-full h-16 bg-zinc-700">
-				<?php echo do_shortcode('[searchbox]'); ?>
 				<?php include(get_template_directory() . '/src/views/search/searchbar_profile_button.php'); ?>
 			</div>
 

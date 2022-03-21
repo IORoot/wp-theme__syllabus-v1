@@ -1,4 +1,4 @@
-<article <?php post_class('p-4 w-full flex flex-row gap-4 text-zinc-100'); ?>>
+<article <?php post_class('w-full flex flex-row gap-4 text-zinc-100'); ?>>
 
 
 	<?php
@@ -8,15 +8,7 @@
 	// │                                                                         │
 	// └─────────────────────────────────────────────────────────────────────────┘
 	?>
-	<div class="w-4/5 h-full flex flex-col gap-4">
-
-		<?php 
-            // ┌─────────────────────────────────────────────────────────────────────────┐
-            // │                			  TITLE                                      │
-            // └─────────────────────────────────────────────────────────────────────────┘
-
-            include(get_template_directory() . '/src/views/partials/post-title.php'); 
-		?>
+	<div class="w-full h-full flex flex-col gap-4">	
 
 		<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
@@ -26,7 +18,7 @@
 		?>
 		
 
-		<div class="content max-w-screen-sm mx-auto w-full">
+		<div class="content max-w-screen-lg mx-auto w-full">
 		<?php
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                			  TABS                                       │
@@ -45,24 +37,24 @@
 	// │                                                                         │
 	// └─────────────────────────────────────────────────────────────────────────┘
 	?>
-	<div class="w-1/5 h-full flex flex-col gap-4">
+	<!-- <div class="w-1/5 h-full flex flex-col gap-4"> -->
 		<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                			  GLYPH                                      │
 			// └─────────────────────────────────────────────────────────────────────────┘
-			include(get_template_directory() . '/src/views/partials/post-taxonomy-glyph.php'); ?>
+			// include(get_template_directory() . '/src/views/partials/post-taxonomy-glyph.php'); ?>
 
 		<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                			  IMAGE                                      │
 			// └─────────────────────────────────────────────────────────────────────────┘
-			include(get_template_directory() . '/src/views/partials/post-thumbnail.php'); ?>
+			// include(get_template_directory() . '/src/views/partials/post-thumbnail.php'); ?>
 
 		<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                			  RULES                                      │
 			// └─────────────────────────────────────────────────────────────────────────┘
-			include(get_template_directory() . '/src/views/partials/post-side-rules.php'); ?>
-	</div>
+			// include(get_template_directory() . '/src/views/partials/post-side-rules.php'); ?>
+	<!-- </div> -->
 
 </article>
