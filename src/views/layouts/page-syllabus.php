@@ -15,12 +15,11 @@
 // └─────────────────────────────────────────────────────────────────────────┘
 
 get_header();
-if (is_admin()){ acf_form_head(); } // https://www.advancedcustomfields.com/resources/create-a-front-end-form/
 
-$help = new andyp\theme\syllabus\lib\helpers;
-$variables = $help->get_variables();
-$access = new andyp\theme\syllabus\lib\access();
-$sidebar_header = new andyp\theme\syllabus\lib\sidebar_header($variables);
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                	        DATA COLLATION                               │
+// └─────────────────────────────────────────────────────────────────────────┘
+include(get_template_directory() . '/src/views/headers/header-syllabus.php'); 
 ?>
 
 	<main class="flex flex-row min-h-screen <?php echo get_field('page_classes', $post); ?>">
@@ -34,7 +33,7 @@ $sidebar_header = new andyp\theme\syllabus\lib\sidebar_header($variables);
 			<?php 
 			
 			// ┌─────────────────────────────────────────────────────────────────────────┐
-			// │                		       HEADER                                    │
+			// │                	   SIDEBAR HEADER                                    │
 			// └─────────────────────────────────────────────────────────────────────────┘
 			include(get_template_directory() . '/src/views/partials/sidebar-header.php'); 
 			?>
@@ -42,7 +41,7 @@ $sidebar_header = new andyp\theme\syllabus\lib\sidebar_header($variables);
 
 			<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
-			// │                		       MENU                                      │
+			// │                    	SIDEBAR MENU                                     │
 			// └─────────────────────────────────────────────────────────────────────────┘
 			include(get_template_directory() . '/src/views/partials/sidebar-menu.php');
 			?>
