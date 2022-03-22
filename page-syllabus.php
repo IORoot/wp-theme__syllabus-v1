@@ -9,6 +9,11 @@
 // └─────────────────────────────────────────────────────────────────────────┘
 
 get_header();
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                	        DATA COLLATION                               │
+// └─────────────────────────────────────────────────────────────────────────┘
+include(get_template_directory() . '/src/views/headers/header-syllabus.php'); 
+
 
 include(get_template_directory() . '/src/views/menus/mainmenu-'.$pagename.'.php');
 

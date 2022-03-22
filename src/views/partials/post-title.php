@@ -1,7 +1,7 @@
 <?php
 
-    $parent = $variables["terms_parent"][0];
-    $child  = $variables["terms_child"][0];
+    $parent = $variables["terms_parent"];
+    $child  = $variables["terms_child"];
     $roman  = $variables["acf"]["award_level_roman"];
 
 ?>

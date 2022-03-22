@@ -12,6 +12,7 @@ class helpers {
         $this->get_acf_fields();
         $this->get_roman_numerals();
         $this->get_taxonomies();
+        $this->get_thumbnail();
         $this->get_terms();
         $this->get_terms_extras(); // ACF, Links, etc..
         $this->order_terms();
@@ -47,10 +48,19 @@ class helpers {
     }
 
 
+    /**
+     * Set the roman numeral for the award level.
+     *
+     * @return void
+     */
     private function get_roman_numerals()
     {
+        if (!isset($this->variables['acf']['award_level'])){
+            return;
+        }
         $this->variables['acf']['award_level_roman'] = $this::numberToRoman($this->variables['acf']['award_level']);
     }
+
 
 
     /**
@@ -61,6 +71,9 @@ class helpers {
         $this->variables['current_object'] = get_queried_object();
     }
 
+
+
+
     /**
      * Get all ACF Fields.
      */
@@ -68,6 +81,10 @@ class helpers {
     {
         $this->variables['acf'] = get_fields( get_queried_object() );
     }
+
+
+
+
 
     /**
      * Get Taxonomies.
@@ -80,8 +97,24 @@ class helpers {
         if (is_a($this->variables['current_object'],'WP_Post')){
             $this->variables['taxonomies'] = get_post_taxonomies($this->variables['current_object']->ID);
         }
+    }  
+
+
+
+    
+    private function get_thumbnail()
+    {
+        /**
+         * WP_Post
+         */
+        if (is_a($this->variables['current_object'],'WP_Post')){
+            $this->variables['thumbnail'] = get_the_post_thumbnail($this->variables['current_object'], null, ['class' => 'w-full h-full']);
+        }
     }    
     
+
+
+
     /**
      * Get Terms.
      */
@@ -131,13 +164,13 @@ class helpers {
 
             // Is it a parent term?
             if ($loop_terms->parent == 0){
-                $this->variables['terms_parent'][] = $loop_terms;
+                $this->variables['terms_parent'] = $loop_terms;
                 array_unshift($ordered, $loop_terms);
                 continue;
             }
 
             // Else its a child term.
-            $this->variables['terms_child'][] = $loop_terms;
+            $this->variables['terms_child'] = $loop_terms;
             array_push($ordered, $loop_terms);
         }
 
