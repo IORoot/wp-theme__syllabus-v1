@@ -24,14 +24,14 @@ if (is_admin()){ acf_form_head(); }
  * Help class 
  * Has functions in it to do various helpful things.
  */
-$help = new andyp\theme\syllabus\lib\helpers();
+$help = new andyp\theme\syllabus\lib\statics();
 
 
 /**
  * Use the helper class to grab a load of variables
  * needed for page rendering.
  */
-$variables = $help->get_variables();
+$variables = (new andyp\theme\syllabus\lib\variables)->get_variables();
 
 
 /**

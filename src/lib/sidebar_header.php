@@ -2,7 +2,7 @@
 
 namespace andyp\theme\syllabus\lib;
 
-class sidebar_post_header {
+class sidebar_header {
 
     public $output = [];
 
@@ -14,66 +14,30 @@ class sidebar_post_header {
 
 
 
-    /**
-     * Sets the award level of current page
-     *
-     * @param string $awardlevel
-     * @return void
-     */
-    public function set_awardlevel(string $awardlevel)
+    public function set_variables(array $variables)
     {
-        $this->awardlevel = $awardlevel;
+
+        $this->variables = $variables;
+
+        if (is_a($variables["current_object"], 'WP_Term'))
+        {
+            $this->awardlevel  = null;
+            $this->title       = strtoupper($variables["current_object"]->name);
+            $this->image       = $variables["acf"]["svg_glyph"];
+            $this->parent_term = $variables["terms_parent"];
+            $this->child_term  = $variables["terms_child"];
+        }
+
+        if (is_a($variables["current_object"], 'WP_Post'))
+        {
+            $this->awardlevel  = $variables["acf"]["award_level_roman"];
+            $this->title       = $variables["current_object"]->post_title;
+            $this->image       = $variables["thumbnail"];
+            $this->parent_term = $variables["terms_parent"];
+            $this->child_term  = $variables["terms_child"];
+        }
+
     }
-
-
-    
-    /**
-     * Set the title
-     *
-     * @param string $title
-     * @return void
-     */
-    public function set_title(string $title)
-    {
-        $this->title = $title;
-    }
-
-
-    /**
-     * Set the SVG image
-     *
-     * @param string $image
-     * @return void
-     */
-    public function set_image(string $image)
-    {
-        $this->image = $image;
-    }    
-
-
-    /**
-     * Set the parent term
-     *
-     * @param array $terms
-     * @return void
-     */
-    public function set_parent_term($parent_term)
-    {
-        $this->parent_term = $parent_term;
-    }    
-    
-
-    /**
-     * Set the child term
-     *
-     * @param [type] $child_term
-     * @return void
-     */
-    public function set_child_term($child_term)
-    {
-        $this->child_term =  $child_term;
-    }
-
 
 
     /**
@@ -85,6 +49,7 @@ class sidebar_post_header {
     {
         ob_start();
         $this->open_wrapper();
+
             $this->svg_thumbnail();
             $this->open_column();
 
@@ -92,13 +57,19 @@ class sidebar_post_header {
 
                 $this->open_row();
                     $this->term_link_child();
-
                     $this->term_link_parent();
-                    
+                $this->close_row();
+
+                $this->open_row();
+                    $this->term_child_count();
+                    $this->term_count();
+                    $this->video_count();
                 $this->close_row();
 
             $this->close_column();
+
         $this->close_wrapper();
+
         $this->post_modal();
 
         $this->output = ob_get_contents();
@@ -116,7 +87,7 @@ class sidebar_post_header {
      */
     public function open_wrapper()
     {
-        ?><div class="flex flex-row p-2 w-full bg-zinc-100 rounded-xl gap-4"><?php
+        ?><div class="flex flex-row p-2 w-full bg-black rounded-xl gap-4 text-white"><?php
     }
 
 
@@ -141,7 +112,7 @@ class sidebar_post_header {
      */
     public function open_column()
     {
-        ?><div class="flex flex-col w-full justify-center"><?php
+        ?><div class="flex flex-col w-full justify-start"><?php
     }
 
 
@@ -188,7 +159,7 @@ class sidebar_post_header {
     public function svg_thumbnail()
     {
         ?>
-        <a href="#open-thumbnail-modal" class="block w-2/5 bg-white hover:bg-emerald-400 rounded-xl p-2">
+        <a href="#open-thumbnail-modal" class="block w-2/5 bg-amber-500 hover:bg-emerald-400 rounded-xl p-2">
             <?php echo $this->image; ?>
         </a>
         <?php
@@ -204,7 +175,7 @@ class sidebar_post_header {
     private function title()
     {   
         ?>
-        <div class="font-thin text-lg text-black">
+        <div class="font-thin text-lg">
             <?php $this->award_level(); ?>
             <?php echo $this->title; ?>
         </div>
@@ -229,7 +200,7 @@ class sidebar_post_header {
         if (!isset($this->parent_term)){
             return;
         }
-        $this->term_link($this->parent_term, 'zinc-500', '8');
+        $this->term_link($this->parent_term, 'amber-500');
     }
 
     private function term_link_child()
@@ -237,7 +208,7 @@ class sidebar_post_header {
         if (!isset($this->child_term)){
             return;
         }
-        $this->term_link($this->child_term, 'zinc-500', '3');
+        $this->term_link($this->child_term, 'amber-700');
     }
 
 
@@ -250,10 +221,10 @@ class sidebar_post_header {
       * @param int    $bg
       * @return void
       */
-    private function term_link(object $term, string $colour, string $paddingleft)
+    private function term_link(object $term, string $colour)
     {
         ?>
-            <a href="<?php echo $term->link ?>" class="fill-<?php echo $colour; ?> text-<?php echo $colour; ?> pl-<?php echo $paddingleft; ?> mb-1 font-thin text-xs uppercase flex flex-row hover:fill-emerald-400 hover:text-emerald-400">
+            <a href="<?php echo $term->link ?>" class="fill-<?php echo $colour; ?> text-<?php echo $colour; ?> mb-1 font-thin text-xs uppercase flex flex-row hover:fill-emerald-400 hover:text-emerald-400">
                 <div class="flex flex-row pr-2">
                     <div class="h-4 w-4"> <?php echo $term->acf["svg_glyph"] ; ?></div>
                     <div> <?php echo $term->name; ?> </div>
@@ -263,6 +234,78 @@ class sidebar_post_header {
         <?php
     }
 
+
+    /**
+     * Sets the number of Techniques in term
+     *
+     * @return void
+     */
+    private function term_count()
+    {
+        if (!isset($this->variables["current_object"]->count)){
+            return;
+        }
+
+        $count = $this->variables["current_object"]->count;
+
+        if ($count == 0)
+        {
+            return;
+        }
+        
+        ?>
+            <div class="text-sm">
+                <div> <?php echo $count; ?> Techniques</div>
+            </div>
+        <?php
+    }
+
+
+    /**
+     * Sets number of movements in term
+     *
+     * @return void
+     */
+    private function term_child_count()
+    {
+        if (!isset($this->variables["current_object"]->child_count)){
+            return;
+        }
+
+        $child_count = $this->variables["current_object"]->child_count;
+
+        if ($child_count == 0)
+        {
+            return;
+        }
+        
+        ?>
+            <div class="text-sm">
+                <div> <?php echo $child_count; ?> Movements</div>
+            </div>
+        <?php
+    }
+
+
+    /**
+     * Sets number of videos in post.
+     *
+     * @return void
+     */
+    private function video_count()
+    {
+        if (!isset($this->variables["current_object"]->video_count)){
+            return;
+        }
+
+        $video_count = $this->variables["current_object"]->video_count;
+        
+        ?>
+            <div class="text-sm ml-auto font-thin mr-2">
+                <div> <?php echo $video_count; ?> Videos</div>
+            </div>
+        <?php
+    }
 
 
 
