@@ -31,7 +31,6 @@ include(get_template_directory() . '/src/views/headers/header-syllabus.php');
 		?>
 		<div class="flex flex-col w-1/5 p-2">
 			<?php 
-			
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                	   SIDEBAR HEADER                                    │
 			// └─────────────────────────────────────────────────────────────────────────┘
@@ -61,8 +60,8 @@ include(get_template_directory() . '/src/views/headers/header-syllabus.php');
 			// │                		  SEARCHBAR                                      │
 			// └─────────────────────────────────────────────────────────────────────────┘
 			?>
-			<div class="searchbar w-full h-16 bg-zinc-700 flex flex-row p-3 gap-3 text-xl font-thin text-zinc-100">
-				<?php include(get_template_directory() . '/src/views/partials/post-title.php'); ?>
+			<div class="searchbar w-full h-12 bg-zinc-500 flex flex-row p-2 gap-2">
+				<?php include(get_template_directory() . '/src/views/partials/breadcrumbs.php'); ?>
 				<?php include(get_template_directory() . '/src/views/search/searchbar_profile_button.php'); ?>
 			</div>
 

@@ -33,7 +33,7 @@ class sidebar_header {
             $this->awardlevel  = $variables["acf"]["award_level_roman"];
             $this->title       = $variables["current_object"]->post_title;
             $this->image       = $variables["thumbnail"];
-            $this->parent_term = $variables["terms_parent"];
+            // $this->parent_term = $variables["terms_parent"];
             $this->child_term  = $variables["terms_child"];
         }
 
@@ -55,16 +55,16 @@ class sidebar_header {
 
                 $this->title();
 
-                $this->open_row();
+                $this->open_middle_row();
                     $this->term_link_child();
                     $this->term_link_parent();
-                $this->close_row();
+                $this->close_middle_row();
 
-                $this->open_row();
+                $this->open_bottom_row();
                     $this->term_child_count();
                     $this->term_count();
                     $this->video_count();
-                $this->close_row();
+                $this->close_bottom_row();
 
             $this->close_column();
 
@@ -135,7 +135,7 @@ class sidebar_header {
      *
      * @return void
      */
-    public function open_row()
+    public function open_middle_row()
     {
         ?><div class="flex flex-col w-full"><?php
     }
@@ -146,7 +146,30 @@ class sidebar_header {
     *
     * @return void
     */
-    public function close_row()
+    public function close_middle_row()
+    {
+        ?></div><?php
+    }
+
+
+
+    /**
+     * Open the row
+     *
+     * @return void
+     */
+    public function open_bottom_row()
+    {
+        ?><div class="flex flex-col w-full mt-auto"><?php
+    }
+
+
+    /**
+     * Close the outer row
+    *
+    * @return void
+    */
+    public function close_bottom_row()
     {
         ?></div><?php
     }
@@ -208,7 +231,7 @@ class sidebar_header {
         if (!isset($this->child_term)){
             return;
         }
-        $this->term_link($this->child_term, 'amber-700');
+        $this->term_link($this->child_term, 'amber-500');
     }
 
 
@@ -254,7 +277,7 @@ class sidebar_header {
         }
         
         ?>
-            <div class="text-sm">
+            <div class="text-sm font-thin">
                 <div> <?php echo $count; ?> Techniques</div>
             </div>
         <?php
@@ -280,7 +303,7 @@ class sidebar_header {
         }
         
         ?>
-            <div class="text-sm">
+            <div class="text-sm font-thin">
                 <div> <?php echo $child_count; ?> Movements</div>
             </div>
         <?php
@@ -301,7 +324,7 @@ class sidebar_header {
         $video_count = $this->variables["current_object"]->video_count;
         
         ?>
-            <div class="text-sm ml-auto font-thin mr-2">
+            <div class="text-sm font-thin">
                 <div> <?php echo $video_count; ?> Videos</div>
             </div>
         <?php

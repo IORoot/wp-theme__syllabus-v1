@@ -18,7 +18,7 @@
 // │                			    TITLE                                    │
 // │                                                                         │
 // └─────────────────────────────────────────────────────────────────────────┘
-include(get_template_directory() . '/src/views/partials/taxonomy-parent-title.php'); 
+// include(get_template_directory() . '/src/views/partials/taxonomy-parent-title.php'); 
 ?>
 
 <?php

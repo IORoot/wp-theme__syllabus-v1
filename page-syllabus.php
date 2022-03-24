@@ -21,7 +21,27 @@ include(get_template_directory() . '/src/views/menus/mainmenu-'.$pagename.'.php'
 
 	<main class="flex flex-row min-h-screen">
 
-		<?php echo do_shortcode('[sidebar_menu slug="sidebar_main"]'); ?>
+	<?php 
+		// ┌─────────────────────────────────────────────────────────────────────────┐
+		// │                		  SIDEBAR                                        │
+		// └─────────────────────────────────────────────────────────────────────────┘
+		?>
+		<div class="flex flex-col w-1/5 p-2">
+			<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                	   SIDEBAR HEADER                                    │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/sidebar-header.php'); 
+			?>
+
+
+			<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                    	SIDEBAR MENU                                     │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/sidebar-menu.php');
+			?>
+		</div>
 
 		<div class="flex flex-1 flex-col">
 			
