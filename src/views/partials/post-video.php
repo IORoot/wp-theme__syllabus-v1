@@ -101,4 +101,3 @@
     .flickity-prev-next-button.previous { left: 2rem; }
     .flickity-prev-next-button.next { right: 2rem; }
 </style>
-<div class="mb-4"></div>

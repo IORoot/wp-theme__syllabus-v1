@@ -17,6 +17,12 @@
 			include(get_template_directory() . '/src/views/partials/post-video.php'); 
 		?>
 		
+		<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                			  HEADER                                     │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/post-header.php'); 
+		?>
 
 		<div class="content max-w-screen-lg mx-auto w-full">
 		<?php
