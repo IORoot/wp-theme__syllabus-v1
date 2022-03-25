@@ -18,3 +18,4 @@ define( 'ANDYP_THEME_FILE',  __FILE__ );
 // │                               Initialise                                │
 // └─────────────────────────────────────────────────────────────────────────┘
 new andyp\theme\syllabus\initialise;
+

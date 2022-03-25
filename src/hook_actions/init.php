@@ -60,3 +60,8 @@ require get_template_directory() . '/src/hook_actions/remove_rsd_link.php';
  * Memberpress sidebar
  */
 require get_template_directory() . '/src/hook_actions/memberpress_user_sidebar.php';
+
+/**
+ * AJAX Search results
+ */
+require get_template_directory() . '/src/hook_actions/ajax_search.php';
