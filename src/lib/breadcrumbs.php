@@ -2,7 +2,7 @@
 
 namespace andyp\theme\syllabus\lib;
 
-class searchbar_breadcrumbs {
+class breadcrumbs {
 
 
     public $variables;
@@ -32,7 +32,7 @@ class searchbar_breadcrumbs {
     {
         ob_start();
             $this->style();
-            ?><ul class="flex list-none text-white w-full font-thin"><?php
+            ?><ul class="flex list-none text-white font-thin"><?php
 
                 $this->syllabus();
                 $this->parent();
