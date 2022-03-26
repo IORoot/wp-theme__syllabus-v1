@@ -1,4 +1,4 @@
-<div class="content-tabs">
+<div class="content-tabs bg-zinc-700 p-10 rounded-xl">
 	
 
     <?php
@@ -10,12 +10,14 @@
     <input type="radio" id="tab2" name="css-tabs" class="hidden">
     <input type="radio" id="tab3" name="css-tabs" class="hidden">
 
-    <ul class="tabs flex list-none p-0 mb-10 gap-4">
-        <li class="tab w-full"><label for="tab1" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">DETAILS</label></li>
-        <li class="tab w-full"><label for="tab2" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">RULES</label></li>
+    <ul class="tabs flex list-none p-0 mb-10 gap-1">
+        <li class="tab w-full"><label for="tab1" class="block m-0 px-2 py-2 cursor-pointer transition-all text-center font-thin border-b-2 border-b-zinc-500 hover:border-b-amber-300 hover:text-amber-300">DETAILS</label></li>
+
+
+        <li class="tab w-full"><label for="tab2" class="block m-0 px-2 py-2 cursor-pointer transition-all text-center font-thin border-b-2 border-b-zinc-500 hover:border-b-amber-300 hover:text-amber-300">GUIDELINES</label></li>
 
         <?php if ($access->can('view_tabs')){ ?>
-            <li class="tab w-full"><label for="tab3" class="block m-0 px-2 py-2 cursor-pointer transition-all bg-zinc-700 hover:bg-zinc-500 text-center rounded-xl font-thin">ADMIN</label></li>
+            <li class="tab w-full"><label for="tab3" class="block m-0 px-2 py-2 cursor-pointer transition-all text-center font-thin border-b-2 border-b-zinc-500 hover:border-b-amber-300 hover:text-amber-300">ADMIN</label></li>
         <?php } ?>
     </ul>
 
@@ -76,7 +78,8 @@
     .content-tabs [type="radio"]:nth-of-type(1):checked ~ .tabs .tab:nth-of-type(1) label,
     .content-tabs [type="radio"]:nth-of-type(2):checked ~ .tabs .tab:nth-of-type(2) label,
     .content-tabs [type="radio"]:nth-of-type(3):checked ~ .tabs .tab:nth-of-type(3) label {
-        background: #f59e0b;
+        color: #f59e0b;
+        border-color: #f59e0b;
     }
 
     .content-tabs [type="radio"]:nth-of-type(1):checked ~ .tab-content:nth-of-type(1),
