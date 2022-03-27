@@ -65,3 +65,8 @@ require get_template_directory() . '/src/hook_actions/memberpress_user_sidebar.p
  * AJAX Search results
  */
 require get_template_directory() . '/src/hook_actions/ajax_search.php';
+
+/**
+ * Switch on post formats
+ */
+require get_template_directory() . '/src/hook_actions/post_formats.php';
