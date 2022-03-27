@@ -191,8 +191,10 @@ class variables {
             // get all terms
             $terms = get_the_terms($this->variables['current_object'], $loop_taxonomy);
 
-            // add to variables.
-            $this->variables['terms'] = array_merge($this->variables['terms'], $terms);
+            if ($terms){
+                // add to variables.
+                $this->variables['terms'] = array_merge($this->variables['terms'], $terms);
+            }
         }
     }
 
