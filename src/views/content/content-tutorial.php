@@ -14,7 +14,7 @@
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                			  VIDEO                                      │
 			// └─────────────────────────────────────────────────────────────────────────┘
-			include(get_template_directory() . '/src/views/partials/post-video.php'); 
+			include(get_template_directory() . '/src/views/partials/post-video-grid.php'); 
 		?>
 		
 		<?php 
