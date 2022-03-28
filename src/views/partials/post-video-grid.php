@@ -23,6 +23,10 @@
         }
 
         foreach ($variables["acf"]["tutorials"] as $video){
+
+            $deleted = $youtube_api->clear_transient($video['video_code']);
+            $youtube_data = $youtube_api->get_data($video['video_code']);
+
             ?>
             <div class="cell w-full">
                 <lite-youtube class="w-full h-60 bg-zinc-800 bg-cover bg-center bg-no-repeat fill-amber-500 flex cursor-pointer rounded-xl overflow-hidden" params="rel=0&modestbranding=1&playlist=<?php echo $playlist; ?>" id="ytplayer" videoid="<?php echo $video['video_code']; ?>" >

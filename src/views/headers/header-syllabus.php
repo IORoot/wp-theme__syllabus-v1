@@ -41,3 +41,11 @@ $variables = (new andyp\theme\syllabus\lib\variables)->get_variables();
  */
 $access = new andyp\theme\syllabus\lib\access();
 
+
+/**
+ * Connects to the YouTube API to get video details.
+ * via JSON calls using the API KEY set in the 
+ * wp-config file..
+ */
+$youtube_api = new andyp\theme\syllabus\lib\youtube_api;
+
