@@ -21,7 +21,7 @@
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                			  HEADER                                     │
 			// └─────────────────────────────────────────────────────────────────────────┘
-			include(get_template_directory() . '/src/views/partials/post-header.php'); 
+			include(get_template_directory() . '/src/views/partials/post-header-tutorial.php'); 
 		?>
 
 		<div class="content max-w-screen-lg mx-auto w-full">
@@ -29,7 +29,7 @@
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                			  TABS                                       │
 			// └─────────────────────────────────────────────────────────────────────────┘
-			include(get_template_directory() . '/src/views/partials/post-tabs.php');
+			include(get_template_directory() . '/src/views/partials/post-tabs-tutorial.php');
 		?>
 		</div>
 		

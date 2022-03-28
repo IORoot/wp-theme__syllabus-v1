@@ -5,9 +5,9 @@
 // │                                                                         │
 // └─────────────────────────────────────────────────────────────────────────┘
 ?>
-<div class="video flex flex-row gap-4">
+<div class="video flex flex-col gap-4">
 
-    <div class="main-carousel p-2 bg-zinc-900 rounded-xl w-full">
+    <div class="main-carousel p-2 bg-zinc-900 rounded-xl w-full gap-4">
         <?php
         /**
          * Set Default
@@ -25,7 +25,7 @@
         foreach ($variables["acf"]["media"] as $video){
             ?>
             <div class="carousel-cell w-full">
-                <lite-youtube class="w-full h-96 bg-zinc-800 bg-cover bg-center bg-no-repeat fill-amber-500 flex cursor-pointer rounded-xl overflow-hidden" params="rel=0&modestbranding=1&playlist=<?php echo $playlist; ?>" id="ytplayer" videoid="<?php echo $video['videoId']; ?>" >
+                <lite-youtube class="w-2/3 aspect-video m-auto bg-zinc-800 bg-cover bg-center bg-no-repeat fill-amber-500 flex cursor-pointer rounded-xl overflow-hidden" params="rel=0&modestbranding=1&playlist=<?php echo $playlist; ?>" id="ytplayer" videoid="<?php echo $video['videoId']; ?>" >
                     <svg class="h-24 w-24 m-auto" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg>
                 </lite-youtube>
             </div>
@@ -69,9 +69,14 @@
     ?>
 
     <?php if ( count($variables["acf"]["media"]) > 1 ){ ?>
-        <div class="nav-carousel w-40 p-2 bg-zinc-900 rounded-xl flex flex-col">
+        <div class="nav-carousel p-2 bg-zinc-900 rounded-xl ">
             <?php foreach ($variables["acf"]["media"] as $video){ ?>
-                <div class="carousel-cell w-32 h-20"><img src="https://img.youtube.com/vi/<?php echo $video['videoId']; ?>/default.jpg"></div>
+                <div class="carousel-cell w-40 flex flex-col gap-4 mr-2 bg-zinc-800 hover:bg-zinc-700 p-4 rounded-lg">
+                    <img src="https://img.youtube.com/vi/<?php echo $video['videoId']; ?>/default.jpg">
+                    <div class="text-center text-xs">
+                        <?php echo $video['video_title']; ?>
+                    </div>
+                </div>
             <?php } ?>
         </div>
 

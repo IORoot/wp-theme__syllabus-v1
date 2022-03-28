@@ -208,13 +208,16 @@ class sidebar_header {
 
     private function award_level()
     {
-        if (isset($this->awardlevel)){
-            ?>
-            <span class="text-emerald-500">
-                <?php echo $this->awardlevel . '. '; ?>
-            </span>
-            <?php
-        }
+
+        if (!isset($this->awardlevel)){ return; }
+        if (empty($this->awardlevel)){ return; }
+
+        ?>
+        <span class="text-emerald-500">
+            <?php echo $this->awardlevel . '. '; ?>
+        </span>
+        <?php
+        
 
     }
 

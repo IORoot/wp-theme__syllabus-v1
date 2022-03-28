@@ -165,7 +165,10 @@ class breadcrumbs {
         ?>
             <li>
                 <div class="chip chip-title inline-block relative bg-zinc-700 p-1 pl-8">
-                    <span class="text-emerald-500 mr-1"><?php echo $this->variables["acf"]["award_level_roman"] . '. '?></span>
+                    <?php  if (!empty($this->variables["acf"]["award_level_roman"])) { ?>
+                        <span class="text-emerald-500 mr-1"><?php echo $this->variables["acf"]["award_level_roman"] . '. '?></span>
+                    <?php } ?>
+                    
                     <?php echo $this->variables["current_object"]->post_title; ?>
                 </div>
             </li>

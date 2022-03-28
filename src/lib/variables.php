@@ -15,11 +15,14 @@ class variables {
 
         $this->get_current_object();
         $this->get_acf_fields();
-        $this->get_counts();
+        $this->get_child_count();
+        $this->get_video_count();
+        $this->get_tutorials_count();
         $this->get_roman_numerals();
         $this->get_taxonomies();
         $this->get_thumbnail();
         $this->get_terms();
+        $this->get_tags();
         $this->get_terms_extras(); // ACF, Links, etc..
         $this->order_parent_child_terms();
     }
@@ -76,7 +79,7 @@ class variables {
 
 
 
-    private function get_counts()
+    private function get_child_count()
     {
         /**
          * WP_Term
@@ -105,6 +108,79 @@ class variables {
 
         // Set media count.
         $this->variables['current_object']->video_count = count($this->variables["acf"]["media"]);
+
+    }
+
+
+    /**
+     * Number of syllabus videos
+     *
+     * @return void
+     */
+    private function get_video_count()
+    {
+        /**
+         * WP_Term
+         */
+        if (is_a($this->variables['current_object'],'WP_Term')){
+            return;
+        }
+
+        /**
+         * WP_Post
+         */
+        // If media hasn't been set.
+        if (!isset($this->variables["acf"]["media"])){
+            $this->variables['current_object']->video_count = 0;
+            return;
+        }
+
+        // If media != false
+        if (!$this->variables["acf"]["media"])
+        {
+            $this->variables['current_object']->video_count = 0;
+            return;
+        }
+
+        // Set media count.
+        $this->variables['current_object']->video_count = count($this->variables["acf"]["media"]);
+
+    }
+
+
+
+    /**
+     * Number of tutorials videos
+     *
+     * @return void
+     */
+    private function get_tutorials_count()
+    {
+        /**
+         * WP_Term
+         */
+        if (is_a($this->variables['current_object'],'WP_Term')){
+            return;
+        }
+
+        /**
+         * WP_Post
+         */
+        // If media hasn't been set.
+        if (!isset($this->variables["acf"]["tutorials"])){
+            $this->variables['current_object']->tutorials_count = 0;
+            return;
+        }
+
+        // If media != false
+        if (!$this->variables["acf"]["tutorials"])
+        {
+            $this->variables['current_object']->tutorials_count = 0;
+            return;
+        }
+
+        // Set media count.
+        $this->variables['current_object']->tutorials_count = count($this->variables["acf"]["tutorials"]);
 
     }
 
@@ -188,6 +264,10 @@ class variables {
         // get all terms from all taxonomies.
         foreach ($this->variables["taxonomies"] as $loop_taxonomy){
 
+            if (!is_taxonomy_hierarchical($loop_taxonomy)){
+                continue;
+            }
+
             // get all terms
             $terms = get_the_terms($this->variables['current_object'], $loop_taxonomy);
 
@@ -216,6 +296,40 @@ class variables {
         // Get the parent term
         $this->variables['terms'][] = get_term($this->variables["current_object"]->parent);
     }
+
+
+    /**
+     * Get the tags associated with a post.
+     * 
+     * $this->variables['tag']
+     *
+     * @return void
+     */
+    private function get_tags()
+    {
+        if (empty($this->variables["taxonomies"])){
+            return;
+        }
+
+        $this->variables['tags'] = [];
+
+        // get all terms from all taxonomies.
+        foreach ($this->variables["taxonomies"] as $loop_taxonomy){
+
+            if (is_taxonomy_hierarchical($loop_taxonomy)){
+                continue;
+            }
+
+            // get all terms
+            $tags = get_the_terms($this->variables['current_object'], $loop_taxonomy);
+
+            if ($tags){
+                // add to variables.
+                $this->variables['tags'] = array_merge($this->variables['tags'], $tags);
+            }
+        }
+    }
+
 
 
 
