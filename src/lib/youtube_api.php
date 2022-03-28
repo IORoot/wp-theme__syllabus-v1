@@ -82,7 +82,7 @@ class youtube_api {
         $this->url  = 'https://www.googleapis.com/youtube/v3/videos';
         $this->url .= '?id='  . $this->video_id;
         $this->url .= '&key=' . GOOGLE_YOUTUBE_API_KEY;
-        $this->url .= '&part=snippet,contentDetails,statistics';
+        $this->url .= '&part=snippet,contentDetails';
     }
 
 
