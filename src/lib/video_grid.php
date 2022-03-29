@@ -20,8 +20,6 @@ class video_grid {
     public $youtube_api;
     public $youtube_data;
 
-
-
     /**
      * Set Variables
      *
