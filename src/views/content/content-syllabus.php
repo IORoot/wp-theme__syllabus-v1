@@ -10,19 +10,18 @@
 	?>
 	<div class="w-full h-full flex flex-col gap-4">	
 
-			
-		<?php 
-			// ┌─────────────────────────────────────────────────────────────────────────┐
-			// │                			  HEADER                                     │
-			// └─────────────────────────────────────────────────────────────────────────┘
-			include(get_template_directory() . '/src/views/partials/post-header.php'); 
-		?>
-
 		<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                			  VIDEO                                      │
 			// └─────────────────────────────────────────────────────────────────────────┘
 			include(get_template_directory() . '/src/views/partials/post-video.php'); 
+		?>
+
+		<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                			  HEADER                                     │
+			// └─────────────────────────────────────────────────────────────────────────┘
+			include(get_template_directory() . '/src/views/partials/post-header.php'); 
 		?>
 
 		<div class="content max-w-screen-lg mx-auto w-full">

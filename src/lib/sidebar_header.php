@@ -11,6 +11,8 @@ class sidebar_header {
     private $image;
     private $parent_term;
     private $child_term;
+    private $total_posts;
+    private $video_count;
 
 
 
@@ -19,6 +21,7 @@ class sidebar_header {
 
         $this->variables = $variables;
 
+        // taxonomy pages
         if (is_a($variables["current_object"], 'WP_Term'))
         {
             $this->awardlevel  = null;
@@ -26,17 +29,29 @@ class sidebar_header {
             $this->image       = $variables["acf"]["svg_glyph"];
             $this->parent_term = $variables["terms_parent"];
             $this->child_term  = $variables["terms_child"];
+            $this->video_count = $variables["current_object"]->video_count;
         }
 
+        // single posts
         if (is_a($variables["current_object"], 'WP_Post'))
         {
             $this->awardlevel  = $variables["acf"]["award_level_roman"];
             $this->title       = $variables["current_object"]->post_title;
             $this->image       = $variables["thumbnail"];
-            // $this->parent_term = $variables["terms_parent"];
             $this->child_term  = $variables["terms_child"];
+            $this->video_count = $variables["current_object"]->video_count;
         }
 
+        // 'Pages'
+        if (is_a($variables["current_object"], 'WP_Post') && $variables["current_object"]->post_type == 'page')
+        {
+            $this->awardlevel  = null;
+            $this->title       = 'Syllabus';
+            $this->image       = null;
+            $this->child_term  = null;
+            $this->video_count = null;
+            $this->total_posts = $variables["current_object"]->total_post_count;
+        }
     }
 
 
@@ -64,6 +79,7 @@ class sidebar_header {
                     $this->term_child_count();
                     $this->term_count();
                     $this->video_count();
+                    $this->posts_count();
                 $this->close_bottom_row();
 
             $this->close_column();
@@ -320,15 +336,33 @@ class sidebar_header {
      */
     private function video_count()
     {
-        if (!isset($this->variables["current_object"]->video_count)){
+        if (!isset($this->video_count)){
             return;
         }
 
-        $video_count = $this->variables["current_object"]->video_count;
+        ?>
+            <div class="text-sm font-thin">
+                <div> <?php echo $this->video_count; ?> Videos</div>
+            </div>
+        <?php
+    }
+
+
+
+    /**
+     * Sets number of total posts.
+     *
+     * @return void
+     */
+    private function posts_count()
+    {
+        if (!isset($this->total_posts)){
+            return;
+        }
         
         ?>
             <div class="text-sm font-thin">
-                <div> <?php echo $video_count; ?> Videos</div>
+                <div> <?php echo $this->total_posts; ?> Techniques</div>
             </div>
         <?php
     }

@@ -17,6 +17,7 @@ class variables {
         $this->get_acf_fields();
         $this->get_child_count();
         $this->get_video_count();
+        $this->get_posts_count();
         $this->get_tutorials_count();
         $this->get_roman_numerals();
         $this->get_taxonomies();
@@ -25,6 +26,7 @@ class variables {
         $this->get_tags();
         $this->get_terms_extras(); // ACF, Links, etc..
         $this->order_parent_child_terms();
+        $this->mycred_page_checkbox();
     }
 
 
@@ -147,6 +149,11 @@ class variables {
 
     }
 
+
+    private function get_posts_count()
+    {
+        $this->variables['current_object']->total_post_count = wp_count_posts( 'syllabus' )->publish;
+    }
 
 
     /**
@@ -395,5 +402,34 @@ class variables {
         }
 
         $this->variables['terms'] = $ordered;
+    }
+
+
+    private function mycred_page_checkbox()
+    {
+        if (!isset($GLOBALS["mycred"])){ return; }
+        if (!isset($GLOBALS["current_user"]->ID)){ return; }
+
+        $args = array(
+            'ctype'   => 'personal_tracking',
+            'user_id' => $GLOBALS["current_user"]->ID,
+            'ref'     => $this->variables['current_object']->ID,
+            'number'  => -1,
+        );
+        $query = new \myCRED_Query_Log( $args );
+
+        if (empty($query->results)){
+            $this->variables['mycred']['page_checked'] = false;
+        }
+
+        $first_entry = $query->results[0];
+
+        if ($first_entry->creds == "-1"){
+            $this->variables['mycred']['page_checked'] = false;
+        }
+
+        if ($first_entry->creds == "1"){
+            $this->variables['mycred']['page_checked'] = true;
+        }
     }
 }

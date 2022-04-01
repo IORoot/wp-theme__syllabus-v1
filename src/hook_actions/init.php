@@ -67,6 +67,11 @@ require get_template_directory() . '/src/hook_actions/memberpress_user_sidebar.p
 require get_template_directory() . '/src/hook_actions/ajax_search.php';
 
 /**
+ * Switch on AJAX endpoints for mycred checkboxes.
+ */
+require get_template_directory() . '/src/hook_actions/ajax_mycred_checkboxes.php';
+
+/**
  * Switch on post formats
  */
 require get_template_directory() . '/src/hook_actions/post_formats.php';
