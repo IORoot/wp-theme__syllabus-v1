@@ -31,7 +31,20 @@ class mycred_checkbox {
         ob_start();
         ?>
 
-        <input type="checkbox" id="mycred_checkbox" name="mycred_checkbox" onclick="checkbox_state()" <?php if ($this->variables['mycred']['page_checked']){ echo 'checked'; } ?> >
+        <style>
+            .favourite {
+                visibility:hidden;
+            }
+            .favourite:before {
+                content: "\2605";
+                position: absolute;
+                visibility:visible;
+            }
+            .favourite:checked:before {
+                content: "\2606";
+            }
+        </style>
+        <input class="favourite text-3xl cursor-pointer mt-4" type="checkbox" id="mycred_checkbox" name="mycred_checkbox" onclick="checkbox_state()" <?php if ($this->variables['mycred']['page_checked']){ echo 'checked'; } ?> >
 
         <?php
         $this->output = ob_get_contents();

@@ -1,6 +1,6 @@
 <div class="w-full h-40 rounded-xl flex flex-row px-12 py-2 gap-4 bg-gradient-to-tr from-amber-500 to-yellow-500">
 
-    <div class="flex flex-col gap-4 justify-center">
+    <div class="flex flex-col gap-4 justify-center w-full">
         <div class="flex flex-row text-5xl">
             <div class="text-black mr-2"><?php echo $variables["acf"]["award_level_roman"] . '. '?></div>
             <div><?php echo $variables["current_object"]->post_title; ?></div>
@@ -59,7 +59,7 @@
 
     </div>
 
-    <div class="flex flex-col gap-4 justify-center">
+    <div class="flex flex-col gap-4 justify-top">
         <?php include(get_template_directory() . '/src/views/partials/mycred-post-header.php'); ?>
     </div>
 
