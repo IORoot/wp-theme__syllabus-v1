@@ -1,35 +1,33 @@
 <?php
 
-namespace andyp\theme\syllabus\lib;
+namespace andyp\theme\syllabus\lib\variables;
 
-use andyp\theme\syllabus\lib\variables\post_variables;
-use andyp\theme\syllabus\lib\variables\taxonomy_variables;
+use andyp\theme\syllabus\lib\statics;
 
-class variables {
+class post_variables {
 
     public $statics;
     public $variables;
 
     public function __construct()
     {
-        $queried_object = get_queried_object();
+        $this->statics = new statics;
 
-        /**
-         * WP_Post
-         */
-        if (is_a($queried_object,'WP_Post')){
-            $post_or_tax = new post_variables();
-        }
-
-        /**
-         * WP_Term
-         */
-        if (is_a($queried_object,'WP_Term')){
-            $post_or_tax = new taxonomy_variables();
-        }
-
-        $this->variables = $post_or_tax->get_variables();
-        
+        $this->get_current_object();
+        $this->get_acf_fields();
+        $this->get_child_count();
+        $this->get_video_count();
+        $this->get_posts_count();
+        $this->get_tutorials_count();
+        $this->get_roman_numerals();
+        $this->get_taxonomies();
+        $this->get_thumbnail();
+        $this->get_post_terms();
+        $this->get_tags();
+        $this->get_terms_extras(); // ACF, Links, etc..
+        $this->order_parent_child_terms();
+        $this->mycred_page_checkbox();
+        $this->get_mycred_personal();
     }
 
 
@@ -86,14 +84,6 @@ class variables {
 
     private function get_child_count()
     {
-        /**
-         * WP_Term
-         */
-        if (is_a($this->variables['current_object'],'WP_Term')){
-            $children = get_term_children( $this->variables['current_object']->term_id, $this->variables['current_object']->taxonomy );
-            $this->variables['current_object']->child_count = count($children);
-            return;
-        }
 
         /**
          * WP_Post
@@ -124,16 +114,7 @@ class variables {
      */
     private function get_video_count()
     {
-        /**
-         * WP_Term
-         */
-        if (is_a($this->variables['current_object'],'WP_Term')){
-            return;
-        }
 
-        /**
-         * WP_Post
-         */
         // If media hasn't been set.
         if (!isset($this->variables["acf"]["media"])){
             $this->variables['current_object']->video_count = 0;
@@ -166,16 +147,6 @@ class variables {
      */
     private function get_tutorials_count()
     {
-        /**
-         * WP_Term
-         */
-        if (is_a($this->variables['current_object'],'WP_Term')){
-            return;
-        }
-
-        /**
-         * WP_Post
-         */
         // If media hasn't been set.
         if (!isset($this->variables["acf"]["tutorials"])){
             $this->variables['current_object']->tutorials_count = 0;
@@ -203,12 +174,9 @@ class variables {
      */
     private function get_taxonomies()
     {
-        /**
-         * WP_Post
-         */
-        if (is_a($this->variables['current_object'],'WP_Post')){
-            $this->variables['taxonomies'] = get_post_taxonomies($this->variables['current_object']->ID);
-        }
+
+        $this->variables['taxonomies'] = get_post_taxonomies($this->variables['current_object']->ID);
+
     }  
 
 
@@ -220,42 +188,9 @@ class variables {
      */
     private function get_thumbnail()
     {
-        /**
-         * WP_Post
-         */
-        if (is_a($this->variables['current_object'],'WP_Post')){
-            $this->variables['thumbnail'] = get_the_post_thumbnail($this->variables['current_object'], null, ['class' => 'w-full h-full']);
-        }
+        $this->variables['thumbnail'] = get_the_post_thumbnail($this->variables['current_object'], null, ['class' => 'w-full h-full']);
     }    
     
-
-
-
-    /**
-     *  Get Taxonomy Terms.
-     *
-     * @return void
-     */
-    private function get_terms()
-    {
-
-        $this->variables['terms'] = [];
-    
-        /**
-         * WP_Post
-         */
-        if (is_a($this->variables['current_object'],'WP_Post')){
-            $this->get_post_terms();
-        }
-
-        /**
-         * WP_Term
-         */
-        if (is_a($this->variables['current_object'],'WP_Term')){
-            $this->get_term_parent();
-        }
-    
-    }
 
 
     /**
@@ -270,6 +205,8 @@ class variables {
         if (empty($this->variables["taxonomies"])){
             return;
         }
+
+        $this->variables['terms'] = [];
 
         // get all terms from all taxonomies.
         foreach ($this->variables["taxonomies"] as $loop_taxonomy){
@@ -288,24 +225,6 @@ class variables {
         }
     }
 
-
-    /**
-     * Get the parent term of the current term
-     * 
-     * @return void
-     */
-    private function get_term_parent()
-    {
-
-        // Skip if already top.
-        if ($this->variables['current_object']->parent == 0)
-        {
-            return;
-        }
-
-        // Get the parent term
-        $this->variables['terms'][] = get_term($this->variables["current_object"]->parent);
-    }
 
 
     /**
