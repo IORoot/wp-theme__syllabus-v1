@@ -111,14 +111,14 @@ class breadcrumbs {
 
     public function parent()
     {
-        if (!isset($this->variables["terms_parent"])) { return; }
-        $item = $this->variables["terms_parent"];
+        if (!isset($this->variables["breadcrumbs"]["parent_term"])) { return; }
+        $item = $this->variables["breadcrumbs"]["parent_term"];
 
         ?>
             <li>
-                <a href="<?php echo $item->link; ?>" class="chip chip-parent relative bg-zinc-900 hover:bg-emerald-500 p-1 pl-8 flex flex-row justify-center items-center">
-                    <div class="h-5 w-5 inline-block mr-2 fill-white"> <?php echo $this->variables["terms_parent"]->acf["svg_glyph"]; ?> </div>
-                    <?php echo $item->name ?>
+                <a href="<?php echo $item['link']; ?>" class="chip chip-parent relative bg-zinc-900 hover:bg-emerald-500 p-1 pl-8 flex flex-row justify-center items-center">
+                    <div class="h-5 w-5 inline-block mr-2 fill-white"> <?php echo $item['glyph']; ?> </div>
+                    <?php echo $item['title'] ?>
                 </a>
             </li>
         <?php
@@ -128,13 +128,13 @@ class breadcrumbs {
 
     public function child()
     {
-        if (!isset($this->variables["terms_child"])) { return; }
-        $item = $this->variables["terms_child"];
+        if (!isset($this->variables["breadcrumbs"]["child_term"])) { return; }
+        $item = $this->variables["breadcrumbs"]["child_term"];
         ?>
             <li>
-                <a href="<?php echo $item->link; ?>" class="chip chip-child relative bg-zinc-800 hover:bg-emerald-500 p-1 pl-8 flex flex-row justify-center items-center">
-                    <div class="h-5 w-5 inline-block mr-2 fill-white"> <?php echo $this->variables["terms_child"]->acf["svg_glyph"]; ?> </div>
-                    <?php echo $item->name ?>
+                <a href="<?php echo $item['link']; ?>" class="chip chip-child relative bg-zinc-800 hover:bg-emerald-500 p-1 pl-8 flex flex-row justify-center items-center">
+                    <div class="h-5 w-5 inline-block mr-2 fill-white"> <?php echo $item['glyph']; ?> </div>
+                    <?php echo $item['title'] ?>
                 </a>
             </li>
         <?php
@@ -144,13 +144,13 @@ class breadcrumbs {
 
     public function term_title()
     {
-        if (!is_a($this->variables["current_object"], 'WP_Term')){ return; }
-        $item = $this->variables["current_object"];
+        if (!isset($this->variables["breadcrumbs"]["term"])) { return; }
+        $item = $this->variables["breadcrumbs"]["term"];
         ?>
             <li>
                 <div class="chip chip-title relative bg-zinc-700 p-1 pl-8 flex flex-row justify-center items-center">
-                    <div class="h-5 w-5 inline-block mr-2 fill-white">  <?php echo $this->variables["acf"]["svg_glyph"]; ?> </div>
-                    <?php echo $item->name; ?>
+                    <div class="h-5 w-5 inline-block mr-2 fill-white">  <?php echo $item["glyph"]; ?> </div>
+                    <?php echo $item['title']; ?>
                 </div>
             </li>
         <?php   
@@ -160,16 +160,13 @@ class breadcrumbs {
 
     public function post_title()
     {
-        if (!is_a($this->variables["current_object"], 'WP_Post')){ return; }
-        $item = $this->variables["current_object"];
+        if (!isset($this->variables["breadcrumbs"]["post"])) { return; }
+        $item = $this->variables["breadcrumbs"]["post"];
         ?>
             <li>
                 <div class="chip chip-title inline-block relative bg-zinc-700 p-1 pl-8">
-                    <?php  if (!empty($this->variables["acf"]["award_level_roman"])) { ?>
-                        <span class="text-emerald-500 mr-1"><?php echo $this->variables["acf"]["award_level_roman"] . '. '?></span>
-                    <?php } ?>
-                    
-                    <?php echo $this->variables["current_object"]->post_title; ?>
+                    <?php echo $item["glyph"]; ?>
+                    <?php echo $item["title"]; ?>
                 </div>
             </li>
         <?php

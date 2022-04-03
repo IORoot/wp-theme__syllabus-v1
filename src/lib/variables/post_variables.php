@@ -26,6 +26,7 @@ class post_variables {
         $this->get_tags();
         $this->get_terms_extras(); // ACF, Links, etc..
         $this->order_parent_child_terms();
+        $this->get_breadcrumbs();
         $this->mycred_page_checkbox();
         $this->get_mycred_personal();
     }
@@ -325,6 +326,32 @@ class post_variables {
 
         $this->variables['terms'] = $ordered;
     }
+    
+
+
+
+    private function get_breadcrumbs()
+    {
+        if (is_a($this->variables["current_object"], 'WP_Post')){
+            $this->variables['breadcrumbs']['post']['title'] = $this->variables["current_object"]->post_title;
+            $this->variables['breadcrumbs']['post']['glyph'] = '<span class="text-emerald-500 mr-1">' . $this->variables["acf"]["award_level_roman"] . '</span>';
+            $this->variables['breadcrumbs']['post']['link'] =  '';
+        }
+
+        if (isset($this->variables["terms_child"])){
+            $this->variables['breadcrumbs']['child_term']['title'] = $this->variables["terms_child"]->name;
+            $this->variables['breadcrumbs']['child_term']['glyph'] = $this->variables["terms_child"]->acf["svg_glyph"];
+            $this->variables['breadcrumbs']['child_term']['link']  = $this->variables["terms_child"]->link;
+        }
+
+        if (isset($this->variables["terms_parent"])){
+            $this->variables['breadcrumbs']['parent_term']['title'] = $this->variables["terms_parent"]->name;
+            $this->variables['breadcrumbs']['parent_term']['glyph'] = $this->variables["terms_parent"]->acf["svg_glyph"];
+            $this->variables['breadcrumbs']['parent_term']['link']  = $this->variables["terms_parent"]->link;
+        }
+
+    }
+
 
 
     /**
@@ -366,5 +393,6 @@ class post_variables {
         if ( ! defined( 'myCRED_VERSION' ) ) { return; }
 
     }
+
 
 }

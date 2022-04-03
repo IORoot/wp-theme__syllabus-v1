@@ -18,9 +18,9 @@ class taxonomy_variables {
         $this->get_child_count();
         $this->get_posts_count();
         $this->get_roman_numerals();
-        $this->get_term_parent();
-        $this->get_terms_extras(); // ACF, Links, etc..
-        $this->order_parent_child_terms();
+        $this->get_parent_term();
+        $this->get_terms();
+        $this->get_breadcrumbs();
     }
 
 
@@ -45,7 +45,6 @@ class taxonomy_variables {
         if (!isset($this->variables['acf']['award_level'])){
             return;
         }
-        // $statics = ;
         $this->variables['acf']['award_level_roman'] = $this->statics::numberToRoman($this->variables['acf']['award_level']);
     }
 
@@ -96,39 +95,38 @@ class taxonomy_variables {
      * 
      * @return void
      */
-    private function get_term_parent()
+    private function get_parent_term()
     {
-
-        $this->variables['terms'] = [];
-
-        // Skip if already top.
-        if ($this->variables['current_object']->parent == 0)
-        {
-            return;
-        }
+        // Skip if already top and has no parent.
+        if ($this->variables['current_object']->parent == 0) { return; }
 
         // Get the parent term
-        $this->variables['terms'][] = get_term($this->variables["current_object"]->parent);
+        $term = $this->variables['terms_parent'] = get_term($this->variables["current_object"]->parent);
+        $this->variables['terms_parent']->acf = get_fields('term_'.$term->term_id,'options');   // Get ACF for each term.
+        $this->variables['terms_parent']->link = get_term_link($term); // Get Links for each term
+        $this->variables['terms_parent']->child_count = count (get_term_children( $this->variables['terms_parent']->term_id, $this->variables['terms_parent']->taxonomy )); // Get child count
+        
     }
 
 
-
-
+    
     /**
-     * Get any Term ACF fields
-     *
+     * Get the parent term of the current term
+     * 
      * @return void
      */
-    private function get_terms_extras()
+    private function get_terms()
     {
-        /**
-         * Check there are terms.
-         */
-        if (empty($this->variables["terms"])){
-            return;
-        }
 
-        foreach ($this->variables["terms"] as $term_key => $term){
+        if (!is_taxonomy_hierarchical($this->variables["current_object"]->taxonomy)){ return; }
+
+        // get all child terms
+        $this->variables['terms'] = get_terms( $this->variables["current_object"]->taxonomy, [
+            'hide_empty' => 0,
+            'parent' => $this->variables["current_object"]->term_id,
+        ]);
+
+        foreach ($this->variables['terms'] as $term_key => $term){
 
             /**
              * Get ACF for each term.
@@ -146,36 +144,25 @@ class taxonomy_variables {
             $this->variables['terms'][$term_key]->child_count = count (get_term_children( $term->term_id, $term->taxonomy ));
         }
     }
+
+
+
     
-    
-    /**
-     * order_terms will put parent first, child second.
-     * 
-     * Will also set:
-     * $this->variables['terms_parent']
-     * $this->variables['terms_child']
-     *
-     * @return void
-     */
-    private function order_parent_child_terms()
+
+    private function get_breadcrumbs()
     {
-        // order parents first, children last.
-        $ordered = [];
-        foreach ($this->variables['terms'] as $loop_terms){
-
-            // Is it a parent term?
-            if ($loop_terms->parent == 0){
-                $this->variables['terms_parent'] = $loop_terms;
-                array_unshift($ordered, $loop_terms);
-                continue;
-            }
-
-            // Else its a child term.
-            $this->variables['terms_child'] = $loop_terms;
-            array_push($ordered, $loop_terms);
+        if (is_a($this->variables["current_object"], 'WP_Term')){
+            $this->variables['breadcrumbs']['term']['title'] =  $this->variables["current_object"]->name;
+            $this->variables['breadcrumbs']['term']['glyph'] =  $this->variables["acf"]["svg_glyph"];
+            $this->variables['breadcrumbs']['term']['link'] =  '';
         }
 
-        $this->variables['terms'] = $ordered;
+        if (!empty($this->variables["terms_parent"])){
+            $this->variables['breadcrumbs']['parent_term']['title'] = $this->variables["terms_parent"]->name;
+            $this->variables['breadcrumbs']['parent_term']['glyph'] = $this->variables["terms_parent"]->acf["svg_glyph"];
+            $this->variables['breadcrumbs']['parent_term']['link']  = $this->variables["terms_parent"]->link;
+        }
+
     }
 
 }

@@ -27,9 +27,13 @@ class sidebar_header {
             $this->awardlevel  = null;
             $this->title       = strtoupper($variables["current_object"]->name);
             $this->image       = $variables["acf"]["svg_glyph"];
-            $this->parent_term = $variables["terms_parent"];
-            $this->child_term  = $variables["terms_child"];
             $this->video_count = $variables["current_object"]->video_count;
+            if (isset($variables["terms_parent"])){
+                $this->parent_term = $variables["terms_parent"];
+            }
+            if (isset($variables["terms_child"])){
+                $this->child_term  = $variables["terms_child"];
+            }
         }
 
         // single posts
@@ -38,9 +42,12 @@ class sidebar_header {
             $this->awardlevel  = $variables["acf"]["award_level_roman"];
             $this->title       = $variables["current_object"]->post_title;
             $this->image       = $variables["thumbnail"];
-            $this->child_term  = $variables["terms_child"];
             $this->video_count = $variables["current_object"]->video_count;
+            $this->parent_term = $variables["terms_parent"];
+            $this->child_term  = $variables["terms_child"];
         }
+
+
 
         // 'Pages'
         if (is_a($variables["current_object"], 'WP_Post') && $variables["current_object"]->post_type == 'page')
@@ -247,9 +254,8 @@ class sidebar_header {
 
     private function term_link_child()
     {
-        if (!isset($this->child_term)){
-            return;
-        }
+        if (!isset($this->child_term)){ return; }
+        if (is_array($this->child_term)){ return; }
         $this->term_link($this->child_term, 'amber-500');
     }
 
