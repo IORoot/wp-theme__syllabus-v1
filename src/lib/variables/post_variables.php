@@ -28,7 +28,6 @@ class post_variables {
         $this->order_parent_child_terms();
         $this->get_breadcrumbs();
         $this->mycred_page_checkbox();
-        $this->get_mycred_personal();
     }
 
 
@@ -329,7 +328,13 @@ class post_variables {
     
 
 
-
+    /**
+     * Setup Breadcrumbs array
+     * 
+     * Used to create the breadcrumbs at top of the page.
+     *
+     * @return void
+     */
     private function get_breadcrumbs()
     {
         if (is_a($this->variables["current_object"], 'WP_Post')){
@@ -385,13 +390,6 @@ class post_variables {
         if ($first_entry->creds == "1"){
             $this->variables['mycred']['page_checked'] = true;
         }
-    }
-
-
-    private function get_mycred_personal()
-    {
-        if ( ! defined( 'myCRED_VERSION' ) ) { return; }
-
     }
 
 

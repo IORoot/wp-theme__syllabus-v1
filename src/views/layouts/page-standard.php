@@ -79,12 +79,6 @@ include(get_template_directory() . '/src/views/headers/header-syllabus.php');
 				<?php
 					// parent term
 					if(is_tax() && $variables["current_object"]->parent == 0){
-
-						$terms = get_terms([
-							'taxonomy' => $variables["current_object"]->taxonomy,
-							'parent' => $variables["current_object"]->term_id
-						]);
-
 						include(get_template_directory() . '/src/views/content/content-taxonomy-parent.php');
 					}
 

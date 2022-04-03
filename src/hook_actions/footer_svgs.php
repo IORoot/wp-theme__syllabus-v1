@@ -27,6 +27,8 @@
             include( get_template_directory() . '/src/assets/svgs/map-marker-path.svg' );
             include( get_template_directory() . '/src/assets/svgs/close.svg' );
             include( get_template_directory() . '/src/assets/svgs/right-cli-triangle.svg' );
+            include( get_template_directory() . '/src/assets/svgs/star.svg' );
+            include( get_template_directory() . '/src/assets/svgs/star-outline.svg' );
         echo '</div>';
     }
 

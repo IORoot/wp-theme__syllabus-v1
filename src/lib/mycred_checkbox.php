@@ -36,12 +36,12 @@ class mycred_checkbox {
                 visibility:hidden;
             }
             .favourite:before {
-                content: "\2605";
+                content: "\2606";
                 position: absolute;
                 visibility:visible;
             }
             .favourite:checked:before {
-                content: "\2606";
+                content: "\2605";
             }
         </style>
         <input class="favourite text-3xl cursor-pointer mt-4" type="checkbox" id="mycred_checkbox" name="mycred_checkbox" onclick="checkbox_state()" <?php if ($this->variables['mycred']['page_checked']){ echo 'checked'; } ?> >

@@ -13,12 +13,13 @@
 ?>
 
 <?php 
+
 // ┌─────────────────────────────────────────────────────────────────────────┐
 // │                                                                         │
 // │                			    TITLE                                    │
 // │                                                                         │
 // └─────────────────────────────────────────────────────────────────────────┘
-// include(get_template_directory() . '/src/views/partials/taxonomy-parent-title.php'); 
+include(get_template_directory() . '/src/views/partials/taxonomy-parent-title.php'); 
 ?>
 
 <?php
@@ -34,7 +35,7 @@
 
     <?php
 
-        foreach ($terms as $index => $term_child){
+        foreach ($variables["terms"] as $index => $term_child){
 
             $term_acf = get_fields('term_'.$term_child->term_id, 'options');
             if (!$term_acf){ $term_acf = []; }
@@ -52,6 +53,8 @@
                             echo $term_acf["svg_glyph"]; 
                         }
                     ?>
+
+                    <?php echo $graphs->bar($term_child->favourited, $term_child->count); ?>
                 </a>
             </div>
 

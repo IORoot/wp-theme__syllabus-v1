@@ -21,6 +21,7 @@ class taxonomy_variables {
         $this->get_parent_term();
         $this->get_terms();
         $this->get_breadcrumbs();
+        $this->get_mycred_personal_tracking_total();
     }
 
 
@@ -111,7 +112,7 @@ class taxonomy_variables {
 
     
     /**
-     * Get the parent term of the current term
+     * Get the terms of the current term
      * 
      * @return void
      */
@@ -126,29 +127,24 @@ class taxonomy_variables {
             'parent' => $this->variables["current_object"]->term_id,
         ]);
 
-        foreach ($this->variables['terms'] as $term_key => $term){
-
-            /**
-             * Get ACF for each term.
-             */
-            $this->variables['terms'][$term_key]->acf = get_fields('term_'.$term->term_id,'options');  
-            
-            /**
-             * Get Links for each term
-             */
-            $this->variables['terms'][$term_key]->link = get_term_link($term);
-
-            /**
-             * Get child count
-             */
-            $this->variables['terms'][$term_key]->child_count = count (get_term_children( $term->term_id, $term->taxonomy ));
+        foreach ($this->variables['terms'] as $this->loop_term_key => $this->loop_term){
+            $this->variables['terms'][$this->loop_term_key]->acf             = get_fields('term_'.$this->loop_term->term_id,'options');   //Get ACF for each term.
+            $this->variables['terms'][$this->loop_term_key]->link            = get_term_link($this->loop_term); //Get Links for each term
+            $this->variables['terms'][$this->loop_term_key]->child_count     = count(get_term_children( $this->loop_term->term_id, $this->loop_term->taxonomy )); // Get child count
+            $this->variables['terms'][$this->loop_term_key]->favourited      = $this->get_mycred_personal_tracking_total($this->loop_term);
         }
     }
 
 
 
     
-
+    /**
+     * Setup Breadcrumbs array
+     * 
+     * Used to create the breadcrumbs at top of the page.
+     *
+     * @return void
+     */
     private function get_breadcrumbs()
     {
         if (is_a($this->variables["current_object"], 'WP_Term')){
@@ -165,4 +161,52 @@ class taxonomy_variables {
 
     }
 
+
+    /**
+     * Undocumented function
+     *
+     * @param object $term
+     * @return void
+     */
+    public function get_mycred_personal_tracking_total(object $term = null)
+    {
+        if ( ! defined( 'myCRED_VERSION' ) ) { return; }
+
+        if (! isset($term)){ $term = $this->variables['current_object']; }
+
+        $posts_array = get_posts([
+            'posts_per_page' => -1,
+            'post_type' => 'syllabus',
+            'tax_query' => [
+                [
+                    'taxonomy' => $term->taxonomy,
+                    'field' => 'term_id',
+                    'terms' => $term->term_id,
+                ]
+            ]
+        ]);
+
+        $results = 0;
+        foreach ($posts_array as $post)
+        {
+            $query = new \myCRED_Query_Log( [
+                'ctype'   => 'personal_tracking',
+                'user_id' => $GLOBALS["current_user"]->ID,
+                'ref'     => $post->ID,
+                'number'  => 1,
+            ] );
+
+            if (empty($query->results)){  continue; }
+
+            $results++;
+        }
+
+        if ($term === $this->variables['current_object']){ 
+            $this->variables['mycred']['taxonomy_personal_tracking_total'] = $results;
+            return;
+        }
+
+        return $results;
+        
+    }
 }

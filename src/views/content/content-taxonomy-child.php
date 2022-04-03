@@ -18,7 +18,7 @@
 // │                			    TITLE                                    │
 // │                                                                         │
 // └─────────────────────────────────────────────────────────────────────────┘
-// include(get_template_directory() . '/src/views/partials/taxonomy-child-title.php'); 
+include(get_template_directory() . '/src/views/partials/taxonomy-child-title.php'); 
 ?>
 
 <?php
@@ -40,6 +40,7 @@
             $post_meta = get_fields( $post );
             $post_permalink = get_post_permalink($post);
             $post_image = get_the_post_thumbnail($post);
+            $post_favouite = $mycred_helpers->get_personal_tracking_score($post);
 
             ?>
 
@@ -49,6 +50,12 @@
                     <div class="text-xs uppercase"><span class="text-emerald-500 mr-1"><?php echo $help->numberToRoman($index) . '. '?></span><?php echo $post->post_title; ?></div>
 
                     <?php echo $post_image; ?>
+
+                    <?php if ($post_favouite){ ?>
+                        <div class="bg-amber-400 w-20 h-20 absolute -bottom-12 -right-12 -rotate-45">
+                            <svg role="img" aria-label="Star Icon" class="mt-0.5 h-4 w-4 fill-white mx-auto"><use xlink:href="#star"></use></svg>
+                        </div>
+                    <?php } ?>
                 </a>
             </div>
 

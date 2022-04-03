@@ -49,3 +49,14 @@ $access = new andyp\theme\syllabus\lib\access();
  */
 $youtube_api = new andyp\theme\syllabus\lib\youtube_api;
 
+
+/**
+ * Functions for interacting with mycred.
+ */
+$mycred_helpers = new andyp\theme\syllabus\lib\mycred_helpers;
+
+
+/**
+ * Functions for creating graphs (bar)
+ */
+$graphs = new andyp\theme\syllabus\lib\graphs;
