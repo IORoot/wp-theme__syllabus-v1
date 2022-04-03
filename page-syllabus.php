@@ -14,7 +14,9 @@ get_header();
 // └─────────────────────────────────────────────────────────────────────────┘
 include(get_template_directory() . '/src/views/headers/header-syllabus.php'); 
 
-
+// ┌─────────────────────────────────────────────────────────────────────────┐
+// │                	        	MAIN MENU                                │
+// └─────────────────────────────────────────────────────────────────────────┘
 include(get_template_directory() . '/src/views/menus/mainmenu-'.$pagename.'.php');
 
 ?>
@@ -58,30 +60,13 @@ include(get_template_directory() . '/src/views/menus/mainmenu-'.$pagename.'.php'
 				<?php include(get_template_directory() . '/src/views/partials/searchbar_profile_button.php'); ?>
 			</div>
 
-
-
-			<div class="content w-full h-full bg-zinc-600">
-
-			<?php
-				if (have_posts()) {
-
-					while (have_posts()) {
-
-						the_post();
-
-						$post_type = get_post_type();
-
-						include(get_template_directory() . '/src/views/content/content-'.$post_type.'.php');
-
-					}
-
-					the_posts_navigation();
-					
-				} else {
-					include(get_template_directory() . '/src/views/content/content-404.php');
-
-				}
+			<?php 
+			// ┌─────────────────────────────────────────────────────────────────────────┐
+			// │                		  CONTENT                                        │
+			// └─────────────────────────────────────────────────────────────────────────┘
 			?>
+			<div class="content w-full h-full bg-zinc-600">
+				<?php include(get_template_directory() . '/src/views/content/content-page-syllabus.php'); ?>
 			</div>
 		</div>
 
