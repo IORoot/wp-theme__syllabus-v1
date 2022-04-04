@@ -15,7 +15,6 @@ class post_variables {
 
         $this->get_current_object();
         $this->get_acf_fields();
-        $this->get_child_count();
         $this->get_video_count();
         $this->get_posts_count();
         $this->get_tutorials_count();
@@ -28,7 +27,6 @@ class post_variables {
         $this->order_parent_child_terms();
         $this->get_breadcrumbs();
         $this->mycred_page_checkbox();
-        $this->mycred_favourites_score();
     }
 
 
@@ -81,31 +79,6 @@ class post_variables {
         $this->variables['acf'] = get_fields( get_queried_object() );
     }
 
-
-
-    private function get_child_count()
-    {
-
-        /**
-         * WP_Post
-         */
-        // If media hasn't been set.
-        if (!isset($this->variables["acf"]["media"])){
-            $this->variables['current_object']->video_count = 0;
-            return;
-        }
-
-        // If media != false
-        if (!$this->variables["acf"]["media"])
-        {
-            $this->variables['current_object']->video_count = 0;
-            return;
-        }
-
-        // Set media count.
-        $this->variables['current_object']->video_count = count($this->variables["acf"]["media"]);
-
-    }
 
 
     /**
@@ -390,11 +363,4 @@ class post_variables {
     }
 
 
-    private function mycred_favourites_score()
-    {
-        // global $wpdb;
-
-        // $wpdb->get_results($sql);
-        return;
-    }
 }

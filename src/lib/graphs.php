@@ -53,7 +53,7 @@ class graphs {
     {
         $length_percentage = ceil((100 / $this->max) * $this->score);
         ?>
-            <div class="bg-zinc-300 rounded-full h-full" style="width: <?php echo $length_percentage; ?>%; "></div>
+            <div class="bg-amber-400 rounded-full h-full" style="width: <?php echo $length_percentage; ?>%; "></div>
         <?php
     }
 

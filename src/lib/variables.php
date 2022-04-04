@@ -3,6 +3,7 @@
 namespace andyp\theme\syllabus\lib;
 
 use andyp\theme\syllabus\lib\variables\post_variables;
+use andyp\theme\syllabus\lib\variables\page_variables;
 use andyp\theme\syllabus\lib\variables\taxonomy_variables;
 
 class variables {
@@ -16,8 +17,12 @@ class variables {
     {
         $queried_object = get_queried_object();
 
-        if (is_a($queried_object,'WP_Post')){
+        if (is_a($queried_object,'WP_Post') && $queried_object->post_type != "page"){
             $post_or_tax = new post_variables();
+        }
+
+        if (is_a($queried_object,'WP_Post') && $queried_object->post_type == "page"){
+            $post_or_tax = new page_variables();
         }
 
         if (is_a($queried_object,'WP_Term')){
