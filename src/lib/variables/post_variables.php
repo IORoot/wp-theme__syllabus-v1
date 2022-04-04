@@ -28,6 +28,7 @@ class post_variables {
         $this->order_parent_child_terms();
         $this->get_breadcrumbs();
         $this->mycred_page_checkbox();
+        $this->mycred_favourites_score();
     }
 
 
@@ -368,29 +369,32 @@ class post_variables {
     {
         if (!isset($GLOBALS["mycred"])){ return; }
         if (!isset($GLOBALS["current_user"]->ID)){ return; }
+        if (!isset($this->variables['current_object']->ID)){ return; }
 
-        $args = array(
-            'ctype'   => 'personal_tracking',
-            'user_id' => $GLOBALS["current_user"]->ID,
-            'ref'     => $this->variables['current_object']->ID,
-            'number'  => -1,
-        );
-        $query = new \myCRED_Query_Log( $args );
+        global $wpdb;
+        
+        $user_ID = $GLOBALS["current_user"]->ID;
+        $post_ID = $this->variables['current_object']->ID;
+        $sql = 'SELECT SUM(creds) AS creds FROM wp_myCRED_log where user_id = '.$user_ID.' AND ref = '.$post_ID.' AND ctype = \'personal_tracking\'';
+        $result = $wpdb->get_results($sql);
 
-        if (empty($query->results)){
+        $credits = intval($result[0]->creds);
+
+        if ( empty($credits)){
             $this->variables['mycred']['page_checked'] = false;
         }
 
-        $first_entry = $query->results[0];
-
-        if ($first_entry->creds == "-1"){
-            $this->variables['mycred']['page_checked'] = false;
-        }
-
-        if ($first_entry->creds == "1"){
+        if ( ! empty($credits)){
             $this->variables['mycred']['page_checked'] = true;
         }
     }
 
 
+    private function mycred_favourites_score()
+    {
+        // global $wpdb;
+
+        // $wpdb->get_results($sql);
+        return;
+    }
 }

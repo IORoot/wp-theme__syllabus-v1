@@ -183,30 +183,25 @@ class taxonomy_variables {
                     'field' => 'term_id',
                     'terms' => $term->term_id,
                 ]
-            ]
+            ],
+            'fields' => 'ids',
         ]);
+        
 
-        $results = 0;
-        foreach ($posts_array as $post)
-        {
-            $query = new \myCRED_Query_Log( [
-                'ctype'   => 'personal_tracking',
-                'user_id' => $GLOBALS["current_user"]->ID,
-                'ref'     => $post->ID,
-                'number'  => 1,
-            ] );
+        $post_list = implode(',', $posts_array);
 
-            if (empty($query->results)){  continue; }
-
-            $results++;
-        }
+        // For the list of refs "160,157,155,153,138,135,132,129,65,43" , list the ones that are favourited.
+        global $wpdb;
+        $user_ID = $GLOBALS["current_user"]->ID;
+        $sql = 'SELECT ref, SUM(creds) AS credits FROM wp_myCRED_log WHERE ref IN ('.$post_list.') AND user_id = '.$user_ID.' AND ctype = \'personal_tracking\' GROUP BY ref HAVING credits = 1';
+        $wpdb->get_results($sql);
 
         if ($term === $this->variables['current_object']){ 
-            $this->variables['mycred']['taxonomy_personal_tracking_total'] = $results;
+            $this->variables['mycred']['taxonomy_personal_tracking_total'] = $wpdb->num_rows;
             return;
         }
 
-        return $results;
+        return $wpdb->num_rows;
         
     }
 }

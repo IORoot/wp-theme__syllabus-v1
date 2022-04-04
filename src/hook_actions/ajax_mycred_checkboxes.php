@@ -14,41 +14,28 @@ function ajax_search_mycred_checkbox(){
     $post_title = esc_attr( $_POST["post_title"]);
     $user_ID    = $GLOBALS["current_user"]->ID;
     $mycred     = mycred('personal_tracking');
-    $checked = '';
+    $favourited = '';
 
     // Make sure user is not excluded
     if ( ! $mycred->exclude_user( $user_ID ) ) {
 
-        // get users balance
-        $args = array(
-            'ctype'   => 'personal_tracking',
-            'user_id' => $user_ID,
-            'ref'     => $post_id,
-            'number'  => -1,
-        );
-        $query = new \myCRED_Query_Log( $args );
+        global $wpdb;
+        $sql = 'SELECT SUM(creds) AS creds FROM wp_myCRED_log where user_id = '.$user_ID.' AND ref = '.$post_id.' AND ctype = \'personal_tracking\'';
+        $result = $wpdb->get_results($sql);
 
-        if (empty($query->results)){
+        $credits = intval($result[0]->creds);
+
+        if ( empty($credits)){
             $mycred->add_creds( $post_id, $user_ID, 1, $post_title );
-            $checked = 'checked';
+            echo 'checked';
         }
 
-        $first_entry = $query->results[0];
-
-        if ($first_entry->creds == "-1"){
-            $mycred->add_creds( $post_id, $user_ID, 1, $post_title );
-            $checked = 'checked';
-        }
-
-        if ($first_entry->creds == "1"){
-            $mycred->add_creds( $post_id, $user_ID, -1, $post_title );
-            $checked = '';
+        if ( ! empty($credits)){
+            $mycred->add_creds( $post_id, $user_ID, -$credits, $post_title );
+            echo '';
         }
 
     }
-
-
-    echo $checked;
 
     wp_reset_postdata();
 

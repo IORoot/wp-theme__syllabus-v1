@@ -12,19 +12,19 @@ class mycred_helpers {
         if ( ! defined( 'myCRED_VERSION' ) ) { return; }
         if ( ! is_a( $post, 'WP_Post') ) { return; }
 
-        $query = new \myCRED_Query_Log( [
-            'ctype'   => 'personal_tracking',
-            'user_id' => $GLOBALS["current_user"]->ID,
-            'ref'     => $post->ID,
-            'number'  => 1,
-        ] );
+        global $wpdb;
+        
+        $user_ID = $GLOBALS["current_user"]->ID;
+        $post_ID = $post->ID;
+        $sql = 'SELECT SUM(creds) AS creds FROM wp_myCRED_log where user_id = '.$user_ID.' AND ref = '.$post_ID.' AND ctype = \'personal_tracking\'';
+        $result = $wpdb->get_results($sql);
 
-        if (empty($query->results)){  return false; }
+        $credits = intval($result[0]->creds);
 
-        if ($query->results == '-1'){  return false; }
+        if ( empty($credits)){ return false; }
 
         return true;
-        
+
     }
 
         /**

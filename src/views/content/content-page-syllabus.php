@@ -23,7 +23,8 @@
 				if (!$term_acf){ $term_acf = []; }
 				$term_permalink = get_term_link($term_child->term_id);
 				$term_favourite_score = $mycred_helpers->get_personal_tracking_score_taxonomy($term_child);
-				$term_child_count = count(get_term_children($term_child->term_id,'syllabus_category'));
+				// $term_child_count = count(get_term_children($term_child->term_id,'syllabus_category'));
+				$term_child_count = 0;
 
 				?>
 
