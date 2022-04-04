@@ -53,7 +53,7 @@ include(get_template_directory() . '/src/views/partials/taxonomy-parent-title.ph
                         }
                     ?>
 
-                    <?php echo $graphs->bar($term_child->favourited, $term_child->count); ?>
+                    <?php echo $graphs->bar($term_child->favourited_count, $term_child->count); ?>
                 </a>
             </div>
 

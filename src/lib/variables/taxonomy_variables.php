@@ -9,6 +9,8 @@ class taxonomy_variables {
     public $statics;
     public $variables;
 
+    public $term_ids_array;
+
     public function __construct()
     {
         $this->statics = new statics;
@@ -20,6 +22,7 @@ class taxonomy_variables {
         $this->get_roman_numerals();
         $this->get_parent_term();
         $this->get_terms();
+        $this->get_terms_mycred_favourited_totals();
         $this->get_breadcrumbs();
         $this->get_mycred_personal_tracking_total();
     }
@@ -131,8 +134,48 @@ class taxonomy_variables {
             $this->variables['terms'][$this->loop_term_key]->acf             = get_fields('term_'.$this->loop_term->term_id,'options');   //Get ACF for each term.
             $this->variables['terms'][$this->loop_term_key]->link            = get_term_link($this->loop_term); //Get Links for each term
             $this->variables['terms'][$this->loop_term_key]->child_count     = count(get_term_children( $this->loop_term->term_id, $this->loop_term->taxonomy )); // Get child count
-            $this->variables['terms'][$this->loop_term_key]->favourited      = $this->get_mycred_personal_tracking_total($this->loop_term);
+            $this->variables['terms'][$this->loop_term_key]->child_ids       = get_posts([ 
+                                                                                    'posts_per_page' => -1,
+                                                                                    'post_type' => 'syllabus', 
+                                                                                    'tax_query' => [ 
+                                                                                        [ 
+                                                                                            'taxonomy' => $this->loop_term->taxonomy, 
+                                                                                            'field' => 'term_id', 
+                                                                                            'terms' => $this->loop_term->term_id, 
+                                                                                        ] 
+                                                                                    ], 
+                                                                                    'fields' => 'ids' 
+                                                                                ]); // get all child_ids for term.
         }
+    }
+
+    
+    /**
+     * Much quicker version of getting all the mycred favourites values.
+     * 
+     * Gets all of the syllabus posts in this term that have been
+     * favourited. Also sets the count too.
+     *
+     * @return void
+     */
+    private function get_terms_mycred_favourited_totals()
+    {
+        if ( ! defined( 'myCRED_VERSION' ) ) { return; }
+
+        global $wpdb;
+        $user_ID = $GLOBALS["current_user"]->ID;
+
+        foreach ($this->variables['terms'] as $this->loop_term_key => $this->loop_term){
+            $post_IDS = implode(',', $this->loop_term->child_ids);
+            $sql = 'SELECT ref, SUM(creds) AS credits FROM wp_myCRED_log WHERE ref IN ('.$post_IDS.') AND user_id = '.$user_ID.' AND ctype = \'personal_tracking\' GROUP BY ref HAVING credits = 1';
+            $results = $wpdb->get_results($sql);
+
+            if (! empty($results)){
+                $this->variables['terms'][$this->loop_term_key]->favourited = $results;
+                $this->variables['terms'][$this->loop_term_key]->favourited_count = count($results);
+            }
+        }
+
     }
 
 
@@ -162,26 +205,26 @@ class taxonomy_variables {
     }
 
 
+
+
     /**
-     * Undocumented function
+     * Finds the total number of mycred favourited posts within this term.
      *
      * @param object $term
      * @return void
      */
-    public function get_mycred_personal_tracking_total(object $term = null)
+    public function get_mycred_personal_tracking_total()
     {
         if ( ! defined( 'myCRED_VERSION' ) ) { return; }
-
-        if (! isset($term)){ $term = $this->variables['current_object']; }
 
         $posts_array = get_posts([
             'posts_per_page' => -1,
             'post_type' => 'syllabus',
             'tax_query' => [
                 [
-                    'taxonomy' => $term->taxonomy,
+                    'taxonomy' => $this->variables['current_object']->taxonomy,
                     'field' => 'term_id',
-                    'terms' => $term->term_id,
+                    'terms' => $this->variables['current_object']->term_id,
                 ]
             ],
             'fields' => 'ids',
@@ -190,18 +233,13 @@ class taxonomy_variables {
 
         $post_list = implode(',', $posts_array);
 
-        // For the list of refs "160,157,155,153,138,135,132,129,65,43" , list the ones that are favourited.
         global $wpdb;
         $user_ID = $GLOBALS["current_user"]->ID;
         $sql = 'SELECT ref, SUM(creds) AS credits FROM wp_myCRED_log WHERE ref IN ('.$post_list.') AND user_id = '.$user_ID.' AND ctype = \'personal_tracking\' GROUP BY ref HAVING credits = 1';
         $wpdb->get_results($sql);
 
-        if ($term === $this->variables['current_object']){ 
-            $this->variables['mycred']['taxonomy_personal_tracking_total'] = $wpdb->num_rows;
-            return;
-        }
-
-        return $wpdb->num_rows;
+        $this->variables['mycred']['taxonomy_personal_tracking_total'] = $wpdb->num_rows;
+        return;
         
     }
 }
