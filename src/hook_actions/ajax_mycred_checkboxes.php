@@ -19,19 +19,30 @@ function ajax_search_mycred_checkbox(){
     // Make sure user is not excluded
     if ( ! $mycred->exclude_user( $user_ID ) ) {
 
+        // Get current credit score.
         global $wpdb;
         $sql = 'SELECT SUM(creds) AS creds FROM wp_myCRED_log where user_id = '.$user_ID.' AND ref = '.$post_id.' AND ctype = \'personal_tracking\'';
-        $result = $wpdb->get_results($sql);
+        $cred_result = $wpdb->get_results($sql);
+        $credits = intval($cred_result[0]->creds);
 
-        $credits = intval($result[0]->creds);
+        // build data for 'Entry' column in mycred log.
+        // Include all TERMS. both parent and child - this is to
+        // increase query performance when having to iterate over
+        // all posts to find which ones are favourited or not. 
+        // Instead, we can use this as a look-up. 
+        $sql = 'SELECT term_taxonomy_id AS term_ids FROM wp_term_relationships WHERE object_id = '.$post_id;
+        $term_result = $wpdb->get_results($sql,'ARRAY_A');
+        $data['terms'] = array_column($term_result, 'term_ids');
+        $data['title'] = $post_title;
+        $json_data = json_encode($data);
 
         if ( empty($credits)){
-            $mycred->add_creds( $post_id, $user_ID, 1, $post_title );
+            $mycred->add_creds( $post_id, $user_ID, 1, $json_data );
             echo 'checked';
         }
 
         if ( ! empty($credits)){
-            $mycred->add_creds( $post_id, $user_ID, -$credits, $post_title );
+            $mycred->add_creds( $post_id, $user_ID, -$credits, $json_data );
             echo '';
         }
 
