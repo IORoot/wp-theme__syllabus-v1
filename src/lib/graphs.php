@@ -7,17 +7,21 @@ class graphs {
     private $score;
     private $max;
     private $output;
+    private $type = 'ratio';
 
 
 
-    public function bar($score = 0, $max = 10)
+    public function bar($score, $max, $type = 'ratio')
     {
         if (!isset($score)){ $score = 0; }
-        if (!isset($max)){ $max = 10; }
+        if (!isset($max)){ return; }
 
         $this->score = $score;
         $this->max = $max;
+        if (isset($type)){ $this->type = $type; }
+
         $this->bar_run();
+
         return $this->output;
     }
 
@@ -60,7 +64,20 @@ class graphs {
     
     private function bar_score()
     {
+        $bar_score_function = 'bar_score_' . $this->type;
+        $this->$bar_score_function();
+    }
+
+
+    private function bar_score_ratio()
+    {
         echo $this->score .'<span class="pl-0.5 text-emerald-500">/</span>'. $this->max;
+    }
+
+    private function bar_score_percentage()
+    {
+        $percentage = ceil((100 / $this->max) * $this->score);
+        echo $percentage .'%';
     }
 
 

@@ -33,40 +33,25 @@ class mycred_helpers {
      * @param object $term
      * @return void
      */
-    public function get_personal_tracking_score_taxonomy(object $term = null)
+    public function get_personal_tracking_score_by_parent_term(object $term = null)
     {
         if ( ! defined( 'myCRED_VERSION' ) ) { return; }
         if (! isset($term)){ return; }
 
-        $posts_array = get_posts([
-            'posts_per_page' => -1,
-            'post_type' => 'syllabus',
-            'tax_query' => [
-                [
-                    'taxonomy' => $term->taxonomy,
-                    'field' => 'term_id',
-                    'terms' => $term->term_id,
-                ]
-            ]
-        ]);
+        global $wpdb;
 
-        $results = 0;
-        foreach ($posts_array as $post)
-        {
-            $query = new \myCRED_Query_Log( [
-                'ctype'   => 'personal_tracking',
-                'user_id' => $GLOBALS["current_user"]->ID,
-                'ref'     => $post->ID,
-                'number'  => 1,
-            ] );
+        $user_ID = $GLOBALS["current_user"]->ID;
+        $term_ID =  $term->term_id;
+        $sql = 'SELECT ref as post_id, SUM(creds) as credits FROM wp_myCRED_log WHERE entry REGEXP \'^{\' AND user_id = '.$user_ID.' AND entry->"$.parent" = '.$term_ID.' AND ctype = \'personal_tracking\' GROUP BY ref;';
+        $sql_result = $wpdb->get_results($sql, 'ARRAY_A');
+        $credits = array_map('intval', array_column($sql_result, 'credits')); // Collect all credits into single array and convert to ints.
 
-            if (empty($query->results)){  continue; }
-
-            $results++;
+        $result = 0;
+        if ( ! empty($sql_result)){
+            $result = array_sum($credits);
         }
 
-        return $results;
-        
+        return $result;
     }
 
 }
