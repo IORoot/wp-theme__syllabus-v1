@@ -32,7 +32,17 @@ function ajax_search_mycred_checkbox(){
         // Instead, we can use this as a look-up. 
         $sql = 'SELECT term_taxonomy_id AS term_ids FROM wp_term_relationships WHERE object_id = '.$post_id;
         $term_result = $wpdb->get_results($sql,'ARRAY_A');
-        $data['terms'] = array_column($term_result, 'term_ids');
+        $term_ids = array_column($term_result, 'term_ids');
+
+        // determine parent and child terms.
+        if ($term_ids){
+            foreach ($term_ids as $term_id){
+                $term = get_term($term_id);
+                if ($term->parent == 0){ $data['parent'] = intval($term_id); continue; }
+                $data['child'] = intval($term_id);
+            }
+        }
+
         $data['title'] = $post_title;
         $json_data = json_encode($data);
 
