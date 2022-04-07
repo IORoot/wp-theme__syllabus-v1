@@ -1,0 +1,16 @@
+{
+    "name": "andyp/loginout",
+    "autoload": {
+        "psr-4": {
+            "andyp\\loginout\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Andy Pearson",
+            "email": "andy@londonparkour.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {}
+}
