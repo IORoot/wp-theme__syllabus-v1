@@ -4,17 +4,20 @@ add_action('wp_ajax_mycred_checkbox' ,      'ajax_search_mycred_checkbox');
 add_action('wp_ajax_nopriv_mycred_checkbox','ajax_search_mycred_checkbox');  
 
 
+/**
+ * AJAX Function to return if post is favourited or not.
+ *
+ * @return void
+ */
 function ajax_search_mycred_checkbox(){
 
     if (!isset($GLOBALS["mycred"])){ return; }
     if (!isset($GLOBALS["current_user"]->ID)){ return; }
 
-    $state      = esc_attr( $_POST["state"]);
     $post_id    = esc_attr( $_POST["post_id"]);
     $post_title = esc_attr( $_POST["post_title"]);
     $user_ID    = $GLOBALS["current_user"]->ID;
     $mycred     = mycred('personal_tracking');
-    $favourited = '';
 
     // Make sure user is not excluded
     if ( ! $mycred->exclude_user( $user_ID ) ) {

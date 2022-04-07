@@ -22,7 +22,7 @@
 				$term_acf = get_fields('term_'.$loop_term->term_id, 'options');
 				if (!$term_acf){ $term_acf = []; }
 				$term_permalink = get_term_link($loop_term->term_id);
-				$term_favourite_score = $mycred_helpers->get_personal_tracking_score_by_parent_term($loop_term);
+				$term_favourite_score = $mycred_helpers->total_favourited_by_parent_term($loop_term);
 
 				?>
 

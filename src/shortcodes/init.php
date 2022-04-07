@@ -19,3 +19,8 @@ require get_template_directory() . '/src/shortcodes/counts/counts.php';
  * Shortcode for searchbox
  */
 require get_template_directory() . '/src/shortcodes/searchbox/searchbox.php';
+
+/**
+ * Shortcode for mycred user history
+ */
+require get_template_directory() . '/src/shortcodes/mycred/mycred_user_history.php';

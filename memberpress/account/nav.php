@@ -5,7 +5,7 @@
   // │                	          Navigation Tabs                              │
   // └─────────────────────────────────────────────────────────────────────────┘
   ?>
-<div class="mp_wrapper w-1/5 max-w-md min-h-screen min-w-fit bg-zinc-900 text-zinc-100 p-4 pt-24">
+<div class="mp_wrapper w-1/6 max-w-md min-h-screen min-w-fit bg-zinc-900 text-zinc-100 p-4 pt-24">
 
   <div id="mepr-account-nav" class="flex flex-col">
 

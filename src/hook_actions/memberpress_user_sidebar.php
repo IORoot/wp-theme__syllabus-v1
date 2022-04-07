@@ -11,7 +11,7 @@
         ?>
         <div class="mepr-nav-item py-2">
             <span class="mepr-nav-item hover:text-emerald-400 font-thin">
-                <a href="/index.php/account/?action=profile-image">Points</a>
+                <a href="/index.php/account/?action=profile-image">Favourites</a>
             </span>
         </div>
         <?php
@@ -29,14 +29,9 @@
         if($action == 'profile-image') {
             ob_start();
                 ?>
-                <div class="pt-32 px-8 text-white">
-                    <H1 class="text-amber-500">Personal_Tracking Points.</H1>
-                    <p>mycred_history</p>
-                    <?php echo do_shortcode('[mycred_history type="personal_tracking"]'); ?>
-                    <p>mycred_my_balance personal_tracking</p>
-                    <?php echo do_shortcode('[mycred_my_balance type="personal_tracking"]'); ?>
-                    <p>mycred_total_points (Number in circulation)</p>
-                    <?php echo do_shortcode('[mycred_total_points type="personal_tracking"]'); ?>
+                <div class="w-5/6 pt-32 px-8 text-white">
+                    <H1 class="text-amber-500 flex flex-row"><div>Favourited Items</div>(<?php echo do_shortcode('[mycred_my_balance type="personal_tracking"]'); ?>)</H1>
+                    <?php echo do_shortcode('[mycred_user_history type="personal_tracking"]'); ?>
                 </div>
                 <?php
             ob_get_contents();

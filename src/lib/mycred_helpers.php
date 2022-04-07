@@ -6,8 +6,15 @@ use mycred;
 
 class mycred_helpers {
 
-
-    public function get_personal_tracking_score_post(object $post)
+    /**
+     * Gets favourited state of post
+     * 
+     * Single SQL query to determine whether post is favourited or not.
+     *
+     * @param object $post
+     * @return bool
+     */
+    public function is_post_favourited(object $post)
     {
         if ( ! defined( 'myCRED_VERSION' ) ) { return; }
         if ( ! is_a( $post, 'WP_Post') ) { return; }
@@ -27,13 +34,16 @@ class mycred_helpers {
 
     }
 
-        /**
-     * Undocumented function
-     *
+    /**
+     * Get count of favourited posts in parent term.
+     * 
+     * This is a single SQL Query that will retrieve a count of all posts in
+     * this particular parent term that have beeen favourited.
+     * 
      * @param object $term
-     * @return void
+     * @return int   $result
      */
-    public function get_personal_tracking_score_by_parent_term(object $term = null)
+    public function total_favourited_by_parent_term(object $term = null)
     {
         if ( ! defined( 'myCRED_VERSION' ) ) { return; }
         if (! isset($term)){ return; }
@@ -53,5 +63,6 @@ class mycred_helpers {
 
         return $result;
     }
+
 
 }
