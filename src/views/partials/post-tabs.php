@@ -16,7 +16,7 @@
 
         <li class="tab w-full"><label for="tab2" class="block m-0 px-2 py-2 cursor-pointer transition-all text-center font-thin border-b-2 border-b-zinc-500 hover:border-b-amber-300 hover:text-amber-300">GUIDELINES</label></li>
 
-        <?php if ( current_user_can( 'syllabus_view_post_tabs' ) ) { ?>
+        <?php if ( current_user_can( 'syllabus_view_admin_tabs' ) ) { ?>
             <li class="tab w-full"><label for="tab3" class="block m-0 px-2 py-2 cursor-pointer transition-all text-center font-thin border-b-2 border-b-zinc-500 hover:border-b-amber-300 hover:text-amber-300">ADMIN</label></li>
         <?php } ?>
     </ul>
