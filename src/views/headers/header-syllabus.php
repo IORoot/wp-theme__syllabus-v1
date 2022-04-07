@@ -35,14 +35,6 @@ $variables = (new andyp\theme\syllabus\lib\variables)->get_variables();
 
 
 /**
- * Returns true if your user can view
- * a certain thing.
- * Access is controlled via the class.
- */
-$access = new andyp\theme\syllabus\lib\access();
-
-
-/**
  * Connects to the YouTube API to get video details.
  * via JSON calls using the API KEY set in the 
  * wp-config file..

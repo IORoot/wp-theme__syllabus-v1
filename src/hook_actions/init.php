@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Add custom capabilities
+ */
+require get_template_directory() . '/src/hook_actions/capabilities.php';
+
+/**
  * DeRegister ACF Styles
  */
 require get_template_directory() . '/src/hook_actions/deregister_acf_styles.php';
