@@ -24,3 +24,8 @@ require get_template_directory() . '/src/shortcodes/searchbox/searchbox.php';
  * Shortcode for mycred user history
  */
 require get_template_directory() . '/src/shortcodes/mycred/mycred_user_history.php';
+
+/**
+ * Login/Logout Profile button
+ */
+require get_template_directory() . '/src/shortcodes/profile_button/init.php';
