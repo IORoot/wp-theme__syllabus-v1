@@ -3,6 +3,7 @@
 namespace andyp\theme\syllabus\lib\variables;
 
 use andyp\theme\syllabus\lib\statics;
+use andyp\theme\syllabus\lib\mycred_helpers;
 
 class page_variables {
 
@@ -12,12 +13,14 @@ class page_variables {
     public function __construct()
     {
         $this->statics = new statics;
+        $this->mycred  = new mycred_helpers;
 
         $this->get_current_object();
         $this->get_acf_fields();
         $this->get_posts_count();
         $this->get_tutorials_count();
         $this->get_breadcrumbs();
+        $this->get_mycred_total_favourited();
     }
 
 
@@ -116,6 +119,24 @@ class page_variables {
             $this->variables['breadcrumbs']['parent_term']['link']  = $this->variables["terms_parent"]->link;
         }
 
+    }
+
+
+
+    private function get_mycred_total_favourited()
+    {
+        /**
+         * Query for all posts that are favourited for user.
+         */
+        global $wpdb;
+        $sql = 'SELECT ref AS post_id, SUM(creds) AS credits 
+            FROM wp_myCRED_log 
+            WHERE user_id = '.$GLOBALS["current_user"]->ID.' AND ctype = \'personal_tracking\' 
+            GROUP BY ref 
+            HAVING credits = 1';
+        $favourited_posts_list = $wpdb->get_results($sql);
+        $this->variables['mycred']['favourited_posts'] = array_column($favourited_posts_list, 'post_id');
+        $this->variables['mycred']['favourited_posts_count'] = count($this->variables['mycred']['favourited_posts']);
     }
 
 
