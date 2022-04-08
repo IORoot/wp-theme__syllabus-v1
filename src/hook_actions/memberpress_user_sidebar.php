@@ -29,7 +29,7 @@
         if($action == 'profile-image') {
             ob_start();
                 ?>
-                <div class="w-5/6 pt-32 px-8 text-white">
+                <div class="w-5/6 pt-32 px-8 text-white flex flex-col gap-4">
                     <H1 class="text-amber-500 flex flex-row"><div>Favourited Items</div>(<?php echo do_shortcode('[mycred_my_balance type="personal_tracking"]'); ?>)</H1>
                     <?php echo do_shortcode('[mycred_user_history type="personal_tracking"]'); ?>
                 </div>

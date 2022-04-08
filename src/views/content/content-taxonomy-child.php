@@ -38,7 +38,7 @@ include(get_template_directory() . '/src/views/partials/taxonomy-child-title.php
 
             the_post();
             $post_meta = get_fields( $post );
-            $post_permalink = get_post_permalink($post);
+            $post_permalink = get_permalink($post);
             $post_image = get_the_post_thumbnail($post);
             $post_favouite = $mycred_helpers->is_post_favourited($post);
 

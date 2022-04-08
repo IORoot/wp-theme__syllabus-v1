@@ -24,7 +24,7 @@ function ajax_search_data_fetch(){
             $thumbnail = get_the_post_thumbnail( get_queried_object(), null, ['class' => 'w-full h-full']);
             $terms = get_the_terms( $the_query->post ,'syllabus_category');
             ?>
-                <a href="<?php echo esc_url( post_permalink() ); ?>" class="rounded-lg bg-zinc-200 flex flex-row gap-2 p-2 flex-1 max-h-28 basis-1/3 hover:bg-amber-500 hover:text-white">
+                <a href="<?php echo esc_url( get_permalink() ); ?>" class="rounded-lg bg-zinc-200 flex flex-row gap-2 p-2 flex-1 max-h-28 basis-1/3 hover:bg-amber-500 hover:text-white">
 
                     <div class="w-40"><?php echo $thumbnail;?></div>
                     <div class="w-full m-auto text-xs flex flex-col ">

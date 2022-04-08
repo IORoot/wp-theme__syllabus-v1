@@ -100,7 +100,7 @@ class mycred_user_history {
                 foreach ($posts as $index => $post)
                 {
                     $thumbnail = get_the_post_thumbnail( $post->ID, null, ['class' => 'w-full h-full']);
-                    $link = esc_url( post_permalink($post->ID) );
+                    $link = esc_url( get_permalink($post->ID) );
 
                     $HTML .= '<a href="'.$link.'" class="rounded-lg bg-zinc-600 hover:bg-amber-500 p-4">';
                     $HTML .=    '<div class="">'.$thumbnail.'</div>';
