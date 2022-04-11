@@ -28,7 +28,7 @@ include(get_template_directory() . '/src/views/menus/mainmenu-'.$pagename.'.php'
 		// │                		  SIDEBAR                                        │
 		// └─────────────────────────────────────────────────────────────────────────┘
 		?>
-		<div class="flex flex-col w-1/5 p-2">
+		<div class="flex flex-col w-1/5 p-2 max-h-screen overflow-auto">
 			<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                	   SIDEBAR HEADER                                    │
@@ -45,7 +45,7 @@ include(get_template_directory() . '/src/views/menus/mainmenu-'.$pagename.'.php'
 			?>
 		</div>
 
-		<div class="flex flex-1 flex-col">
+		<div class="flex flex-1 flex-col max-h-screen overflow-auto">
 			
 
 
@@ -65,7 +65,7 @@ include(get_template_directory() . '/src/views/menus/mainmenu-'.$pagename.'.php'
 			// │                		  CONTENT                                        │
 			// └─────────────────────────────────────────────────────────────────────────┘
 			?>
-			<div class="content w-full h-full bg-zinc-600">
+			<div class="content w-full h-full bg-zinc-600 max-h-screen overflow-auto">
 				<?php include(get_template_directory() . '/src/views/content/content-page-syllabus.php'); ?>
 			</div>
 		</div>

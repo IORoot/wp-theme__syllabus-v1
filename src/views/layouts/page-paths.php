@@ -30,7 +30,7 @@ include(get_template_directory() . '/src/views/headers/header-syllabus.php');
 		// │                		  SIDEBAR                                        │
 		// └─────────────────────────────────────────────────────────────────────────┘
 		?>
-		<div class="flex flex-col w-1/5 p-2">
+		<div class="flex flex-col w-1/5 p-2 max-h-screen overflow-auto">
 			<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                	   SIDEBAR HEADER                                    │
@@ -54,7 +54,7 @@ include(get_template_directory() . '/src/views/headers/header-syllabus.php');
 		// │                                                                         │
 		// └─────────────────────────────────────────────────────────────────────────┘
 		?>
-		<div class="flex flex-1 flex-col">
+		<div class="flex flex-1 flex-col max-h-screen overflow-auto">
 			
 			<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
