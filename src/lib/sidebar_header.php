@@ -110,7 +110,7 @@ class sidebar_header {
      */
     public function open_wrapper()
     {
-        ?><div class="flex flex-row p-2 w-full bg-black rounded-xl gap-4 text-white"><?php
+        ?><div class="w-full p-2"><div class="flex flex-row p-2 w-full bg-black rounded-xl gap-4 text-white"><?php
     }
 
 
@@ -123,7 +123,7 @@ class sidebar_header {
     */
     public function close_wrapper()
     {
-        ?></div><?php
+        ?></div></div><?php
     }
 
 

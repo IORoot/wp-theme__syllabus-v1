@@ -30,7 +30,7 @@ include(get_template_directory() . '/src/views/headers/header-syllabus.php');
 		// │                		  SIDEBAR                                        │
 		// └─────────────────────────────────────────────────────────────────────────┘
 		?>
-		<div class="flex flex-col w-1/5 p-2 max-h-screen overflow-auto">
+		<div class="flex flex-col w-1/6 max-h-screen overflow-auto">
 			<?php 
 			// ┌─────────────────────────────────────────────────────────────────────────┐
 			// │                	   SIDEBAR HEADER                                    │
