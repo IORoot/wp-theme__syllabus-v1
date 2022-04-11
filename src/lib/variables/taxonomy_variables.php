@@ -7,12 +7,16 @@ use andyp\theme\syllabus\lib\statics;
 class taxonomy_variables {
 
     public $statics;
+    public $queried_object;
     public $variables;
 
     public $term_ids_array;
 
-    public function __construct()
+    public function __construct($queried_object = null)
     {
+        if (empty($queried_object)){ return; }
+        $this->queried_object = $queried_object;
+
         $this->statics = new statics;
 
         $this->get_current_object();
@@ -61,7 +65,7 @@ class taxonomy_variables {
      */
     private function get_current_object()
     {
-        $this->variables['current_object'] = get_queried_object();
+        $this->variables['current_object'] = $this->queried_object;
     }
 
 
@@ -73,7 +77,7 @@ class taxonomy_variables {
      */
     private function get_acf_fields()
     {
-        $this->variables['acf'] = get_fields( get_queried_object() );
+        $this->variables['acf'] = get_fields( $this->variables['current_object'] );
     }
 
 

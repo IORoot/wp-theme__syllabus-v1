@@ -7,7 +7,7 @@
          * on content.
          * These can be controlled through the Admin > Syllabus > Settings.
          */
-        echo apply_filters('cpt_syllabus_transforms', $post->post_content);
+        echo apply_filters('cpt_syllabus_transforms', $variables['current_object']->post_content);
 
     ?>
 </div>

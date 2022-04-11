@@ -70,6 +70,14 @@ new andyp\theme\syllabus\hook_filters\taxonomy_templates([
 ]);
 
 /**
+ * Register the template files to use with the custom taxonomies.
+ */
+new andyp\theme\syllabus\hook_filters\taxonomy_templates([
+    'taxonomy' => 'paths_category',
+    'post_type' => 'paths'
+]);
+
+/**
  * Add filmed status to post title in sidebar.
  */
 require get_template_directory() . '/src/hook_filters/sidebar_post_title.php';

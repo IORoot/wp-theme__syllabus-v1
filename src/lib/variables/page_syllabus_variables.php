@@ -5,7 +5,7 @@ namespace andyp\theme\syllabus\lib\variables;
 use andyp\theme\syllabus\lib\statics;
 use andyp\theme\syllabus\lib\mycred_helpers;
 
-class page_variables {
+class page_syllabus_variables {
 
     public $statics;
     public $queried_object;
@@ -146,6 +146,16 @@ class page_variables {
         $favourited_posts_list = $wpdb->get_results($sql);
         $this->variables['mycred']['favourited_posts'] = array_column($favourited_posts_list, 'post_id');
         $this->variables['mycred']['favourited_posts_count'] = count($this->variables['mycred']['favourited_posts']);
+    }
+
+
+
+    private function get_all_paths()
+    {
+        $this->variables['paths'] = get_posts([
+            'posts_per_page' => -1,
+            'post_type' => 'paths'
+        ]);
     }
 
 

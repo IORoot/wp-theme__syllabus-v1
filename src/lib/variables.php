@@ -3,7 +3,8 @@
 namespace andyp\theme\syllabus\lib;
 
 use andyp\theme\syllabus\lib\variables\post_variables;
-use andyp\theme\syllabus\lib\variables\page_variables;
+use andyp\theme\syllabus\lib\variables\page_paths_variables;
+use andyp\theme\syllabus\lib\variables\page_syllabus_variables;
 use andyp\theme\syllabus\lib\variables\taxonomy_variables;
 
 class variables {
@@ -17,16 +18,22 @@ class variables {
     {
         $queried_object = get_queried_object();
 
-        if (is_a($queried_object,'WP_Post') && $queried_object->post_type != "page"){
-            $post_or_tax = new post_variables();
+        if ($queried_object->post_name == 'paths' && $queried_object->post_type == "page")
+        {
+            $post_or_tax = new page_paths_variables($queried_object);
         }
 
-        if (is_a($queried_object,'WP_Post') && $queried_object->post_type == "page"){
-            $post_or_tax = new page_variables();
+        if ($queried_object->post_name == 'syllabus' && $queried_object->post_type == "page")
+        {
+            $post_or_tax = new page_syllabus_variables($queried_object);
+        }
+
+        if (is_a($queried_object,'WP_Post') && $queried_object->post_type != "page"){
+            $post_or_tax = new post_variables($queried_object);
         }
 
         if (is_a($queried_object,'WP_Term')){
-            $post_or_tax = new taxonomy_variables();
+            $post_or_tax = new taxonomy_variables($queried_object);
         }
 
         $this->variables = $post_or_tax->get_variables();
