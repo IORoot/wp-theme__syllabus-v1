@@ -1,4 +1,4 @@
-<div class="w-full h-40 rounded-xl flex flex-row px-12 py-2 gap-4 bg-gradient-to-tr from-amber-500 to-yellow-500">
+<div class="w-full h-40 rounded-xl flex flex-row px-12 py-2 gap-4 bg-gradient-to-tr from-amber-500 to-yellow-500 relative">
 
     <div class="flex flex-col gap-4 justify-center w-full">
         <div class="flex flex-row text-5xl">

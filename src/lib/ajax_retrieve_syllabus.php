@@ -49,7 +49,6 @@ class ajax_retrieve_syllabus {
     public function output()
     {
 
-
         ob_start();
 
             foreach($this->variables["acf"]["syllabus_items"] as $loop_index => $loop_item){
@@ -95,6 +94,9 @@ class ajax_retrieve_syllabus {
 
                 function fetch_syllabus_post(item){
                 
+                    /** Clear the innerHTML */
+                    document.getElementById('path_item_content').innerHTML = '<div class="w-full h-full flex"><svg class="animate-spin w-20 h20 fill-white m-auto" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z"/></svg></div>'
+
                     var request = new XMLHttpRequest();
                     request.open('POST', '<?php echo admin_url("admin-ajax.php"); ?>', true);
                     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
