@@ -12,18 +12,30 @@ $tw_secondary   = $path_acf["tailwind_secondary_colour"];
 $tw_highlight   = $path_acf["tailwind_highlight_colour"];
 $glyph          = $path_acf["path_glyph"];
 
+$difficulty_list     = '';
+foreach ($path_acf["difficulty"] as $difficulty_index => $difficulty){
+    $difficulty_list .= '<div class="flex flex-row h-4"><div class="h-4 w-4">'.$path_acf["difficulty_icon"][$difficulty_index].'</div><div class="w-full">'.$difficulty.'</div></div>';
+}
+
 ?>
 
 <div class="grid-item overflow-hidden inline-block w-full ">
     <a class="flex flex-col group gap-4 bg-<?php echo $tw_background; ?> text-<?php echo $tw_foreground; ?> hover:bg-amber-500 rounded-lg overflow-hidden relative hover:text-zinc-900 p-4" href="<?php echo $path_permalink; ?>">
+        
+        <?php if (!empty($glyph)){ ?><div class="w-full"><img src="<?php echo $glyph; ?>" class="w-10 mx-auto"></div><?php } ?>
+
         <div class="h-60">
             <?php if ($path_image){  echo $path_image; }  ?>
         </div>
+
         <div class="p-4 flex flex-col gap-5">
-            <div class="text-3xl text-center"><?php echo $loop_path->post_title; ?></div>
+            <div class="text-4xl text-center"><?php echo $loop_path->post_title; ?></div>
             <div class="text-<?php echo $tw_secondary; ?> group-hover:text-white font-thin text-center"><?php echo $loop_path->post_excerpt; ?></div>
-            <div class="text-<?php echo $tw_highlight; ?> group-hover:text-white text-xs uppercase text-right"><?php echo count($path_acf["syllabus_items"]); ?> Steps</div>
+            <div class="flex flex-row group-hover:text-white text-xs uppercase">
+                <div class="text-<?php echo $tw_highlight; ?> fill-<?php echo $tw_highlight; ?> w-4/5"><?php echo  $difficulty_list; ?></div>
+                <div class="text-<?php echo $tw_highlight; ?> w-1/5 text-right"><?php echo count($path_acf["syllabus_items"]); ?> Steps</div>
+            </div>
         </div>
-        <?php if (!empty($glyph)){ ?><img src="<?php echo $glyph; ?>" class="z-50 w-10 absolute bottom-4"> <?php } ?>
+        
     </a>
 </div>

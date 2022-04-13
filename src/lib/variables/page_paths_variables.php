@@ -27,6 +27,7 @@ class page_paths_variables {
         $this->get_mycred_total_favourited();
         $this->get_all_paths();
         $this->get_paths_acf();
+        $this->get_difficulty_icon();
     }
 
 
@@ -167,7 +168,40 @@ class page_paths_variables {
         foreach($this->variables['paths'] as $this->loop_index => $this->loop_path)
         {
             $this->variables['paths'][$this->loop_index]->acf = get_fields( $this->loop_path->ID );
+            $this->get_difficulty_icon();
         }
+    }
+
+
+
+    private function get_difficulty_icon()
+    {
+        if ( empty($this->loop_path->acf["difficulty"]) ){ return; }
+
+        // loop through all difficulties.
+        foreach ($this->loop_path->acf["difficulty"] as $difficulty_index => $difficulty)
+        {
+            if ($difficulty == 'beginner'){
+                $icon = '<svg class="m-auto svg-inherit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.5,5.5V18.5H17.5V5.5H19.5M12.5,10.5V18.5H10.5V10.5H12.5M21,4H16V20H21V4M14,9H9V20H14V9M7,14H2V20H7V14Z"/></svg>';
+            }           
+            
+            if ($difficulty == 'intermdiate'){
+                $icon = '<svg class="m-auto svg-inherit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.5,5.5V18.5H17.5V5.5H19.5M21,4H16V20H21V4M14,9H9V20H14V9M7,14H2V20H7V14Z"/></svg>';
+            }            
+
+            if ($difficulty == 'advanced'){
+                $icon = '<svg class="m-auto svg-inherit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21,4H16V20H21V4M14,9H9V20H14V9M7,14H2V20H7V14Z"/></svg>';
+            }            
+
+            if ($difficulty == 'coach'){
+                $icon = '<svg class="m-auto svg-inherit" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3,21H6V18H3M8,21H11V14H8M13,21H16V9H13M18,21H21V3H18V21Z"/></svg>';
+            }
+
+            // Set the correct variables icon
+            $this->variables['paths'][$this->loop_index]->acf['difficulty_icon'][$difficulty_index] = $icon;
+        }
+        
+
     }
 
 }
