@@ -34,13 +34,6 @@ $help = new andyp\theme\syllabus\lib\statics();
 $variables = (new andyp\theme\syllabus\lib\variables)->get_variables();
 
 
-/**
- * Connects to the YouTube API to get video details.
- * via JSON calls using the API KEY set in the 
- * wp-config file..
- */
-$youtube_api = new andyp\theme\syllabus\lib\youtube_api;
-
 
 /**
  * Functions for interacting with mycred.
