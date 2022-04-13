@@ -25,6 +25,8 @@ class page_paths_variables {
         $this->get_tutorials_count();
         $this->get_breadcrumbs();
         $this->get_mycred_total_favourited();
+        $this->get_all_paths();
+        $this->get_paths_acf();
     }
 
 
@@ -162,11 +164,10 @@ class page_paths_variables {
 
     private function get_paths_acf()
     {
-        foreach($this->variables['paths'] as $loop_index => $loop_path)
+        foreach($this->variables['paths'] as $this->loop_index => $this->loop_path)
         {
-            $this->variables['paths'][$loop_index]->acf = get_fields( $loop_path->ID );
+            $this->variables['paths'][$this->loop_index]->acf = get_fields( $this->loop_path->ID );
         }
     }
-
 
 }
