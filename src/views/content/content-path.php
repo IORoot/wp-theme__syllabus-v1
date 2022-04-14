@@ -27,10 +27,11 @@
 				<div class="w-1/4 overflow-hidden h-auto bg-zinc-800 rounded-xl hover:bg-zinc-700">
 					<?php echo get_the_post_thumbnail(); ?>
 				</div>
-				<div class="flex flex-col justify-center">
+				<div class="w-full flex flex-col justify-center">
 					<div class="text-xs text-zinc-500">OVERVIEW</div>
 					<?php echo $variables["current_object"]->post_title; ?>
 					<div class="text-xs text-emerald-500"><?php echo count($variables["acf"]["syllabus_items"]); ?> Steps</div>
+					<div class="text-xs mt-2 text-right  font-thin"><span class="text-zinc-600 mr-1">Total duration:</span><?php echo gmdate("H:i:s", $variables["current_object"]->total_watch_seconds); ?></div>
 				</div>
 				
 			</a>

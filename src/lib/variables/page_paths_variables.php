@@ -169,6 +169,7 @@ class page_paths_variables {
         {
             $this->variables['paths'][$this->loop_index]->acf = get_fields( $this->loop_path->ID );
             $this->get_difficulty_icon();
+            $this->get_total_watch_time();
         }
     }
 
@@ -204,4 +205,20 @@ class page_paths_variables {
 
     }
 
+
+    private function get_total_watch_time()
+    {
+        $path_total_time = 0;
+        foreach ($this->loop_path->acf['syllabus_items'] as $syllabus_index => $syllabus_item)
+        {
+            $total_watch_seconds = intval(get_field('total_watch_seconds', $syllabus_item->ID));
+            if (!empty($total_watch_seconds)){ $path_total_time = $path_total_time + $total_watch_seconds; }
+        }
+
+        $this->variables['paths'][$this->loop_index]->total_watch_seconds = $path_total_time;
+
+        if ($this->variables["current_object"]->ID == $this->loop_path->ID){
+            $this->variables["current_object"]->total_watch_seconds = $path_total_time;
+        }
+    }
 }
